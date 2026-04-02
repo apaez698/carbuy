@@ -1,1347 +1,2542 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════
      SEO PRIMARIO
 ══════════════════════════════════════════ -->
-<title>AutoCash | Vende tu Auto Usado en Quito — Cotización Gratis al Instante</title>
-<meta name="description" content="Vende tu auto usado en Quito sin complicaciones. Ingresa los datos, recibe un estimado de precio al instante y nuestro equipo te contacta en minutos. Revisión técnica gratis. ¡Pago en 24 horas!">
-<meta name="keywords" content="vender auto en quito, compro autos usados quito, cotizar auto quito, vender carro quito ecuador, compra venta autos ecuador, autocash">
-<meta name="robots" content="index, follow">
-<meta name="author" content="AutoCash Ecuador">
-<link rel="canonical" href="https://autocash.ec/">
+    <title>
+      AutoCash Quito | Vende tu Auto Usado con Atencion por WhatsApp
+    </title>
+    <meta
+      name="description"
+      content="Vende tu auto usado en Quito de forma simple. Completa el formulario y recibe atencion por WhatsApp para continuar tu proceso con AutoCash."
+    />
+    <meta
+      name="keywords"
+      content="vender auto en quito, compro autos usados quito, cotizar auto quito, vender carro quito ecuador, compra venta autos ecuador, autocash"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="AutoCash Ecuador" />
+    <meta name="theme-color" content="#1e3a8a" />
+    <link rel="canonical" href="https://autocash-one.vercel.app/" />
+    <link
+      rel="alternate"
+      hreflang="es-EC"
+      href="https://autocash-one.vercel.app/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://autocash-one.vercel.app/"
+    />
 
-<!-- ══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════
      OPEN GRAPH (WhatsApp, Facebook)
 ══════════════════════════════════════════ -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://autocash.ec/">
-<meta property="og:title" content="AutoCash — Vende tu Auto en Quito, Ecuador">
-<meta property="og:description" content="Cotización gratis al instante. Revisión técnica gratuita. Pago en 24 horas. El lugar más fácil para vender tu auto en Quito.">
-<meta property="og:image" content="https://autocash.ec/og-image.jpg">
-<meta property="og:locale" content="es_EC">
-<meta property="og:site_name" content="AutoCash">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://autocash-one.vercel.app/" />
+    <meta property="og:title" content="AutoCash Quito | Vende tu Auto Usado" />
+    <meta
+      property="og:description"
+      content="Completa tus datos y recibe seguimiento por WhatsApp para vender tu auto usado en Quito con AutoCash."
+    />
+    <meta
+      property="og:image"
+      content="https://autocash-one.vercel.app/og-image.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="AutoCash en Quito para vender auto usado"
+    />
+    <meta property="og:locale" content="es_EC" />
+    <meta property="og:site_name" content="AutoCash" />
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AutoCash — Vende tu Auto en Quito">
-<meta name="twitter:description" content="Cotización gratis al instante. Pago en 24 horas.">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AutoCash Quito | Vende tu Auto Usado" />
+    <meta
+      name="twitter:description"
+      content="Atencion y seguimiento por WhatsApp para vender tu auto usado en Quito."
+    />
+    <meta
+      name="twitter:image"
+      content="https://autocash-one.vercel.app/og-image.jpg"
+    />
 
-<!-- ══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════
      SCHEMA.ORG — Rich Results Google
 ══════════════════════════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AutoDealer",
-  "name": "AutoCash",
-  "description": "Compramos tu auto usado en Quito. Cotización gratis al instante, revisión técnica gratuita y pago en 24 horas.",
-  "url": "https://autocash.ec",
-  "telephone": "+593-99-900-0000",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Quito",
-    "addressLocality": "Quito",
-    "addressRegion": "Pichincha",
-    "postalCode": "170150",
-    "addressCountry": "EC"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": -0.1807,
-    "longitude": -78.4678
-  },
-  "openingHours": "Mo-Su 08:00-20:00",
-  "priceRange": "$$",
-  "areaServed": {
-    "@type": "City",
-    "name": "Quito"
-  },
-  "sameAs": [
-    "https://www.facebook.com/autocash",
-    "https://www.instagram.com/autocash_ec"
-  ]
-}
-</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --blue: #1E3A8A;
-    --blue-dark: #0f1f4d;
-    --blue-mid: #172f6e;
-    --blue-light: #EFF6FF;
-    --green: #10B981;
-    --green-dark: #059669;
-    --cta: #2563EB;
-    --bg: #F9FAFB;
-    --white: #FFFFFF;
-    --gray: #E5E7EB;
-    --gray-light: #F3F4F6;
-    --text: #111827;
-    --text-mid: #4B5563;
-    --success: #10B981;
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 48px;
-    box-shadow: 0 2px 12px rgba(30,58,138,0.08);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-
-  .logo-badge { display: flex; align-items: center; }
-
-  .logo-wordmark {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 26px;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-  }
-
-  .logo-wordmark .vendo { color: var(--blue-dark); }
-  .logo-wordmark .ya { color: var(--green); }
-
-  .logo-dot {
-    width: 8px; height: 8px;
-    background: var(--cta);
-    border-radius: 50%;
-    margin-left: 3px; margin-bottom: 14px;
-    flex-shrink: 0;
-  }
-
-  .logo-tag {
-    font-size: 9px; font-weight: 800;
-    color: var(--text-mid);
-    letter-spacing: 1.5px; text-transform: uppercase;
-    display: block; line-height: 1;
-    margin-top: -4px; padding-left: 2px;
-  }
-
-  nav ul { list-style: none; display: flex; gap: 32px; }
-
-  nav ul a {
-    text-decoration: none; color: var(--text-mid);
-    font-weight: 700; font-size: 15px; transition: color .2s;
-  }
-
-  nav ul a:hover, nav ul a.active { color: var(--blue); }
-  nav ul a.active { border-bottom: 3px solid var(--blue); padding-bottom: 2px; }
-
-  /* HERO */
-  .hero {
-    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 55%, var(--cta) 100%);
-    padding: 60px 48px 80px;
-    position: relative; overflow: hidden;
-    display: flex; align-items: center; gap: 48px;
-  }
-
-  .hero::before {
-    content: ''; position: absolute;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: rgba(255,255,255,0.05);
-    top: -200px; right: -100px; pointer-events: none;
-  }
-
-  .hero::after {
-    content: ''; position: absolute;
-    width: 300px; height: 300px; border-radius: 50%;
-    background: rgba(16,185,129,0.08);
-    bottom: -100px; left: 100px; pointer-events: none;
-  }
-
-  .hero-text { flex: 1; position: relative; z-index: 2; }
-
-  .hero-badge {
-    display: inline-block;
-    background: var(--green); color: white;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px; font-weight: 800;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 6px 18px; border-radius: 50px; margin-bottom: 20px;
-  }
-
-  .hero h1 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 64px; font-weight: 900;
-    color: white; line-height: 1.05; margin-bottom: 16px;
-  }
-
-  .hero h1 em { font-style: normal; color: var(--green); display: block; }
-
-  .hero p {
-    color: rgba(255,255,255,0.85); font-size: 18px;
-    font-weight: 600; line-height: 1.6;
-    max-width: 420px; margin-bottom: 32px;
-  }
-
-  .hero-features { display: flex; flex-direction: column; gap: 14px; }
-
-  .hero-feat {
-    display: flex; align-items: center; gap: 12px;
-    color: white; font-weight: 700; font-size: 16px;
-  }
-
-  .hero-feat .icon {
-    width: 36px; height: 36px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 10px; display: flex;
-    align-items: center; justify-content: center;
-    font-size: 18px; flex-shrink: 0;
-  }
-
-  .hero-visual {
-    flex: 0 0 420px; position: relative; z-index: 2;
-    display: flex; flex-direction: column; align-items: center;
-  }
-
-  .steps-card {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 20px; padding: 28px 32px; width: 100%;
-  }
-
-  .steps-card h3 {
-    color: var(--green);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 20px; font-weight: 800;
-    letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase;
-  }
-
-  .steps-list { display: flex; flex-direction: column; gap: 16px; }
-
-  .step { display: flex; align-items: center; gap: 14px; }
-
-  .step-num {
-    width: 32px; height: 32px;
-    background: var(--green); color: #fff;
-    border-radius: 50%; display: flex;
-    align-items: center; justify-content: center;
-    font-weight: 900; font-size: 15px; flex-shrink: 0;
-  }
-
-  .step span { color: white; font-weight: 700; font-size: 15px; line-height: 1.3; }
-
-  /* FORM SECTION */
-  .form-section {
-    max-width: 960px; margin: -40px auto 60px;
-    padding: 0 24px; position: relative; z-index: 10;
-  }
-
-  .form-card {
-    background: white; border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(30,58,138,0.15); overflow: hidden;
-  }
-
-  .form-header {
-    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
-    padding: 28px 40px; display: flex; align-items: center; gap: 16px;
-  }
-
-  .form-header-icon {
-    width: 52px; height: 52px; background: var(--green);
-    border-radius: 14px; display: flex;
-    align-items: center; justify-content: center;
-    font-size: 26px; flex-shrink: 0;
-  }
-
-  .form-header h2 {
-    color: white; font-family: 'Barlow Condensed', sans-serif;
-    font-size: 28px; font-weight: 800; letter-spacing: 0.5px;
-  }
-
-  .form-header p { color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 600; margin-top: 2px; }
-
-  /* PROGRESS */
-  .progress-bar {
-    background: var(--blue-light); padding: 20px 40px;
-    display: flex; align-items: center;
-  }
-
-  .prog-step { display: flex; align-items: center; flex: 1; }
-
-  .prog-dot {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--gray); display: flex;
-    align-items: center; justify-content: center;
-    font-weight: 900; font-size: 14px; color: var(--text-mid);
-    flex-shrink: 0; transition: all .3s;
-  }
-
-  .prog-dot.active { background: var(--blue); color: white; box-shadow: 0 0 0 4px rgba(30,58,138,0.2); }
-  .prog-dot.done { background: var(--green); color: white; }
-
-  .prog-label { font-size: 12px; font-weight: 700; color: var(--text-mid); margin-left: 8px; white-space: nowrap; }
-  .prog-label.active { color: var(--blue); }
-
-  .prog-line {
-    flex: 1; height: 3px; background: var(--gray);
-    margin: 0 8px; border-radius: 2px; transition: background .3s;
-  }
-
-  .prog-line.done { background: var(--green); }
-
-  /* FORM BODY */
-  .form-body { padding: 40px; }
-  .form-step { display: none; }
-  .form-step.active { display: block; animation: fadeSlide .3s ease; }
-
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .step-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 24px; font-weight: 800;
-    color: var(--blue-dark); margin-bottom: 6px; letter-spacing: 0.5px;
-  }
-
-  .step-subtitle { color: var(--text-mid); font-size: 14px; font-weight: 600; margin-bottom: 28px; }
-
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .form-grid.one { grid-template-columns: 1fr; }
-
-  .field { display: flex; flex-direction: column; gap: 6px; }
-  .field.full { grid-column: 1 / -1; }
-
-  label {
-    font-size: 13px; font-weight: 800;
-    color: var(--blue-dark); text-transform: uppercase; letter-spacing: 0.5px;
-  }
-
-  input, select, textarea {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    padding: 14px 18px; border: 2px solid var(--gray);
-    border-radius: var(--radius-sm); font-size: 15px;
-    font-weight: 600; color: var(--text);
-    background: var(--gray-light); outline: none;
-    transition: border-color .2s, box-shadow .2s; width: 100%;
-    appearance: none;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 4px rgba(30,58,138,0.12);
-    background: white;
-  }
-
-  textarea { resize: vertical; min-height: 100px; }
-
-  .select-wrapper { position: relative; }
-  .select-wrapper::after {
-    content: '▼'; position: absolute; right: 16px; top: 50%;
-    transform: translateY(-50%); font-size: 11px;
-    color: var(--blue); pointer-events: none; font-weight: 700;
-  }
-
-  /* RADIO CARDS */
-  .radio-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 4px; }
-  .radio-card input[type="radio"] { display: none; }
-  .radio-card label {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    padding: 18px 12px; border: 2px solid var(--gray);
-    border-radius: var(--radius-sm); background: var(--gray-light);
-    cursor: pointer; transition: all .2s; text-align: center;
-    text-transform: none; font-size: 14px; font-weight: 700; color: var(--text-mid);
-  }
-  .radio-card label .card-icon { font-size: 30px; }
-  .radio-card input[type="radio"]:checked + label {
-    border-color: var(--blue); background: var(--blue-light);
-    color: var(--blue); box-shadow: 0 0 0 4px rgba(30,58,138,0.1);
-  }
-
-  /* CHECK LIST */
-  .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
-  .check-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 16px; border: 2px solid var(--gray);
-    border-radius: var(--radius-sm); background: var(--gray-light);
-    cursor: pointer; transition: all .2s;
-  }
-  .check-item input[type="checkbox"] { display: none; }
-  .check-box {
-    width: 20px; height: 20px; border: 2px solid var(--gray);
-    border-radius: 5px; flex-shrink: 0; display: flex;
-    align-items: center; justify-content: center; transition: all .2s;
-  }
-  .check-item:has(input:checked) { border-color: var(--blue); background: var(--blue-light); }
-  .check-item:has(input:checked) .check-box { background: var(--blue); border-color: var(--blue); }
-  .check-item:has(input:checked) .check-box::after { content: '✓'; color: white; font-size: 13px; font-weight: 900; }
-  .check-item span { font-size: 13px; font-weight: 700; color: var(--text-mid); }
-  .check-item:has(input:checked) span { color: var(--blue); }
-
-  /* PRECIO ESTIMADO */
-  .price-estimate {
-    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
-    border-radius: 18px; padding: 32px; text-align: center;
-    margin: 28px 0; position: relative; overflow: hidden;
-  }
-  .price-estimate::before {
-    content: ''; position: absolute;
-    width: 200px; height: 200px; border-radius: 50%;
-    background: rgba(255,255,255,0.05); top: -80px; right: -60px;
-  }
-  .price-estimate .est-label {
-    color: rgba(255,255,255,0.75); font-size: 13px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
-  }
-  .price-estimate .est-range {
-    color: var(--green); font-family: 'Barlow Condensed', sans-serif;
-    font-size: 52px; font-weight: 900; line-height: 1; margin-bottom: 8px;
-  }
-  .price-estimate .est-note { color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; }
-  .price-estimate .est-disclaimer {
-    display: inline-block; margin-top: 14px;
-    background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);
-    color: var(--green); font-size: 12px; font-weight: 700;
-    padding: 6px 16px; border-radius: 50px;
-  }
-
-  /* CONTACTO */
-  .contact-banner {
-    background: var(--blue-light); border: 2px solid rgba(30,58,138,0.2);
-    border-radius: 14px; padding: 20px 24px;
-    display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
-  }
-  .contact-banner .banner-icon { font-size: 36px; flex-shrink: 0; }
-  .contact-banner p { font-size: 14px; font-weight: 700; color: var(--blue-dark); line-height: 1.5; }
-  .contact-banner p strong { color: var(--blue); }
-
-  .whatsapp-opt {
-    display: flex; align-items: center; gap: 12px; padding: 16px;
-    border: 2px solid #25D366; border-radius: var(--radius-sm);
-    background: #F0FFF4; cursor: pointer; margin-top: 8px;
-  }
-  .whatsapp-opt input { width: auto; }
-  .whatsapp-opt label {
-    color: #16a34a; font-size: 14px; font-weight: 700;
-    text-transform: none; letter-spacing: 0; cursor: pointer;
-  }
-
-  /* BOTONES */
-  .form-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 24px 40px 32px; border-top: 2px solid var(--blue-light); gap: 16px;
-  }
-
-  .btn {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800; font-size: 16px; padding: 14px 32px;
-    border-radius: 50px; border: none; cursor: pointer;
-    transition: all .2s; display: flex; align-items: center; gap: 8px;
-  }
-
-  .btn-back { background: transparent; color: var(--text-mid); border: 2px solid var(--gray); }
-  .btn-back:hover { border-color: var(--blue); color: var(--blue); }
-
-  .btn-next {
-    background: linear-gradient(135deg, var(--blue), var(--cta));
-    color: white; box-shadow: 0 6px 20px rgba(30,58,138,0.35);
-  }
-  .btn-next:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(30,58,138,0.45); }
-
-  .btn-submit {
-    background: linear-gradient(135deg, var(--green), var(--green-dark));
-    color: white; box-shadow: 0 6px 20px rgba(16,185,129,0.35);
-    font-size: 17px; padding: 16px 40px;
-  }
-  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(16,185,129,0.45); }
-
-  /* SUCCESS */
-  .success-screen { display: none; text-align: center; padding: 60px 40px; }
-  .success-screen.active { display: block; }
-
-  .success-icon {
-    width: 100px; height: 100px;
-    background: linear-gradient(135deg, var(--green), var(--green-dark));
-    border-radius: 50%; display: flex;
-    align-items: center; justify-content: center;
-    font-size: 48px; margin: 0 auto 24px;
-    box-shadow: 0 10px 30px rgba(16,185,129,0.3);
-    animation: popIn .5s cubic-bezier(0.34,1.56,0.64,1);
-  }
-
-  @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-  .success-screen h2 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 40px; font-weight: 900; color: var(--blue-dark); margin-bottom: 12px;
-  }
-
-  .success-screen p {
-    color: var(--text-mid); font-size: 16px; font-weight: 600;
-    line-height: 1.6; max-width: 480px; margin: 0 auto 32px;
-  }
-
-  .success-data {
-    background: var(--blue-light); border-radius: 16px;
-    padding: 24px 32px; max-width: 500px; margin: 0 auto 32px; text-align: left;
-  }
-
-  .success-data h4 {
-    font-family: 'Barlow Condensed', sans-serif; font-size: 18px;
-    font-weight: 800; color: var(--blue); margin-bottom: 16px;
-    letter-spacing: 0.5px; text-transform: uppercase;
-  }
-
-  .data-row {
-    display: flex; justify-content: space-between;
-    padding: 8px 0; border-bottom: 1px solid rgba(30,58,138,0.1); font-size: 14px;
-  }
-  .data-row:last-child { border-bottom: none; }
-  .data-row .key { color: var(--text-mid); font-weight: 700; }
-  .data-row .val { color: var(--blue-dark); font-weight: 800; }
-
-  .whatsapp-cta {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: #25D366; color: white;
-    font-weight: 800; font-size: 16px;
-    padding: 14px 28px; border-radius: 50px; text-decoration: none;
-    box-shadow: 0 6px 20px rgba(37,211,102,0.3); transition: all .2s;
-  }
-  .whatsapp-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.4); }
-
-  /* TRUST */
-  .trust-section { max-width: 960px; margin: 0 auto 60px; padding: 0 24px; }
-
-  .trust-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
-
-  .trust-card {
-    background: white; border-radius: 16px; padding: 28px 20px; text-align: center;
-    box-shadow: 0 4px 20px rgba(30,58,138,0.08);
-    border: 2px solid transparent; transition: all .2s;
-  }
-  .trust-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(30,58,138,0.15); }
-  .trust-card .t-icon { font-size: 40px; margin-bottom: 14px; }
-  .trust-card h4 {
-    font-family: 'Barlow Condensed', sans-serif; font-size: 18px;
-    font-weight: 800; color: var(--blue-dark); margin-bottom: 6px; letter-spacing: 0.5px;
-  }
-  .trust-card p { color: var(--text-mid); font-size: 13px; font-weight: 600; line-height: 1.5; }
-
-  footer {
-    background: var(--blue-dark); color: rgba(255,255,255,0.7);
-    text-align: center; padding: 24px; font-size: 13px; font-weight: 600;
-  }
-  footer strong { color: var(--green); }
-
-  .error-msg { color: #ef4444; font-size: 12px; font-weight: 700; display: none; margin-top: 2px; }
-  .field.has-error input, .field.has-error select { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
-  .field.has-error .error-msg { display: block; }
-
-  @media (max-width: 768px) {
-    nav { padding: 14px 20px; }
-    nav ul { display: none; }
-    .hero { flex-direction: column; padding: 36px 20px 70px; gap: 32px; }
-    .hero h1 { font-size: 44px; }
-    .hero-visual { flex: none; width: 100%; }
-    .form-section { padding: 0 16px; }
-    .form-body { padding: 28px 20px; }
-    .form-header { padding: 22px 20px; }
-    .progress-bar { padding: 16px 20px; }
-    .form-grid { grid-template-columns: 1fr; }
-    .radio-cards { grid-template-columns: 1fr 1fr; }
-    .trust-grid { grid-template-columns: 1fr 1fr; }
-    .form-nav { padding: 20px; }
-    .prog-label { display: none; }
-  }
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <a href="/" class="logo" aria-label="AutoCash - Inicio">
-    <div class="logo-badge">
-      <div>
-        <div class="logo-wordmark"><span class="vendo">Auto</span><span class="ya">Cash</span></div>
-        <span class="logo-tag">Quito · Ecuador</span>
-      </div>
-      <div class="logo-dot"></div>
-    </div>
-  </a>
-  <ul role="navigation" aria-label="Menú principal">
-    <li><a href="/">Inicio</a></li>
-    <li><a href="#como-funciona">¿Cómo funciona?</a></li>
-    <li><a href="#formulario" class="active" aria-current="page">Vender</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero" aria-label="Vende tu auto en Quito">
-  <div class="hero-text">
-    <span class="hero-badge">💰 Cotización gratis al instante</span>
-    <h1>Tu auto vale<em>dinero hoy</em></h1>
-    <p>Ingresa los datos de tu vehículo, recibe un estimado al instante y te contactamos para cerrar el trato. Sin vueltas.</p>
-    <div class="hero-features" role="list">
-      <div class="hero-feat" role="listitem"><div class="icon" aria-hidden="true">⚡</div> Estimado de precio inmediato</div>
-      <div class="hero-feat" role="listitem"><div class="icon" aria-hidden="true">🔍</div> Revisión técnica gratuita</div>
-      <div class="hero-feat" role="listitem"><div class="icon" aria-hidden="true">💬</div> Te contactamos por WhatsApp</div>
-      <div class="hero-feat" role="listitem"><div class="icon" aria-hidden="true">✅</div> Garantía legal ✔</div>
-    </div>
-  </div>
-  <div class="hero-visual" id="como-funciona">
-    <div class="steps-card" role="list" aria-label="Pasos para vender tu auto">
-      <h3>¿Cómo funciona?</h3>
-      <div class="steps-list">
-        <div class="step" role="listitem"><div class="step-num" aria-hidden="true">1</div><span>Llena el formulario con los datos de tu auto</span></div>
-        <div class="step" role="listitem"><div class="step-num" aria-hidden="true">2</div><span>Recibe un estimado de precio en pantalla</span></div>
-        <div class="step" role="listitem"><div class="step-num" aria-hidden="true">3</div><span>Nuestro equipo AutoCash te contacta para la revisión</span></div>
-        <div class="step" role="listitem"><div class="step-num" aria-hidden="true">4</div><span>¡Vende tu auto al mejor precio!</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FORM -->
-<section class="form-section" id="formulario" aria-label="Formulario de venta">
-  <div class="form-card">
-    <div class="form-header">
-      <div class="form-header-icon" aria-hidden="true">🚗</div>
-      <div>
-        <h2>FORMULARIO DE VENTA</h2>
-        <p>Completa los 3 pasos para recibir tu cotización</p>
-      </div>
-    </div>
-
-    <div class="progress-bar" role="progressbar" aria-label="Progreso del formulario">
-      <div class="prog-step">
-        <div class="prog-dot active" id="dot1">1</div>
-        <span class="prog-label active" id="lbl1">Tu Auto</span>
-      </div>
-      <div class="prog-line" id="line1"></div>
-      <div class="prog-step">
-        <div class="prog-dot" id="dot2">2</div>
-        <span class="prog-label" id="lbl2">Estado y Extras</span>
-      </div>
-      <div class="prog-line" id="line2"></div>
-      <div class="prog-step">
-        <div class="prog-dot" id="dot3">3</div>
-        <span class="prog-label" id="lbl3">Tus Datos</span>
-      </div>
-    </div>
-
-    <div class="form-body">
-
-      <!-- STEP 1 -->
-      <div class="form-step active" id="step1" role="form" aria-label="Paso 1: Datos del vehículo">
-        <div class="step-title">DATOS DEL VEHÍCULO</div>
-        <div class="step-subtitle">Cuéntanos sobre tu auto para calcular el estimado</div>
-        <div class="form-grid">
-          <div class="field">
-            <label for="marca">Marca *</label>
-            <div class="select-wrapper">
-              <select id="marca" required onchange="updateEstimate()" data-track="marca">
-                <option value="">Seleccionar marca</option>
-                <option>Toyota</option><option>Chevrolet</option><option>Hyundai</option>
-                <option>Kia</option><option>Mazda</option><option>Nissan</option>
-                <option>Ford</option><option>Volkswagen</option><option>Renault</option>
-                <option>Peugeot</option><option>Suzuki</option><option>Changan</option>
-                <option>JAC</option><option>DFSK</option><option>Haval</option><option>Otra</option>
-              </select>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AutoDealer",
+        "name": "AutoCash",
+        "description": "Compramos tu auto usado en Quito. Completa el formulario y recibe seguimiento por WhatsApp.",
+        "url": "https://autocash-one.vercel.app",
+        "telephone": "+593-99-900-0000",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Quito",
+          "addressLocality": "Quito",
+          "addressRegion": "Pichincha",
+          "postalCode": "170150",
+          "addressCountry": "EC"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -0.1807,
+          "longitude": -78.4678
+        },
+        "openingHours": "Mo-Su 08:00-20:00",
+        "priceRange": "$$",
+        "areaServed": {
+          "@type": "City",
+          "name": "Quito"
+        },
+        "sameAs": [
+          "https://www.facebook.com/autocash",
+          "https://www.instagram.com/autocash_ec"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Como vendo mi auto usado en Quito con AutoCash?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Completa el formulario con los datos de tu auto y tus datos de contacto. Nuestro equipo te responde por WhatsApp para continuar el proceso."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Por que me contactan por WhatsApp?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WhatsApp nos permite confirmar datos, coordinar la revision y darte seguimiento rapido de forma directa."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "En que ciudad funciona AutoCash?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "AutoCash opera en Quito y atiende solicitudes de venta de autos usados en Ecuador."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --blue: #1e3a8a;
+        --blue-dark: #0f1f4d;
+        --blue-mid: #172f6e;
+        --blue-light: #eff6ff;
+        --green: #10b981;
+        --green-dark: #059669;
+        --cta: #2563eb;
+        --bg: #f9fafb;
+        --white: #ffffff;
+        --gray: #e5e7eb;
+        --gray-light: #f3f4f6;
+        --text: #111827;
+        --text-mid: #4b5563;
+        --success: #10b981;
+        --radius: 16px;
+        --radius-sm: 10px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      #inicio,
+      #como-funciona,
+      #formulario,
+      #contacto {
+        scroll-margin-top: 90px;
+      }
+
+      /* NAV */
+      nav {
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 48px;
+        box-shadow: 0 2px 12px rgba(30, 58, 138, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+      }
+
+      .logo-badge {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-wordmark {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+      }
+
+      .logo-wordmark .vendo {
+        color: var(--blue-dark);
+      }
+      .logo-wordmark .ya {
+        color: var(--green);
+      }
+
+      .logo-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--cta);
+        border-radius: 50%;
+        margin-left: 3px;
+        margin-bottom: 14px;
+        flex-shrink: 0;
+      }
+
+      .logo-tag {
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--text-mid);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        display: block;
+        line-height: 1;
+        margin-top: -4px;
+        padding-left: 2px;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 32px;
+      }
+
+      nav ul a {
+        text-decoration: none;
+        color: var(--text-mid);
+        font-weight: 700;
+        font-size: 15px;
+        transition: color 0.2s;
+      }
+
+      nav ul a:hover,
+      nav ul a.active {
+        color: var(--blue);
+      }
+      nav ul a.active {
+        border-bottom: 3px solid var(--blue);
+        padding-bottom: 2px;
+      }
+
+      /* HERO */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--blue-dark) 0%,
+          var(--blue) 55%,
+          var(--cta) 100%
+        );
+        padding: 60px 48px 80px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        gap: 48px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        top: -200px;
+        right: -100px;
+        pointer-events: none;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.08);
+        bottom: -100px;
+        left: 100px;
+        pointer-events: none;
+      }
+
+      .hero-text {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: var(--green);
+        color: white;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 64px;
+        font-weight: 900;
+        color: white;
+        line-height: 1.05;
+        margin-bottom: 16px;
+      }
+
+      .hero h1 em {
+        font-style: normal;
+        color: var(--green);
+        display: block;
+      }
+
+      .hero p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.6;
+        max-width: 420px;
+        margin-bottom: 32px;
+      }
+
+      .hero-features {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .hero-feat {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: white;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .hero-feat .icon {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+
+      .hero-visual {
+        flex: 0 0 420px;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .steps-card {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 28px 32px;
+        width: 100%;
+      }
+
+      .steps-card h3 {
+        color: var(--green);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+      }
+
+      .steps-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .step-num {
+        width: 32px;
+        height: 32px;
+        background: var(--green);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+
+      .step span {
+        color: white;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 1.3;
+      }
+
+      /* FORM SECTION */
+      .form-section {
+        max-width: 960px;
+        margin: -40px auto 60px;
+        padding: 0 24px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .form-card {
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15);
+        overflow: hidden;
+      }
+
+      .form-header {
+        background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+        padding: 28px 40px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .form-header-icon {
+        width: 52px;
+        height: 52px;
+        background: var(--green);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        flex-shrink: 0;
+      }
+
+      .form-header h2 {
+        color: white;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+
+      .form-header p {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 2px;
+      }
+
+      /* PROGRESS */
+      .progress-bar {
+        background: var(--blue-light);
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+      }
+
+      .prog-step {
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+
+      .prog-dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 14px;
+        color: var(--text-mid);
+        flex-shrink: 0;
+        transition: all 0.3s;
+      }
+
+      .prog-dot.active {
+        background: var(--blue);
+        color: white;
+        box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.2);
+      }
+      .prog-dot.done {
+        background: var(--green);
+        color: white;
+      }
+
+      .prog-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-mid);
+        margin-left: 8px;
+        white-space: nowrap;
+      }
+      .prog-label.active {
+        color: var(--blue);
+      }
+
+      .prog-line {
+        flex: 1;
+        height: 3px;
+        background: var(--gray);
+        margin: 0 8px;
+        border-radius: 2px;
+        transition: background 0.3s;
+      }
+
+      .prog-line.done {
+        background: var(--green);
+      }
+
+      /* FORM BODY */
+      .form-body {
+        padding: 40px;
+      }
+      .form-step {
+        display: none;
+      }
+      .form-step.active {
+        display: block;
+        animation: fadeSlide 0.3s ease;
+      }
+
+      @keyframes fadeSlide {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .step-title {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--blue-dark);
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+      }
+
+      .step-subtitle {
+        color: var(--text-mid);
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 28px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .form-grid.one {
+        grid-template-columns: 1fr;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .field.full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--blue-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      input,
+      select,
+      textarea {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        padding: 14px 18px;
+        border: 2px solid var(--gray);
+        border-radius: var(--radius-sm);
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+        background: var(--gray-light);
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        width: 100%;
+        appearance: none;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.12);
+        background: white;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .select-wrapper {
+        position: relative;
+      }
+      .select-wrapper::after {
+        content: "▼";
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px;
+        color: var(--blue);
+        pointer-events: none;
+        font-weight: 700;
+      }
+
+      /* RADIO CARDS */
+      .radio-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 4px;
+      }
+      .radio-card input[type="radio"] {
+        display: none;
+      }
+      .radio-card label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 18px 12px;
+        border: 2px solid var(--gray);
+        border-radius: var(--radius-sm);
+        background: var(--gray-light);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+        text-transform: none;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-mid);
+      }
+      .radio-card label .card-icon {
+        font-size: 30px;
+      }
+      .radio-card input[type="radio"]:checked + label {
+        border-color: var(--blue);
+        background: var(--blue-light);
+        color: var(--blue);
+        box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+      }
+
+      /* CHECK LIST */
+      .check-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 4px;
+      }
+      .check-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border: 2px solid var(--gray);
+        border-radius: var(--radius-sm);
+        background: var(--gray-light);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .check-item input[type="checkbox"] {
+        display: none;
+      }
+      .check-box {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--gray);
+        border-radius: 5px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .check-item:has(input:checked) {
+        border-color: var(--blue);
+        background: var(--blue-light);
+      }
+      .check-item:has(input:checked) .check-box {
+        background: var(--blue);
+        border-color: var(--blue);
+      }
+      .check-item:has(input:checked) .check-box::after {
+        content: "✓";
+        color: white;
+        font-size: 13px;
+        font-weight: 900;
+      }
+      .check-item span {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-mid);
+      }
+      .check-item:has(input:checked) span {
+        color: var(--blue);
+      }
+
+      /* PRECIO ESTIMADO */
+      .price-estimate {
+        background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+        border-radius: 18px;
+        padding: 32px;
+        text-align: center;
+        margin: 28px 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .price-estimate::before {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        top: -80px;
+        right: -60px;
+      }
+      .price-estimate .est-label {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .price-estimate .est-range {
+        color: var(--green);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 52px;
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .price-estimate .est-note {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .price-estimate .est-disclaimer {
+        display: inline-block;
+        margin-top: 14px;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 16px;
+        border-radius: 50px;
+      }
+
+      /* CONTACTO */
+      .contact-banner {
+        background: var(--blue-light);
+        border: 2px solid rgba(30, 58, 138, 0.2);
+        border-radius: 14px;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .contact-banner .banner-icon {
+        font-size: 36px;
+        flex-shrink: 0;
+      }
+      .contact-banner p {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--blue-dark);
+        line-height: 1.5;
+      }
+      .contact-banner p strong {
+        color: var(--blue);
+      }
+
+      .whatsapp-opt {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        border: 2px solid #25d366;
+        border-radius: var(--radius-sm);
+        background: #f0fff4;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+      .whatsapp-opt input[type="checkbox"] {
+        appearance: auto;
+        -webkit-appearance: checkbox;
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        padding: 0;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        accent-color: #16a34a;
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+      .whatsapp-opt input[type="checkbox"]:focus {
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        outline: 2px solid rgba(22, 163, 74, 0.3);
+        outline-offset: 2px;
+      }
+      .whatsapp-opt label {
+        color: #16a34a;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: none;
+        letter-spacing: 0;
+        cursor: pointer;
+      }
+
+      /* BOTONES */
+      .form-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 40px 32px;
+        border-top: 2px solid var(--blue-light);
+        gap: 16px;
+      }
+
+      .btn {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        padding: 14px 32px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-back {
+        background: transparent;
+        color: var(--text-mid);
+        border: 2px solid var(--gray);
+      }
+      .btn-back:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+
+      .btn-next {
+        background: linear-gradient(135deg, var(--blue), var(--cta));
+        color: white;
+        box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+      }
+      .btn-next:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(30, 58, 138, 0.45);
+      }
+
+      .btn-submit {
+        background: linear-gradient(135deg, var(--green), var(--green-dark));
+        color: white;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        font-size: 17px;
+        padding: 16px 40px;
+      }
+      .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45);
+      }
+
+      /* SUCCESS */
+      .success-screen {
+        display: none;
+        text-align: center;
+        padding: 60px 40px;
+      }
+      .success-screen.active {
+        display: block;
+      }
+
+      .success-icon {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, var(--green), var(--green-dark));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        margin: 0 auto 24px;
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes popIn {
+        from {
+          transform: scale(0);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .success-screen h2 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 40px;
+        font-weight: 900;
+        color: var(--blue-dark);
+        margin-bottom: 12px;
+      }
+
+      .success-screen p {
+        color: var(--text-mid);
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.6;
+        max-width: 480px;
+        margin: 0 auto 32px;
+      }
+
+      .success-data {
+        background: var(--blue-light);
+        border-radius: 16px;
+        padding: 24px 32px;
+        max-width: 500px;
+        margin: 0 auto 32px;
+        text-align: left;
+      }
+
+      .success-data h4 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--blue);
+        margin-bottom: 16px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .data-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+        font-size: 14px;
+      }
+      .data-row:last-child {
+        border-bottom: none;
+      }
+      .data-row .key {
+        color: var(--text-mid);
+        font-weight: 700;
+      }
+      .data-row .val {
+        color: var(--blue-dark);
+        font-weight: 800;
+      }
+
+      .whatsapp-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #25d366;
+        color: white;
+        font-weight: 800;
+        font-size: 16px;
+        padding: 14px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+        transition: all 0.2s;
+      }
+      .whatsapp-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(37, 211, 102, 0.4);
+      }
+
+      /* TRUST */
+      .trust-section {
+        max-width: 960px;
+        margin: 0 auto 60px;
+        padding: 0 24px;
+      }
+
+      .seo-section {
+        max-width: 960px;
+        margin: 0 auto 60px;
+        padding: 0 24px;
+      }
+
+      .seo-card {
+        background: white;
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08);
+      }
+
+      .seo-card h2 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 30px;
+        color: var(--blue-dark);
+        letter-spacing: 0.4px;
+        margin-bottom: 12px;
+      }
+
+      .seo-card p {
+        color: var(--text-mid);
+        font-size: 15px;
+        line-height: 1.75;
+        margin-bottom: 12px;
+      }
+
+      .faq-list {
+        margin-top: 18px;
+      }
+
+      .faq-list h3 {
+        font-size: 19px;
+        color: var(--blue-dark);
+        margin-bottom: 10px;
+      }
+
+      .faq-list details {
+        border: 1px solid var(--gray);
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        background: var(--gray-light);
+      }
+
+      .faq-list summary {
+        font-weight: 800;
+        color: var(--blue-dark);
+        cursor: pointer;
+      }
+
+      .faq-list details p {
+        margin-top: 8px;
+        margin-bottom: 2px;
+      }
+
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .trust-card {
+        background: white;
+        border-radius: 16px;
+        padding: 28px 20px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08);
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+      .trust-card:hover {
+        border-color: var(--blue);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(30, 58, 138, 0.15);
+      }
+      .trust-card .t-icon {
+        font-size: 40px;
+        margin-bottom: 14px;
+      }
+      .trust-card h4 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--blue-dark);
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+      }
+      .trust-card p {
+        color: var(--text-mid);
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+
+      footer {
+        background: var(--blue-dark);
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        padding: 24px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      footer strong {
+        color: var(--green);
+      }
+
+      .error-msg {
+        color: #ef4444;
+        font-size: 12px;
+        font-weight: 700;
+        display: none;
+        margin-top: 2px;
+      }
+      .field-help {
+        color: var(--text-mid);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .field.has-error input,
+      .field.has-error select {
+        border-color: #ef4444;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+      }
+      .field.has-error .error-msg {
+        display: block;
+      }
+
+      .whatsapp-opt.has-error {
+        border-color: #ef4444;
+        background: #fef2f2;
+      }
+
+      .wha-error {
+        color: #ef4444;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 8px;
+        display: none;
+      }
+
+      .wha-error.show {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 14px 20px;
+        }
+        nav ul {
+          display: none;
+        }
+        .hero {
+          flex-direction: column;
+          padding: 36px 20px 70px;
+          gap: 32px;
+        }
+        .hero h1 {
+          font-size: 44px;
+        }
+        .hero-visual {
+          flex: none;
+          width: 100%;
+        }
+        .form-section {
+          padding: 0 16px;
+        }
+        .form-body {
+          padding: 28px 20px;
+        }
+        .form-header {
+          padding: 22px 20px;
+        }
+        .progress-bar {
+          padding: 16px 20px;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .radio-cards {
+          grid-template-columns: 1fr 1fr;
+        }
+        .trust-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .form-nav {
+          padding: 20px;
+        }
+        .prog-label {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="/" class="logo" aria-label="AutoCash - Inicio">
+        <div class="logo-badge">
+          <div>
+            <div class="logo-wordmark">
+              <span class="vendo">Auto</span><span class="ya">Cash</span>
             </div>
-            <span class="error-msg" role="alert">Selecciona la marca</span>
+            <span class="logo-tag">Quito · Ecuador</span>
           </div>
-
-          <div class="field">
-            <label for="modelo">Modelo *</label>
-            <input type="text" id="modelo" placeholder="Ej: Corolla, Aveo, Tucson…" required oninput="updateEstimate()" data-track="modelo">
-            <span class="error-msg" role="alert">Ingresa el modelo</span>
-          </div>
-
-          <div class="field">
-            <label for="anio">Año *</label>
-            <div class="select-wrapper">
-              <select id="anio" required onchange="updateEstimate()" data-track="anio">
-                <option value="">Seleccionar año</option>
-              </select>
-            </div>
-            <span class="error-msg" role="alert">Selecciona el año</span>
-          </div>
-
-          <div class="field">
-            <label for="tipo">Tipo de carrocería</label>
-            <div class="select-wrapper">
-              <select id="tipo" onchange="updateEstimate()" data-track="tipo">
-                <option value="">Seleccionar tipo</option>
-                <option>Sedán</option><option>SUV</option><option>Hatchback</option>
-                <option>Camioneta / Pick-up</option><option>Station Wagon</option>
-                <option>Coupé</option><option>Van / Furgoneta</option><option>Otro</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="combustible">Combustible</label>
-            <div class="select-wrapper">
-              <select id="combustible" onchange="updateEstimate()" data-track="combustible">
-                <option value="">Seleccionar</option>
-                <option>Gasolina</option><option>Diésel</option>
-                <option>Híbrido</option><option>Eléctrico</option><option>GLP (Gas)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="transmision">Transmisión</label>
-            <div class="select-wrapper">
-              <select id="transmision" onchange="updateEstimate()" data-track="transmision">
-                <option value="">Seleccionar</option>
-                <option>Automático</option><option>Manual</option><option>CVT</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="kilometraje">Kilometraje *</label>
-            <div class="select-wrapper">
-              <select id="kilometraje" required onchange="updateEstimate()" data-track="kilometraje">
-                <option value="">Seleccionar rango</option>
-                <option value="0-20000">0 – 20.000 km</option>
-                <option value="20001-50000">20.001 – 50.000 km</option>
-                <option value="50001-80000">50.001 – 80.000 km</option>
-                <option value="80001-120000">80.001 – 120.000 km</option>
-                <option value="120001-180000">120.001 – 180.000 km</option>
-                <option value="180001+">Más de 180.000 km</option>
-              </select>
-            </div>
-            <span class="error-msg" role="alert">Selecciona el kilometraje</span>
-          </div>
-
-          <div class="field">
-            <label for="color">Color</label>
-            <div class="select-wrapper">
-              <select id="color" data-track="color">
-                <option value="">Seleccionar</option>
-                <option>Blanco</option><option>Negro</option><option>Gris / Plata</option>
-                <option>Rojo</option><option>Azul</option><option>Beige / Champán</option>
-                <option>Verde</option><option>Otro</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field full">
-            <label for="placa">Placa (opcional)</label>
-            <input type="text" id="placa" placeholder="Ej: PBA-1234" style="text-transform:uppercase" data-track="placa">
-          </div>
+          <div class="logo-dot"></div>
         </div>
-      </div>
+      </a>
+      <ul role="navigation" aria-label="Menú principal">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li>
+          <a href="#formulario" class="active" aria-current="page"
+            >Enviar datos</a
+          >
+        </li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
 
-      <!-- STEP 2 -->
-      <div class="form-step" id="step2" role="form" aria-label="Paso 2: Estado y características">
-        <div class="step-title">ESTADO Y CARACTERÍSTICAS</div>
-        <div class="step-subtitle">Más detalles = estimado más preciso</div>
-
-        <div style="margin-bottom:28px">
-          <label style="display:block;margin-bottom:12px">Estado general del vehículo *</label>
-          <div class="radio-cards">
-            <div class="radio-card">
-              <input type="radio" name="estado" id="e1" value="Excelente" onchange="updateEstimate()">
-              <label for="e1"><span class="card-icon">⭐⭐⭐⭐⭐</span>Excelente<small style="display:block;font-size:11px;opacity:.7;margin-top:4px">Como nuevo</small></label>
-            </div>
-            <div class="radio-card">
-              <input type="radio" name="estado" id="e2" value="Bueno" onchange="updateEstimate()" checked>
-              <label for="e2"><span class="card-icon">⭐⭐⭐⭐</span>Bueno<small style="display:block;font-size:11px;opacity:.7;margin-top:4px">Detalles menores</small></label>
-            </div>
-            <div class="radio-card">
-              <input type="radio" name="estado" id="e3" value="Regular" onchange="updateEstimate()">
-              <label for="e3"><span class="card-icon">⭐⭐⭐</span>Regular<small style="display:block;font-size:11px;opacity:.7;margin-top:4px">Necesita trabajo</small></label>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-bottom:28px">
-          <label style="display:block;margin-bottom:12px">¿Tiene revisión técnica vehicular vigente?</label>
-          <div class="radio-cards" style="grid-template-columns:1fr 1fr">
-            <div class="radio-card">
-              <input type="radio" name="rtv" id="rtv1" value="Sí" onchange="updateEstimate()">
-              <label for="rtv1"><span class="card-icon">✅</span>Sí, vigente</label>
-            </div>
-            <div class="radio-card">
-              <input type="radio" name="rtv" id="rtv2" value="No" onchange="updateEstimate()" checked>
-              <label for="rtv2"><span class="card-icon">❌</span>No / Vencida</label>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-bottom:28px">
-          <label style="display:block;margin-bottom:12px">Accesorios y características</label>
-          <div class="check-list">
-            <div class="check-item" onclick="toggleCheck('acc1')"><input type="checkbox" id="acc1"><div class="check-box" id="box-acc1"></div><span>❄️ Aire acondicionado</span></div>
-            <div class="check-item" onclick="toggleCheck('acc2')"><input type="checkbox" id="acc2"><div class="check-box" id="box-acc2"></div><span>🔲 Vidrios eléctricos</span></div>
-            <div class="check-item" onclick="toggleCheck('acc3')"><input type="checkbox" id="acc3"><div class="check-box" id="box-acc3"></div><span>📷 Cámara de reversa</span></div>
-            <div class="check-item" onclick="toggleCheck('acc4')"><input type="checkbox" id="acc4"><div class="check-box" id="box-acc4"></div><span>📡 Sensores de parqueo</span></div>
-            <div class="check-item" onclick="toggleCheck('acc5')"><input type="checkbox" id="acc5"><div class="check-box" id="box-acc5"></div><span>📱 Pantalla táctil / GPS</span></div>
-            <div class="check-item" onclick="toggleCheck('acc6')"><input type="checkbox" id="acc6"><div class="check-box" id="box-acc6"></div><span>☀️ Sunroof / Panorámico</span></div>
-            <div class="check-item" onclick="toggleCheck('acc7')"><input type="checkbox" id="acc7"><div class="check-box" id="box-acc7"></div><span>🛋️ Asientos de cuero</span></div>
-            <div class="check-item" onclick="toggleCheck('acc8')"><input type="checkbox" id="acc8"><div class="check-box" id="box-acc8"></div><span>🚙 4x4 / Tracción total</span></div>
-            <div class="check-item" onclick="toggleCheck('acc9')"><input type="checkbox" id="acc9"><div class="check-box" id="box-acc9"></div><span>⚙️ Aros de lujo</span></div>
-            <div class="check-item" onclick="toggleCheck('acc10')"><input type="checkbox" id="acc10"><div class="check-box" id="box-acc10"></div><span>📋 Historial de servicio</span></div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="observaciones">Observaciones adicionales</label>
-          <textarea id="observaciones" placeholder="Ej: tiene rally en el guardafango, motor en perfectas condiciones..."></textarea>
-        </div>
-
-        <div class="price-estimate" id="priceEstimate" aria-live="polite">
-          <div class="est-label">💰 Estimado de precio de compra</div>
-          <div class="est-range" id="estRange">—</div>
-          <div class="est-note" id="estNote">Completa los datos del auto para ver tu estimado</div>
-          <div class="est-disclaimer">⚠️ Sujeto a revisión técnica presencial</div>
-        </div>
-      </div>
-
-      <!-- STEP 3 -->
-      <div class="form-step" id="step3" role="form" aria-label="Paso 3: Datos de contacto">
-        <div class="step-title">TUS DATOS DE CONTACTO</div>
-        <div class="step-subtitle">Para que nuestro equipo te llame y agende la revisión técnica</div>
-
-        <div class="contact-banner">
-          <div class="banner-icon" aria-hidden="true">🤖</div>
-          <p>Nuestro <strong>bot de WhatsApp</strong> te enviará la cotización al instante y coordinará la cita automáticamente.</p>
-        </div>
-
-        <div class="form-grid">
-          <div class="field">
-            <label for="nombre">Nombre completo *</label>
-            <input type="text" id="nombre" placeholder="Tu nombre" required autocomplete="name" data-track="nombre">
-            <span class="error-msg" role="alert">Ingresa tu nombre</span>
-          </div>
-          <div class="field">
-            <label for="cedula">Cédula / RUC</label>
-            <input type="text" id="cedula" placeholder="0912345678" inputmode="numeric" data-track="cedula">
-          </div>
-          <div class="field">
-            <label for="celular">Celular / WhatsApp *</label>
-            <input type="tel" id="celular" placeholder="09XXXXXXXX" required autocomplete="tel" data-track="celular">
-            <span class="error-msg" role="alert">Ingresa tu número de celular</span>
-          </div>
-          <div class="field">
-            <label for="email">Correo electrónico *</label>
-            <input type="email" id="email" placeholder="tucorreo@gmail.com" required autocomplete="email" data-track="email">
-            <span class="error-msg" role="alert">Ingresa un correo válido</span>
-          </div>
-          <div class="field full">
-            <label for="ciudad">Ciudad *</label>
-            <div class="select-wrapper">
-              <select id="ciudad" required data-track="ciudad">
-                <option value="">Seleccionar ciudad</option>
-                <option>Quito</option><option>Guayaquil</option><option>Cuenca</option>
-                <option>Manta</option><option>Ambato</option><option>Machala</option>
-                <option>Portoviejo</option><option>Loja</option><option>Riobamba</option>
-                <option>Otra ciudad</option>
-              </select>
-            </div>
-            <span class="error-msg" role="alert">Selecciona tu ciudad</span>
-          </div>
-          <div class="field full">
-            <label for="horario">Horario preferido de contacto</label>
-            <div class="select-wrapper">
-              <select id="horario" data-track="horario">
-                <option>Cualquier hora</option>
-                <option>Mañana (8:00 - 12:00)</option>
-                <option>Tarde (12:00 - 17:00)</option>
-                <option>Noche (17:00 - 20:00)</option>
-              </select>
-            </div>
-          </div>
-          <div class="field full">
-            <label for="precioEsperado">¿Cuánto esperas recibir por tu auto? (opcional)</label>
-            <input type="text" id="precioEsperado" placeholder="Ej: $8.500" data-track="precioEsperado">
-          </div>
-        </div>
-
-        <div class="whatsapp-opt">
-          <input type="checkbox" id="whaAccept" checked>
-          <label for="whaAccept">📱 Acepto recibir mensajes de WhatsApp con mi cotización y coordinar la cita</label>
-        </div>
-
-        <p style="margin-top:12px;font-size:12px;color:var(--text-mid);font-weight:600">
-          Al enviar aceptas nuestros <a href="/terminos" style="color:var(--blue)">Términos y Condiciones</a> y
-          <a href="/privacidad" style="color:var(--blue)">Política de Privacidad</a>.
+    <!-- HERO -->
+    <section class="hero" id="inicio" aria-label="Vende tu auto en Quito">
+      <div class="hero-text">
+        <span class="hero-badge">💬 Respuesta por WhatsApp en minutos</span>
+        <h1>Tu auto vale<em>dinero hoy</em></h1>
+        <p>
+          Completa tus datos y recibe la cotizacion de seguimiento directamente
+          por WhatsApp. Te contactamos rapido para continuar el proceso.
         </p>
+        <div class="hero-features" role="list">
+          <div class="hero-feat" role="listitem">
+            <div class="icon" aria-hidden="true">⚡</div>
+            Confirmacion y seguimiento por WhatsApp
+          </div>
+          <div class="hero-feat" role="listitem">
+            <div class="icon" aria-hidden="true">🔍</div>
+            Revisión técnica gratuita
+          </div>
+          <div class="hero-feat" role="listitem">
+            <div class="icon" aria-hidden="true">💬</div>
+            Te contactamos por WhatsApp
+          </div>
+          <div class="hero-feat" role="listitem">
+            <div class="icon" aria-hidden="true">✅</div>
+            Garantía legal ✔
+          </div>
+        </div>
       </div>
-
-      <!-- SUCCESS -->
-      <div class="success-screen" id="successScreen" role="status" aria-live="polite">
-        <div class="success-icon" aria-hidden="true">✅</div>
-        <h2>¡COTIZACIÓN ENVIADA!</h2>
-        <p>Recibimos los datos de tu auto. Nuestro equipo AutoCash te contactará pronto para agendar la revisión técnica gratuita.</p>
-        <div class="success-data" id="successData"><h4>📋 Resumen de tu solicitud</h4></div>
-        <a href="#" class="whatsapp-cta" id="whatsappLink" aria-label="Chatear con AutoCash por WhatsApp">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Chatear con AutoCash
-        </a>
+      <div class="hero-visual" id="como-funciona">
+        <div
+          class="steps-card"
+          role="list"
+          aria-label="Pasos para vender tu auto"
+        >
+          <h3>¿Cómo funciona?</h3>
+          <div class="steps-list">
+            <div class="step" role="listitem">
+              <div class="step-num" aria-hidden="true">1</div>
+              <span>Llena el formulario con los datos de tu auto</span>
+            </div>
+            <div class="step" role="listitem">
+              <div class="step-num" aria-hidden="true">2</div>
+              <span>Recibe seguimiento y orientacion por WhatsApp</span>
+            </div>
+            <div class="step" role="listitem">
+              <div class="step-num" aria-hidden="true">3</div>
+              <span>Nuestro equipo AutoCash te contacta para la revisión</span>
+            </div>
+            <div class="step" role="listitem">
+              <div class="step-num" aria-hidden="true">4</div>
+              <span>¡Vende tu auto al mejor precio!</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="form-nav" id="formNav">
-      <button class="btn btn-back" id="btnBack" onclick="goBack()" style="visibility:hidden" aria-label="Volver al paso anterior">← Atrás</button>
-      <div style="font-size:13px;color:var(--text-mid);font-weight:700" id="stepCounter" aria-live="polite">Paso 1 de 3</div>
-      <button class="btn btn-next" id="btnNext" onclick="goNext()" aria-label="Ir al siguiente paso">Siguiente →</button>
-    </div>
-  </div>
-</section>
+    <!-- FORM -->
+    <section
+      class="form-section"
+      id="formulario"
+      aria-label="Formulario de venta"
+    >
+      <div class="form-card">
+        <div class="form-header">
+          <div class="form-header-icon" aria-hidden="true">🚗</div>
+          <div>
+            <h2>FORMULARIO DE VENTA</h2>
+            <p>Completa los 3 pasos para recibir la respuesta por WhatsApp</p>
+          </div>
+        </div>
 
-<section class="trust-section" aria-label="Por qué elegirnos">
-  <div class="trust-grid">
-    <div class="trust-card">
-      <div class="t-icon" aria-hidden="true">🔍</div>
-      <h4>REVISIÓN TÉCNICA GRATIS</h4>
-      <p>Nuestros expertos evalúan tu auto sin ningún costo adicional</p>
-    </div>
-    <div class="trust-card">
-      <div class="t-icon" aria-hidden="true">💰</div>
-      <h4>MEJOR PRECIO</h4>
-      <p>Pagamos el precio justo del mercado por tu vehículo usado</p>
-    </div>
-    <div class="trust-card">
-      <div class="t-icon" aria-hidden="true">⚡</div>
-      <h4>PAGO RÁPIDO</h4>
-      <p>Cerramos el trato y te pagamos en menos de 24 horas</p>
-    </div>
-    <div class="trust-card">
-      <div class="t-icon" aria-hidden="true">📋</div>
-      <h4>SIN TRÁMITES</h4>
-      <p>Nos encargamos de todo el papeleo y transferencia</p>
-    </div>
-  </div>
-</section>
+        <div
+          class="progress-bar"
+          role="progressbar"
+          aria-label="Progreso del formulario"
+        >
+          <div class="prog-step">
+            <div class="prog-dot active" id="dot1">1</div>
+            <span class="prog-label active" id="lbl1">Tu Auto</span>
+          </div>
+          <div class="prog-line" id="line1"></div>
+          <div class="prog-step">
+            <div class="prog-dot" id="dot2">2</div>
+            <span class="prog-label" id="lbl2">Estado y Extras</span>
+          </div>
+          <div class="prog-line" id="line2"></div>
+          <div class="prog-step">
+            <div class="prog-dot" id="dot3">3</div>
+            <span class="prog-label" id="lbl3">Tus Datos</span>
+          </div>
+        </div>
 
-<footer id="contacto">
-  <strong>AutoCash</strong> — Vendemos tu auto, fácil y rápido &nbsp;|&nbsp; 📍 Quito, Ecuador &nbsp;|&nbsp; © 2025
-</footer>
+        <div class="form-body">
+          <!-- STEP 1 -->
+          <div
+            class="form-step active"
+            id="step1"
+            role="form"
+            aria-label="Paso 1: Datos del vehículo"
+          >
+            <div class="step-title">DATOS DEL VEHÍCULO</div>
+            <div class="step-subtitle">
+              Cuentanos sobre tu auto para iniciar el proceso de evaluacion
+            </div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="marca">Marca *</label>
+                <div class="select-wrapper">
+                  <select
+                    id="marca"
+                    required
+                    onchange="updateEstimate()"
+                    data-track="marca"
+                  >
+                    <option value="">Seleccionar marca</option>
+                    <option>Toyota</option>
+                    <option>Chevrolet</option>
+                    <option>Hyundai</option>
+                    <option>Kia</option>
+                    <option>Mazda</option>
+                    <option>Nissan</option>
+                    <option>Ford</option>
+                    <option>Volkswagen</option>
+                    <option>Renault</option>
+                    <option>Peugeot</option>
+                    <option>Suzuki</option>
+                    <option>Changan</option>
+                    <option>JAC</option>
+                    <option>DFSK</option>
+                    <option>Haval</option>
+                    <option>Otra</option>
+                  </select>
+                </div>
+                <span class="error-msg" role="alert">Selecciona la marca</span>
+              </div>
 
-<script>
-// ════════════════════════════════════════════════════
-//  ⚙️  CONFIG — solo el número de WhatsApp aquí
-//  Las keys de Supabase están en Vercel (servidor)
-//  Este archivo es 100% seguro para subir a GitHub
-// ════════════════════════════════════════════════════
-const WHA_NUMBER = '593999000000'; // ← CAMBIAR (solo esto)
+              <div class="field">
+                <label for="modelo">Modelo *</label>
+                <input
+                  type="text"
+                  id="modelo"
+                  placeholder="Ej: Corolla, Aveo, Tucson…"
+                  required
+                  oninput="updateEstimate()"
+                  data-track="modelo"
+                />
+                <span class="error-msg" role="alert">Ingresa el modelo</span>
+              </div>
 
-// ════════════════════════════════════════════════════
-//  📡  API CLIENT — llama a tus rutas de Vercel
-// ════════════════════════════════════════════════════
-const SESSION_ID = crypto.randomUUID();
-const PAGE_START = Date.now();
-let stepStart    = Date.now();
-let scrollMax    = 0;
-const utmParams  = new URLSearchParams(window.location.search);
+              <div class="field">
+                <label for="anio">Año *</label>
+                <div class="select-wrapper">
+                  <select
+                    id="anio"
+                    required
+                    onchange="updateEstimate()"
+                    data-track="anio"
+                  >
+                    <option value="">Seleccionar año</option>
+                  </select>
+                </div>
+                <span class="error-msg" role="alert">Selecciona el año</span>
+              </div>
 
-async function api(path, body, method = 'POST') {
-  try {
-    await fetch(path, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-      keepalive: true   // funciona incluso en beforeunload
-    });
-  } catch { /* silencioso — nunca interrumpir la UX */ }
-}
+              <div class="field">
+                <label for="tipo">Tipo de carrocería</label>
+                <div class="select-wrapper">
+                  <select
+                    id="tipo"
+                    onchange="updateEstimate()"
+                    data-track="tipo"
+                  >
+                    <option value="">Seleccionar tipo</option>
+                    <option>Sedán</option>
+                    <option>SUV</option>
+                    <option>Hatchback</option>
+                    <option>Camioneta / Pick-up</option>
+                    <option>Station Wagon</option>
+                    <option>Coupé</option>
+                    <option>Van / Furgoneta</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+              </div>
 
-async function initSession() {
-  await api('/api/session', {
-    id:           SESSION_ID,
-    referrer:     document.referrer || null,
-    utm_source:   utmParams.get('utm_source'),
-    utm_medium:   utmParams.get('utm_medium'),
-    utm_campaign: utmParams.get('utm_campaign'),
-    landing_url:  window.location.href
-  });
-}
+              <div class="field">
+                <label for="combustible">Combustible</label>
+                <div class="select-wrapper">
+                  <select
+                    id="combustible"
+                    onchange="updateEstimate()"
+                    data-track="combustible"
+                  >
+                    <option value="">Seleccionar</option>
+                    <option>Gasolina</option>
+                    <option>Diésel</option>
+                    <option>Híbrido</option>
+                    <option>Eléctrico</option>
+                    <option>GLP (Gas)</option>
+                  </select>
+                </div>
+              </div>
 
-async function track(eventType, data = {}) {
-  await api('/api/track', {
-    session_id:   SESSION_ID,
-    event_type:   eventType,
-    event_data:   data,
-    step:         data.step   ?? null,
-    field_name:   data.field  ?? null,
-    value:        data.value  != null ? String(data.value) : null,
-    time_on_step: data.time_on_step ?? null
-  });
-}
+              <div class="field">
+                <label for="transmision">Transmisión</label>
+                <div class="select-wrapper">
+                  <select
+                    id="transmision"
+                    onchange="updateEstimate()"
+                    data-track="transmision"
+                  >
+                    <option value="">Seleccionar</option>
+                    <option>Automático</option>
+                    <option>Manual</option>
+                    <option>CVT</option>
+                  </select>
+                </div>
+              </div>
 
-// Scroll depth
-window.addEventListener('scroll', () => {
-  const total = document.body.scrollHeight - window.innerHeight;
-  if (total <= 0) return;
-  const pct = Math.round((window.scrollY / total) * 100);
-  if (pct > scrollMax) {
-    scrollMax = pct;
-    if ([25, 50, 75, 90, 100].includes(pct))
-      track('scroll_depth', { value: pct });
-  }
-}, { passive: true });
+              <div class="field">
+                <label for="kilometraje">Kilometraje *</label>
+                <div class="select-wrapper">
+                  <select
+                    id="kilometraje"
+                    required
+                    onchange="updateEstimate()"
+                    data-track="kilometraje"
+                  >
+                    <option value="">Seleccionar rango</option>
+                    <option value="0-20000">0 – 20.000 km</option>
+                    <option value="20001-50000">20.001 – 50.000 km</option>
+                    <option value="50001-80000">50.001 – 80.000 km</option>
+                    <option value="80001-120000">80.001 – 120.000 km</option>
+                    <option value="120001-180000">120.001 – 180.000 km</option>
+                    <option value="180001+">Más de 180.000 km</option>
+                  </select>
+                </div>
+                <span class="error-msg" role="alert"
+                  >Selecciona el kilometraje</span
+                >
+              </div>
 
-// Actualizar sesión al salir (keepalive asegura que llegue)
-window.addEventListener('beforeunload', () => {
-  const timeOnPage = Math.round((Date.now() - PAGE_START) / 1000);
-  api('/api/session', {
-    id: SESSION_ID,
-    scroll_max_pct: scrollMax,
-    time_on_page:   timeOnPage
-  }, 'PATCH');
-});
+              <div class="field">
+                <label for="color">Color</label>
+                <div class="select-wrapper">
+                  <select id="color" data-track="color">
+                    <option value="">Seleccionar</option>
+                    <option>Blanco</option>
+                    <option>Negro</option>
+                    <option>Gris / Plata</option>
+                    <option>Rojo</option>
+                    <option>Azul</option>
+                    <option>Beige / Champán</option>
+                    <option>Verde</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+              </div>
 
-// Clicks en botones clave
-document.addEventListener('click', e => {
-  const btn = e.target.closest('button, a');
-  if (!btn) return;
-  track('button_click', {
-    label: (btn.textContent || '').trim().slice(0, 60),
-    id:    btn.id || null
-  });
-});
+              <div class="field full">
+                <label for="placa">Placa (opcional)</label>
+                <input
+                  type="text"
+                  id="placa"
+                  placeholder="Ej: PBA-1234"
+                  style="text-transform: uppercase"
+                  data-track="placa"
+                />
+              </div>
+            </div>
+          </div>
 
-// Focus / blur en campos
-document.addEventListener('focusin', e => {
-  if (!e.target.matches('input,select,textarea')) return;
-  track('field_focus', { field: e.target.id, step: currentStep });
-});
+          <!-- STEP 2 -->
+          <div
+            class="form-step"
+            id="step2"
+            role="form"
+            aria-label="Paso 2: Estado y características"
+          >
+            <div class="step-title">ESTADO Y CARACTERÍSTICAS</div>
+            <div class="step-subtitle">
+              Mas detalles = mejor analisis para tu caso
+            </div>
 
-document.addEventListener('focusout', e => {
-  if (!e.target.matches('input,select,textarea')) return;
-  track('field_blur', {
-    field: e.target.id,
-    step:  currentStep,
-    empty: !e.target.value?.trim()
-  });
-});
+            <div style="margin-bottom: 28px">
+              <label style="display: block; margin-bottom: 12px"
+                >Estado general del vehículo *</label
+              >
+              <div class="radio-cards">
+                <div class="radio-card">
+                  <input
+                    type="radio"
+                    name="estado"
+                    id="e1"
+                    value="Excelente"
+                    onchange="updateEstimate()"
+                  />
+                  <label for="e1"
+                    ><span class="card-icon">⭐⭐⭐⭐⭐</span>Excelente<small
+                      style="
+                        display: block;
+                        font-size: 11px;
+                        opacity: 0.7;
+                        margin-top: 4px;
+                      "
+                      >Como nuevo</small
+                    ></label
+                  >
+                </div>
+                <div class="radio-card">
+                  <input
+                    type="radio"
+                    name="estado"
+                    id="e2"
+                    value="Bueno"
+                    onchange="updateEstimate()"
+                    checked
+                  />
+                  <label for="e2"
+                    ><span class="card-icon">⭐⭐⭐⭐</span>Bueno<small
+                      style="
+                        display: block;
+                        font-size: 11px;
+                        opacity: 0.7;
+                        margin-top: 4px;
+                      "
+                      >Detalles menores</small
+                    ></label
+                  >
+                </div>
+                <div class="radio-card">
+                  <input
+                    type="radio"
+                    name="estado"
+                    id="e3"
+                    value="Regular"
+                    onchange="updateEstimate()"
+                  />
+                  <label for="e3"
+                    ><span class="card-icon">⭐⭐⭐</span>Regular<small
+                      style="
+                        display: block;
+                        font-size: 11px;
+                        opacity: 0.7;
+                        margin-top: 4px;
+                      "
+                      >Necesita trabajo</small
+                    ></label
+                  >
+                </div>
+              </div>
+            </div>
 
-// ════════════════════════════════════════════════════
-//  AÑOS
-// ════════════════════════════════════════════════════
-const selAnio = document.getElementById('anio');
-const currentYear = new Date().getFullYear();
-for (let y = currentYear; y >= 1990; y--) {
-  const o = document.createElement('option');
-  o.value = y; o.textContent = y; selAnio.appendChild(o);
-}
+            <div style="margin-bottom: 28px">
+              <label style="display: block; margin-bottom: 12px"
+                >¿Tiene revisión técnica vehicular vigente?</label
+              >
+              <div class="radio-cards" style="grid-template-columns: 1fr 1fr">
+                <div class="radio-card">
+                  <input
+                    type="radio"
+                    name="rtv"
+                    id="rtv1"
+                    value="Sí"
+                    onchange="updateEstimate()"
+                  />
+                  <label for="rtv1"
+                    ><span class="card-icon">✅</span>Sí, vigente</label
+                  >
+                </div>
+                <div class="radio-card">
+                  <input
+                    type="radio"
+                    name="rtv"
+                    id="rtv2"
+                    value="No"
+                    onchange="updateEstimate()"
+                    checked
+                  />
+                  <label for="rtv2"
+                    ><span class="card-icon">❌</span>No / Vencida</label
+                  >
+                </div>
+              </div>
+            </div>
 
-// ════════════════════════════════════════════════════
-//  STEP MANAGEMENT
-// ════════════════════════════════════════════════════
-let currentStep = 1;
-const totalSteps = 3;
+            <div style="margin-bottom: 28px">
+              <label style="display: block; margin-bottom: 12px"
+                >Accesorios y características</label
+              >
+              <div class="check-list">
+                <div class="check-item" onclick="toggleCheck('acc1')">
+                  <input type="checkbox" id="acc1" />
+                  <div class="check-box" id="box-acc1"></div>
+                  <span>❄️ Aire acondicionado</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc2')">
+                  <input type="checkbox" id="acc2" />
+                  <div class="check-box" id="box-acc2"></div>
+                  <span>🔲 Vidrios eléctricos</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc3')">
+                  <input type="checkbox" id="acc3" />
+                  <div class="check-box" id="box-acc3"></div>
+                  <span>📷 Cámara de reversa</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc4')">
+                  <input type="checkbox" id="acc4" />
+                  <div class="check-box" id="box-acc4"></div>
+                  <span>📡 Sensores de parqueo</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc5')">
+                  <input type="checkbox" id="acc5" />
+                  <div class="check-box" id="box-acc5"></div>
+                  <span>📱 Pantalla táctil / GPS</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc6')">
+                  <input type="checkbox" id="acc6" />
+                  <div class="check-box" id="box-acc6"></div>
+                  <span>☀️ Sunroof / Panorámico</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc7')">
+                  <input type="checkbox" id="acc7" />
+                  <div class="check-box" id="box-acc7"></div>
+                  <span>🛋️ Asientos de cuero</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc8')">
+                  <input type="checkbox" id="acc8" />
+                  <div class="check-box" id="box-acc8"></div>
+                  <span>🚙 4x4 / Tracción total</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc9')">
+                  <input type="checkbox" id="acc9" />
+                  <div class="check-box" id="box-acc9"></div>
+                  <span>⚙️ Aros de lujo</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck('acc10')">
+                  <input type="checkbox" id="acc10" />
+                  <div class="check-box" id="box-acc10"></div>
+                  <span>📋 Historial de servicio</span>
+                </div>
+              </div>
+            </div>
 
-function showStep(n) {
-  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-  const el = document.getElementById('step' + n);
-  if (el) el.classList.add('active');
+            <div class="field">
+              <label for="observaciones">Observaciones adicionales</label>
+              <textarea
+                id="observaciones"
+                placeholder="Ej: tiene rally en el guardafango, motor en perfectas condiciones..."
+              ></textarea>
+            </div>
 
-  for (let i = 1; i <= totalSteps; i++) {
-    const dot = document.getElementById('dot' + i);
-    const lbl = document.getElementById('lbl' + i);
-    dot.classList.remove('active', 'done');
-    if (lbl) lbl.classList.remove('active');
-    if (i < n)      { dot.classList.add('done'); dot.textContent = '✓'; }
-    else if (i === n) { dot.classList.add('active'); dot.textContent = i; if (lbl) lbl.classList.add('active'); }
-    else              { dot.textContent = i; }
-  }
+            <div class="price-estimate" id="priceEstimate" aria-live="polite">
+              <div class="est-label">🔧 ESTIMADOR EN CONSTRUCCION</div>
+              <div class="est-range" id="estRange">Proximamente</div>
+              <div class="est-note" id="estNote">
+                Por ahora no mostramos un valor en pantalla. Te contactaremos
+                por WhatsApp con el siguiente paso.
+              </div>
+              <div class="est-disclaimer">
+                ⚠️ Pronto integraremos un analisis avanzado de cotizacion
+              </div>
+            </div>
+          </div>
 
-  for (let i = 1; i < totalSteps; i++) {
-    document.getElementById('line' + i)?.classList.toggle('done', i < n);
-  }
+          <!-- STEP 3 -->
+          <div
+            class="form-step"
+            id="step3"
+            role="form"
+            aria-label="Paso 3: Datos de contacto"
+          >
+            <div class="step-title">TUS DATOS DE CONTACTO</div>
+            <div class="step-subtitle">
+              Para que nuestro equipo te llame y agende la revisión técnica
+            </div>
 
-  document.getElementById('stepCounter').textContent = 'Paso ' + n + ' de ' + totalSteps;
-  document.getElementById('btnBack').style.visibility = n > 1 ? 'visible' : 'hidden';
+            <div class="contact-banner">
+              <div class="banner-icon" aria-hidden="true">🤖</div>
+              <p>
+                Nuestro <strong>equipo por WhatsApp</strong> te guiara en el
+                siguiente paso y coordinara la cita de revision.
+              </p>
+            </div>
 
-  const btnNext = document.getElementById('btnNext');
-  if (n === totalSteps) {
-    btnNext.textContent = '✅ Enviar cotización';
-    btnNext.className   = 'btn btn-submit';
-    btnNext.onclick     = submitForm;
-  } else {
-    btnNext.textContent = 'Siguiente →';
-    btnNext.className   = 'btn btn-next';
-    btnNext.onclick     = goNext;
-  }
+            <div class="form-grid">
+              <div class="field">
+                <label for="nombre">Nombre completo *</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  placeholder="Tu nombre"
+                  required
+                  autocomplete="name"
+                  data-track="nombre"
+                />
+                <span class="error-msg" role="alert">Ingresa tu nombre</span>
+              </div>
+              <div class="field">
+                <label for="cedula">Cédula / RUC</label>
+                <input
+                  type="text"
+                  id="cedula"
+                  placeholder="0912345678"
+                  inputmode="numeric"
+                  data-track="cedula"
+                />
+              </div>
+              <div class="field">
+                <label for="celular"
+                  >Celular / WhatsApp * (codigo pais +593)</label
+                >
+                <input
+                  type="tel"
+                  id="celular"
+                  placeholder="+593 987 654 321"
+                  required
+                  autocomplete="tel"
+                  data-track="celular"
+                  inputmode="tel"
+                />
+                <span class="field-help"
+                  >Formato recomendado: +593XXXXXXXXX. Tambien aceptamos
+                  09XXXXXXXX y lo normalizamos.</span
+                >
+                <span class="error-msg" role="alert"
+                  >Ingresa tu número de celular</span
+                >
+              </div>
+              <div class="field">
+                <label for="email">Correo electrónico *</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="tucorreo@gmail.com"
+                  required
+                  autocomplete="email"
+                  data-track="email"
+                />
+                <span class="error-msg" role="alert"
+                  >Ingresa un correo válido</span
+                >
+              </div>
+              <div class="field full">
+                <label for="ciudad">Ciudad *</label>
+                <div class="select-wrapper">
+                  <select id="ciudad" required data-track="ciudad">
+                    <option value="">Seleccionar ciudad</option>
+                    <option>Quito</option>
+                    <option>Guayaquil</option>
+                    <option>Cuenca</option>
+                    <option>Manta</option>
+                    <option>Ambato</option>
+                    <option>Machala</option>
+                    <option>Portoviejo</option>
+                    <option>Loja</option>
+                    <option>Riobamba</option>
+                    <option>Otra ciudad</option>
+                  </select>
+                </div>
+                <span class="error-msg" role="alert">Selecciona tu ciudad</span>
+              </div>
+              <div class="field full">
+                <label for="horario">Horario preferido de contacto</label>
+                <div class="select-wrapper">
+                  <select id="horario" data-track="horario">
+                    <option>Cualquier hora</option>
+                    <option>Mañana (8:00 - 12:00)</option>
+                    <option>Tarde (12:00 - 17:00)</option>
+                    <option>Noche (17:00 - 20:00)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field full">
+                <label for="precioEsperado"
+                  >¿Cuánto esperas recibir por tu auto? (opcional)</label
+                >
+                <input
+                  type="text"
+                  id="precioEsperado"
+                  placeholder="Ej: $8.500"
+                  data-track="precioEsperado"
+                />
+              </div>
+            </div>
 
-  track('step_start', { step: n });
-  stepStart = Date.now();
-}
+            <div class="whatsapp-opt" onclick="toggleWhatsappAccept(event)">
+              <input type="checkbox" id="whaAccept" checked />
+              <label for="whaAccept"
+                >📱 Acepto recibir mensajes por WhatsApp para continuar con mi
+                cotizacion y coordinar la cita</label
+              >
+            </div>
+            <div id="whaAcceptError" class="wha-error" role="alert">
+              Debes aceptar el contacto por WhatsApp para continuar.
+            </div>
 
-function goNext() {
-  if (!validateStep(currentStep)) return;
-  const timeOnStep = Math.round((Date.now() - stepStart) / 1000);
-  track('step_complete', { step: currentStep, time_on_step: timeOnStep });
-  api('/api/session', { id: SESSION_ID, max_step: currentStep }, 'PATCH');
-  currentStep++;
-  showStep(currentStep);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+            <p
+              style="
+                margin-top: 12px;
+                font-size: 12px;
+                color: var(--text-mid);
+                font-weight: 600;
+              "
+            >
+              Al enviar aceptas nuestros
+              <a href="/terminos" style="color: var(--blue)"
+                >Términos y Condiciones</a
+              >
+              y
+              <a href="/privacidad" style="color: var(--blue)"
+                >Política de Privacidad</a
+              >.
+            </p>
+          </div>
 
-function goBack() {
-  if (currentStep > 1) {
-    track('step_abandon', {
-      step: currentStep,
-      time_on_step: Math.round((Date.now() - stepStart) / 1000)
-    });
-    currentStep--;
-    showStep(currentStep);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-}
+          <!-- SUCCESS -->
+          <div
+            class="success-screen"
+            id="successScreen"
+            role="status"
+            aria-live="polite"
+          >
+            <div class="success-icon" aria-hidden="true">✅</div>
+            <h2>¡COTIZACIÓN ENVIADA!</h2>
+            <p>
+              Recibimos los datos de tu auto. Nuestro equipo AutoCash te
+              contactará pronto para agendar la revisión técnica gratuita.
+            </p>
+            <div class="success-data" id="successData">
+              <h4>📋 Resumen de tu solicitud</h4>
+            </div>
+            <a
+              href="#"
+              class="whatsapp-cta"
+              id="whatsappLink"
+              aria-label="Chatear con AutoCash por WhatsApp"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="white"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Chatear con AutoCash
+            </a>
+          </div>
+        </div>
 
-// ════════════════════════════════════════════════════
-//  VALIDACIÓN
-// ════════════════════════════════════════════════════
-function validateStep(n) {
-  let valid = true;
-  const required = n === 1 ? ['marca','modelo','anio','kilometraje']
-                 : n === 3 ? ['nombre','celular','email','ciudad']
-                 : [];
-  required.forEach(id => {
-    const el    = document.getElementById(id);
-    const field = el?.closest('.field');
-    if (!el?.value?.trim()) {
-      field?.classList.add('has-error');
-      track('field_error', { field: id, step: n });
-      valid = false;
-    } else {
-      field?.classList.remove('has-error');
-    }
-  });
-  return valid;
-}
+        <div class="form-nav" id="formNav">
+          <button
+            class="btn btn-back"
+            id="btnBack"
+            onclick="goBack()"
+            style="visibility: hidden"
+            aria-label="Volver al paso anterior"
+          >
+            ← Atrás
+          </button>
+          <div
+            style="font-size: 13px; color: var(--text-mid); font-weight: 700"
+            id="stepCounter"
+            aria-live="polite"
+          >
+            Paso 1 de 3
+          </div>
+          <button
+            class="btn btn-next"
+            id="btnNext"
+            onclick="goNext()"
+            aria-label="Ir al siguiente paso"
+          >
+            Siguiente →
+          </button>
+        </div>
+      </div>
+    </section>
 
-// ════════════════════════════════════════════════════
-//  ESTIMADOR
-// ════════════════════════════════════════════════════
-function updateEstimate() {
-  const marca       = document.getElementById('marca').value;
-  const anio        = parseInt(document.getElementById('anio').value);
-  const km          = document.getElementById('kilometraje').value;
-  const transmision = document.getElementById('transmision').value;
-  const estado      = document.querySelector('input[name="estado"]:checked')?.value || 'Bueno';
-  const rtv         = document.querySelector('input[name="rtv"]:checked')?.value || 'No';
+    <section class="trust-section" aria-label="Por qué elegirnos">
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="t-icon" aria-hidden="true">🔍</div>
+          <h4>REVISIÓN TÉCNICA GRATIS</h4>
+          <p>Nuestros expertos evalúan tu auto sin ningún costo adicional</p>
+        </div>
+        <div class="trust-card">
+          <div class="t-icon" aria-hidden="true">💰</div>
+          <h4>MEJOR PRECIO</h4>
+          <p>Pagamos el precio justo del mercado por tu vehículo usado</p>
+        </div>
+        <div class="trust-card">
+          <div class="t-icon" aria-hidden="true">⚡</div>
+          <h4>PAGO RÁPIDO</h4>
+          <p>Cerramos el trato y te pagamos en menos de 24 horas</p>
+        </div>
+        <div class="trust-card">
+          <div class="t-icon" aria-hidden="true">📋</div>
+          <h4>SIN TRÁMITES</h4>
+          <p>Nos encargamos de todo el papeleo y transferencia</p>
+        </div>
+      </div>
+    </section>
 
-  if (!marca || !anio || !km) {
-    document.getElementById('estRange').textContent = '—';
-    document.getElementById('estNote').textContent  = 'Completa los datos del auto para ver tu estimado';
-    return;
-  }
+    <section
+      class="seo-section"
+      aria-label="Informacion sobre venta de autos usados en Quito"
+    >
+      <div class="seo-card">
+        <h2>Vender tu auto usado en Quito con AutoCash</h2>
+        <p>
+          AutoCash es una opcion para personas que buscan vender su auto usado
+          en Quito de forma simple y con seguimiento directo por WhatsApp.
+          Nuestro formulario esta pensado para recoger los datos necesarios del
+          vehiculo y acelerar el contacto del equipo.
+        </p>
+        <p>
+          Si estas buscando como vender carro en Quito, cotizar tu auto o
+          recibir atencion rapida para iniciar el proceso, en AutoCash puedes
+          dejar tus datos y continuar el flujo con asesoria por WhatsApp.
+        </p>
+        <div class="faq-list" id="faq">
+          <h3>Preguntas frecuentes</h3>
+          <details>
+            <summary>Como inicio el proceso para vender mi auto?</summary>
+            <p>
+              Completa el formulario en 3 pasos y confirma tu numero de
+              WhatsApp. Nuestro equipo te escribe para continuar.
+            </p>
+          </details>
+          <details>
+            <summary>AutoCash trabaja solo en Quito?</summary>
+            <p>
+              La cobertura principal es Quito y se revisan solicitudes de otras
+              ciudades segun disponibilidad.
+            </p>
+          </details>
+          <details>
+            <summary>Por que es importante ingresar bien mi celular?</summary>
+            <p>
+              Porque la continuidad del proceso es por WhatsApp. Recomendamos
+              usar +593XXXXXXXXX para evitar errores.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
 
-  const brandBase = {
-    Toyota:14000, Chevrolet:9000, Hyundai:10000, Kia:11000, Mazda:12000,
-    Nissan:10500, Ford:11000, Volkswagen:10000, Renault:8000, Peugeot:9500,
-    Suzuki:9000, Changan:7500, JAC:7000, DFSK:6500, Haval:10000, Otra:8000
-  };
+    <footer id="contacto">
+      <strong>AutoCash</strong> — Vendemos tu auto, fácil y rápido &nbsp;|&nbsp;
+      📍 Quito, Ecuador &nbsp;|&nbsp; © 2025
+    </footer>
 
-  let base = brandBase[marca] || 9000;
-  const age = currentYear - anio;
-  base *= Math.pow(0.88, age);
+    <script>
+      // ════════════════════════════════════════════════════
+      //  ⚙️  CONFIG — solo el número de WhatsApp aquí
+      //  Las keys de Supabase están en Vercel (servidor)
+      //  Este archivo es 100% seguro para subir a GitHub
+      // ════════════════════════════════════════════════════
+      const WHA_NUMBER = "593963225661";
 
-  const kmFactor = {
-    '0-20000':1.12,'20001-50000':1.05,'50001-80000':1.0,
-    '80001-120000':0.90,'120001-180000':0.80,'180001+':0.65
-  };
-  base *= (kmFactor[km] || 1);
+      // ════════════════════════════════════════════════════
+      //  📡  API CLIENT — llama a tus rutas de Vercel
+      // ════════════════════════════════════════════════════
+      const SESSION_ID = crypto.randomUUID();
+      const PAGE_START = Date.now();
+      let stepStart = Date.now();
+      let scrollMax = 0;
+      const utmParams = new URLSearchParams(window.location.search);
 
-  if (transmision === 'Automático') base *= 1.08;
-  if (transmision === 'CVT')        base *= 1.06;
-  if (estado === 'Excelente')       base *= 1.10;
-  if (estado === 'Regular')         base *= 0.85;
-  if (rtv === 'Sí')                 base *= 1.03;
+      async function api(path, body, method = "POST") {
+        try {
+          await fetch(path, {
+            method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+            keepalive: true, // funciona incluso en beforeunload
+          });
+        } catch {
+          /* silencioso — nunca interrumpir la UX */
+        }
+      }
 
-  const accValues = {acc1:200,acc3:300,acc4:150,acc5:400,acc6:600,acc7:500,acc8:800,acc10:200};
-  Object.entries(accValues).forEach(([id, val]) => {
-    if (document.getElementById(id)?.checked) base += val;
-  });
+      async function initSession() {
+        await api("/api/session", {
+          id: SESSION_ID,
+          referrer: document.referrer || null,
+          utm_source: utmParams.get("utm_source"),
+          utm_medium: utmParams.get("utm_medium"),
+          utm_campaign: utmParams.get("utm_campaign"),
+          landing_url: window.location.href,
+        });
+      }
 
-  const low  = Math.round(base * 0.90 / 100) * 100;
-  const high = Math.round(base * 1.10 / 100) * 100;
-  const fmt  = n => '$' + n.toLocaleString('es-EC');
+      async function track(eventType, data = {}) {
+        await api("/api/track", {
+          session_id: SESSION_ID,
+          event_type: eventType,
+          event_data: data,
+          step: data.step ?? null,
+          field_name: data.field ?? null,
+          value: data.value != null ? String(data.value) : null,
+          time_on_step: data.time_on_step ?? null,
+        });
+      }
 
-  document.getElementById('estRange').textContent = fmt(low) + ' – ' + fmt(high);
-  document.getElementById('estNote').textContent  =
-    `Estimado para ${marca} ${anio} · ${age === 0 ? 'Nuevo' : age + (age===1?' año':' años')} de antigüedad`;
+      // Scroll depth
+      window.addEventListener(
+        "scroll",
+        () => {
+          const total = document.body.scrollHeight - window.innerHeight;
+          if (total <= 0) return;
+          const pct = Math.round((window.scrollY / total) * 100);
+          if (pct > scrollMax) {
+            scrollMax = pct;
+            if ([25, 50, 75, 90, 100].includes(pct))
+              track("scroll_depth", { value: pct });
+          }
+        },
+        { passive: true },
+      );
 
-  track('estimate_view', { value: fmt(low)+' – '+fmt(high), marca, anio, km });
-}
+      // Actualizar sesión al salir (keepalive asegura que llegue)
+      window.addEventListener("beforeunload", () => {
+        const timeOnPage = Math.round((Date.now() - PAGE_START) / 1000);
+        api(
+          "/api/session",
+          {
+            id: SESSION_ID,
+            scroll_max_pct: scrollMax,
+            time_on_page: timeOnPage,
+          },
+          "PATCH",
+        );
+      });
 
-// ════════════════════════════════════════════════════
-//  CHECKBOX TOGGLE
-// ════════════════════════════════════════════════════
-function toggleCheck(id) {
-  document.getElementById(id).checked ^= true;
-  updateEstimate();
-}
+      // Clicks en botones clave
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest("button, a");
+        if (!btn) return;
+        track("button_click", {
+          label: (btn.textContent || "").trim().slice(0, 60),
+          id: btn.id || null,
+        });
+      });
 
-// ════════════════════════════════════════════════════
-//  SUBMIT → /api/lead (servidor) + WhatsApp
-// ════════════════════════════════════════════════════
-async function submitForm() {
-  if (!validateStep(3)) return;
+      // Focus / blur en campos
+      document.addEventListener("focusin", (e) => {
+        if (!e.target.matches("input,select,textarea")) return;
+        track("field_focus", { field: e.target.id, step: currentStep });
+      });
 
-  const v = id => document.getElementById(id)?.value?.trim() || '';
+      document.addEventListener("focusout", (e) => {
+        if (!e.target.matches("input,select,textarea")) return;
+        track("field_blur", {
+          field: e.target.id,
+          step: currentStep,
+          empty: !e.target.value?.trim(),
+        });
+      });
 
-  const marca         = v('marca');
-  const modelo        = v('modelo');
-  const anio          = v('anio');
-  const tipo          = v('tipo')          || 'No especificado';
-  const combustible   = v('combustible')   || 'No especificado';
-  const transmision   = v('transmision')   || 'No especificado';
-  const km            = v('kilometraje')   || 'No especificado';
-  const color         = v('color')         || 'No especificado';
-  const placa         = v('placa')         || 'No ingresada';
-  const estado        = document.querySelector('input[name="estado"]:checked')?.value || 'No indicado';
-  const rtv           = document.querySelector('input[name="rtv"]:checked')?.value    || 'No indicado';
-  const estimado      = document.getElementById('estRange').textContent;
-  const observaciones = v('observaciones') || 'Ninguna';
-  const nombre        = v('nombre');
-  const cedula        = v('cedula')        || 'No ingresada';
-  const celular       = v('celular');
-  const email         = v('email');
-  const ciudad        = v('ciudad');
-  const horario       = v('horario');
-  const precioEsp     = v('precioEsperado') || 'No especificado';
-  const whaAcept      = document.getElementById('whaAccept').checked;
+      // ════════════════════════════════════════════════════
+      //  AÑOS
+      // ════════════════════════════════════════════════════
+      const selAnio = document.getElementById("anio");
+      const currentYear = new Date().getFullYear();
+      for (let y = currentYear; y >= 1990; y--) {
+        const o = document.createElement("option");
+        o.value = y;
+        o.textContent = y;
+        selAnio.appendChild(o);
+      }
 
-  const accsMap = {
-    acc1:'Aire acondicionado', acc2:'Vidrios eléctricos', acc3:'Cámara de reversa',
-    acc4:'Sensores de parqueo', acc5:'Pantalla táctil / GPS', acc6:'Sunroof',
-    acc7:'Asientos de cuero', acc8:'4x4 / Tracción total', acc9:'Aros de lujo',
-    acc10:'Historial de servicio'
-  };
-  const accsSeleccionados = Object.entries(accsMap)
-    .filter(([id]) => document.getElementById(id)?.checked).map(([,l]) => l);
+      // ════════════════════════════════════════════════════
+      //  STEP MANAGEMENT
+      // ════════════════════════════════════════════════════
+      let currentStep = 1;
+      const totalSteps = 3;
 
-  const rangeMatch = estimado.match(/\$([0-9.,]+)\s*–\s*\$([0-9.,]+)/);
-  const estMin = rangeMatch ? parseInt(rangeMatch[1].replace(/[.,]/g,'')) : null;
-  const estMax = rangeMatch ? parseInt(rangeMatch[2].replace(/[.,]/g,'')) : null;
+      function showStep(n) {
+        document
+          .querySelectorAll(".form-step")
+          .forEach((s) => s.classList.remove("active"));
+        const el = document.getElementById("step" + n);
+        if (el) el.classList.add("active");
 
-  // ── Enviar al servidor (seguro) ──
-  await api('/api/lead', {
-    marca, modelo, anio, tipo, combustible, transmision, kilometraje: km,
-    color, placa, estado_general: estado, rtv_vigente: rtv,
-    accesorios: accsSeleccionados, observaciones,
-    estimado_min: estMin, estimado_max: estMax, estimado_texto: estimado,
-    precio_esperado: precioEsp,
-    nombre, cedula, celular, email, ciudad, horario, acepta_wha: whaAcept,
-    session_id: SESSION_ID,
-    utm_source:   utmParams.get('utm_source'),
-    utm_medium:   utmParams.get('utm_medium'),
-    utm_campaign: utmParams.get('utm_campaign')
-  });
+        for (let i = 1; i <= totalSteps; i++) {
+          const dot = document.getElementById("dot" + i);
+          const lbl = document.getElementById("lbl" + i);
+          dot.classList.remove("active", "done");
+          if (lbl) lbl.classList.remove("active");
+          if (i < n) {
+            dot.classList.add("done");
+            dot.textContent = "✓";
+          } else if (i === n) {
+            dot.classList.add("active");
+            dot.textContent = i;
+            if (lbl) lbl.classList.add("active");
+          } else {
+            dot.textContent = i;
+          }
+        }
 
-  // Marcar sesión como convertida
-  api('/api/session', { id: SESSION_ID, converted: true, max_step: 3 }, 'PATCH');
-  track('form_submit', { marca, anio, estimado, ciudad,
-    time_on_step: Math.round((Date.now() - stepStart) / 1000) });
+        for (let i = 1; i < totalSteps; i++) {
+          document.getElementById("line" + i)?.classList.toggle("done", i < n);
+        }
 
-  // Resumen en pantalla
-  const ahora    = new Date();
-  const fechaStr = ahora.toLocaleDateString('es-EC', {day:'2-digit',month:'short'});
-  const horaStr  = ahora.toLocaleTimeString('es-EC', {hour:'2-digit',minute:'2-digit'});
+        document.getElementById("stepCounter").textContent =
+          "Paso " + n + " de " + totalSteps;
+        document.getElementById("btnBack").style.visibility =
+          n > 1 ? "visible" : "hidden";
 
-  document.getElementById('successData').innerHTML =
-    '<h4>📋 Resumen de tu solicitud</h4>' +
-    row('Auto',            marca + ' ' + modelo + ' ' + anio) +
-    row('Tipo',            tipo) +
-    row('Combustible',     combustible) +
-    row('Transmisión',     transmision) +
-    row('Kilometraje',     km) +
-    row('Estado',          estado) +
-    row('Estimado AutoCash','<span style="color:var(--green);font-size:17px">' + estimado + '</span>') +
-    row('Vendedor',        nombre) +
-    row('Celular',         celular) +
-    row('Ciudad',          ciudad) +
-    row('Precio esperado', precioEsp);
+        const btnNext = document.getElementById("btnNext");
+        if (n === totalSteps) {
+          btnNext.textContent = "✅ Enviar cotización";
+          btnNext.className = "btn btn-submit";
+          btnNext.onclick = submitForm;
+        } else {
+          btnNext.textContent = "Siguiente →";
+          btnNext.className = "btn btn-next";
+          btnNext.onclick = goNext;
+        }
 
-  // ── Mensaje WhatsApp ──
-  const msg = encodeURIComponent([
-    'NUEVA COTIZACION - AutoCash',
-    'Fecha: ' + fechaStr + ' ' + horaStr,
-    '',
-    'DATOS DEL VEHICULO',
-    'Marca y modelo: ' + marca + ' ' + modelo,
-    'Anio: ' + anio,
-    'Tipo: ' + tipo,
-    'Combustible: ' + combustible,
-    'Transmision: ' + transmision,
-    'Kilometraje: ' + km,
-    'Color: ' + color,
-    'Placa: ' + placa,
-    '',
-    'ESTADO Y EXTRAS',
-    'Estado: ' + estado,
-    'Revision tecnica: ' + rtv,
-    'Accesorios: ' + (accsSeleccionados.join(', ') || 'Ninguno'),
-    'Observaciones: ' + observaciones,
-    '',
-    'ESTIMADO',
-    'Rango AutoCash: ' + estimado,
-    'Precio esperado: ' + precioEsp,
-    '(Sujeto a revision tecnica)',
-    '',
-    'VENDEDOR',
-    'Nombre: ' + nombre,
-    'Cedula: ' + cedula,
-    'Celular: ' + celular,
-    'Correo: ' + email,
-    'Ciudad: ' + ciudad,
-    'Horario: ' + horario,
-    'Acepta WhatsApp: ' + (whaAcept ? 'Si' : 'No'),
-    '',
-    'ID: ' + SESSION_ID,
-    'autocash.ec'
-  ].join('\n'));
+        track("step_start", { step: n });
+        stepStart = Date.now();
+      }
 
-  const whaLink = document.getElementById('whatsappLink');
-  whaLink.href = 'https://wa.me/' + WHA_NUMBER + '?text=' + msg;
-  whaLink.addEventListener('click', () =>
-    track('whatsapp_click', { nombre, celular, estimado }), { once: true });
+      function goNext() {
+        if (!validateStep(currentStep)) return;
+        const timeOnStep = Math.round((Date.now() - stepStart) / 1000);
+        track("step_complete", { step: currentStep, time_on_step: timeOnStep });
+        api("/api/session", { id: SESSION_ID, max_step: currentStep }, "PATCH");
+        currentStep++;
+        showStep(currentStep);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
 
-  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('formNav').style.display = 'none';
-  document.getElementById('successScreen').classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+      function goBack() {
+        if (currentStep > 1) {
+          track("step_abandon", {
+            step: currentStep,
+            time_on_step: Math.round((Date.now() - stepStart) / 1000),
+          });
+          currentStep--;
+          showStep(currentStep);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
 
-function row(k, v) {
-  return '<div class="data-row"><span class="key">' + k + '</span><span class="val">' + v + '</span></div>';
-}
+      // ════════════════════════════════════════════════════
+      //  VALIDACIÓN
+      // ════════════════════════════════════════════════════
+      function validateStep(n) {
+        let valid = true;
+        const required =
+          n === 1
+            ? ["marca", "modelo", "anio", "kilometraje"]
+            : n === 3
+              ? ["nombre", "celular", "email", "ciudad"]
+              : [];
+        required.forEach((id) => {
+          const el = document.getElementById(id);
+          const field = el?.closest(".field");
+          if (!el?.value?.trim()) {
+            field?.classList.add("has-error");
+            track("field_error", { field: id, step: n });
+            valid = false;
+          } else {
+            field?.classList.remove("has-error");
+          }
+        });
 
-// ════════════════════════════════════════════════════
-//  INIT
-// ════════════════════════════════════════════════════
-initSession();
-track('page_view', { url: window.location.href, referrer: document.referrer });
-showStep(1);
-</script>
-</body>
+        if (n === 3) {
+          const whaAccept = document.getElementById("whaAccept");
+          const whaWrap = document.querySelector(".whatsapp-opt");
+          const whaError = document.getElementById("whaAcceptError");
+          if (!whaAccept.checked) {
+            whaWrap?.classList.add("has-error");
+            whaError?.classList.add("show");
+            track("field_error", { field: "whaAccept", step: n });
+            valid = false;
+          } else {
+            whaWrap?.classList.remove("has-error");
+            whaError?.classList.remove("show");
+          }
+        }
+
+        return valid;
+      }
+
+      // ════════════════════════════════════════════════════
+      //  ESTIMADOR
+      // ════════════════════════════════════════════════════
+      function updateEstimate() {
+        const marca = document.getElementById("marca").value;
+        const anio = parseInt(document.getElementById("anio").value);
+        const km = document.getElementById("kilometraje").value;
+        const transmision = document.getElementById("transmision").value;
+        const estado =
+          document.querySelector('input[name="estado"]:checked')?.value ||
+          "Bueno";
+        const rtv =
+          document.querySelector('input[name="rtv"]:checked')?.value || "No";
+
+        if (!marca || !anio || !km) {
+          document.getElementById("estRange").textContent = "Proximamente";
+          document.getElementById("estNote").textContent =
+            "Por ahora no mostramos un valor en pantalla. Te contactaremos por WhatsApp con el siguiente paso.";
+          return;
+        }
+
+        document.getElementById("estRange").textContent = "Proximamente";
+        document.getElementById("estNote").textContent =
+          `Recibimos tus datos del ${marca} ${anio}. La cotizacion detallada llegara por WhatsApp.`;
+
+        track("estimate_view", {
+          value: "proximamente",
+          marca,
+          anio,
+          km,
+          transmision,
+          estado,
+          rtv,
+        });
+      }
+
+      // ════════════════════════════════════════════════════
+      //  CHECKBOX TOGGLE
+      // ════════════════════════════════════════════════════
+      function toggleCheck(id) {
+        document.getElementById(id).checked ^= true;
+        updateEstimate();
+      }
+
+      // ════════════════════════════════════════════════════
+      //  SUBMIT → /api/lead (servidor) + WhatsApp
+      // ════════════════════════════════════════════════════
+      async function submitForm() {
+        if (!validateStep(3)) return;
+
+        const v = (id) => document.getElementById(id)?.value?.trim() || "";
+
+        const marca = v("marca");
+        const modelo = v("modelo");
+        const anio = v("anio");
+        const tipo = v("tipo") || "No especificado";
+        const combustible = v("combustible") || "No especificado";
+        const transmision = v("transmision") || "No especificado";
+        const km = v("kilometraje") || "No especificado";
+        const color = v("color") || "No especificado";
+        const placa = v("placa") || "No ingresada";
+        const estado =
+          document.querySelector('input[name="estado"]:checked')?.value ||
+          "No indicado";
+        const rtv =
+          document.querySelector('input[name="rtv"]:checked')?.value ||
+          "No indicado";
+        const estimado = "Proximamente por WhatsApp";
+        const observaciones = v("observaciones") || "Ninguna";
+        const nombre = v("nombre");
+        const cedula = v("cedula") || "No ingresada";
+        const celular = v("celular");
+        const email = v("email");
+        const ciudad = v("ciudad");
+        const horario = v("horario");
+        const precioEsp = v("precioEsperado") || "No especificado";
+        const whaAcept = document.getElementById("whaAccept").checked;
+
+        const accsMap = {
+          acc1: "Aire acondicionado",
+          acc2: "Vidrios eléctricos",
+          acc3: "Cámara de reversa",
+          acc4: "Sensores de parqueo",
+          acc5: "Pantalla táctil / GPS",
+          acc6: "Sunroof",
+          acc7: "Asientos de cuero",
+          acc8: "4x4 / Tracción total",
+          acc9: "Aros de lujo",
+          acc10: "Historial de servicio",
+        };
+        const accsSeleccionados = Object.entries(accsMap)
+          .filter(([id]) => document.getElementById(id)?.checked)
+          .map(([, l]) => l);
+
+        const estMin = null;
+        const estMax = null;
+
+        // ── Enviar al servidor (seguro) ──
+        await api("/api/lead", {
+          marca,
+          modelo,
+          anio,
+          tipo,
+          combustible,
+          transmision,
+          kilometraje: km,
+          color,
+          placa,
+          estado_general: estado,
+          rtv_vigente: rtv,
+          accesorios: accsSeleccionados,
+          observaciones,
+          estimado_min: estMin,
+          estimado_max: estMax,
+          estimado_texto: estimado,
+          precio_esperado: precioEsp,
+          nombre,
+          cedula,
+          celular,
+          email,
+          ciudad,
+          horario,
+          acepta_wha: whaAcept,
+          session_id: SESSION_ID,
+          utm_source: utmParams.get("utm_source"),
+          utm_medium: utmParams.get("utm_medium"),
+          utm_campaign: utmParams.get("utm_campaign"),
+        });
+
+        // Marcar sesión como convertida
+        api(
+          "/api/session",
+          { id: SESSION_ID, converted: true, max_step: 3 },
+          "PATCH",
+        );
+        track("form_submit", {
+          marca,
+          anio,
+          estimado,
+          ciudad,
+          time_on_step: Math.round((Date.now() - stepStart) / 1000),
+        });
+
+        // Resumen en pantalla
+        const ahora = new Date();
+        const fechaStr = ahora.toLocaleDateString("es-EC", {
+          day: "2-digit",
+          month: "short",
+        });
+        const horaStr = ahora.toLocaleTimeString("es-EC", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        document.getElementById("successData").innerHTML =
+          "<h4>📋 Resumen de tu solicitud</h4>" +
+          row("Auto", marca + " " + modelo + " " + anio) +
+          row("Tipo", tipo) +
+          row("Combustible", combustible) +
+          row("Transmisión", transmision) +
+          row("Kilometraje", km) +
+          row("Estado", estado) +
+          row(
+            "Cotizacion",
+            '<span style="color:var(--green);font-size:17px">La recibiras por WhatsApp</span>',
+          ) +
+          row("Vendedor", nombre) +
+          row("Celular", celular) +
+          row("Ciudad", ciudad) +
+          row("Precio esperado", precioEsp);
+
+        // ── Mensaje WhatsApp ──
+        const msg = encodeURIComponent(
+          [
+            "NUEVA COTIZACION - AutoCash",
+            "Fecha: " + fechaStr + " " + horaStr,
+            "",
+            "DATOS DEL VEHICULO",
+            "Marca y modelo: " + marca + " " + modelo,
+            "Anio: " + anio,
+            "Tipo: " + tipo,
+            "Combustible: " + combustible,
+            "Transmision: " + transmision,
+            "Kilometraje: " + km,
+            "Color: " + color,
+            "Placa: " + placa,
+            "",
+            "ESTADO Y EXTRAS",
+            "Estado: " + estado,
+            "Revision tecnica: " + rtv,
+            "Accesorios: " + (accsSeleccionados.join(", ") || "Ninguno"),
+            "Observaciones: " + observaciones,
+            "",
+            "COTIZACION",
+            "Estado de cotizacion: " + estimado,
+            "Precio esperado: " + precioEsp,
+            "(Sujeto a revision tecnica)",
+            "",
+            "VENDEDOR",
+            "Nombre: " + nombre,
+            "Cedula: " + cedula,
+            "Celular: " + celular,
+            "Correo: " + email,
+            "Ciudad: " + ciudad,
+            "Horario: " + horario,
+            "Acepta WhatsApp: " + (whaAcept ? "Si" : "No"),
+            "",
+            "ID: " + SESSION_ID,
+            "autocash-one.vercel.app",
+          ].join("\n"),
+        );
+
+        const whaLink = document.getElementById("whatsappLink");
+        whaLink.href = "https://wa.me/" + WHA_NUMBER + "?text=" + msg;
+        whaLink.addEventListener(
+          "click",
+          () => track("whatsapp_click", { nombre, celular, estimado }),
+          { once: true },
+        );
+
+        document
+          .querySelectorAll(".form-step")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("formNav").style.display = "none";
+        document.getElementById("successScreen").classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function row(k, v) {
+        return (
+          '<div class="data-row"><span class="key">' +
+          k +
+          '</span><span class="val">' +
+          v +
+          "</span></div>"
+        );
+      }
+
+      // ════════════════════════════════════════════════════
+      //  INIT
+      // ════════════════════════════════════════════════════
+      initSession();
+      track("page_view", {
+        url: window.location.href,
+        referrer: document.referrer,
+      });
+      showStep(1);
+
+      function toggleWhatsappAccept(event) {
+        const input = document.getElementById("whaAccept");
+        if (!input) return;
+
+        const target = event.target;
+        if (target === input || target.closest("label")) return;
+
+        input.checked = !input.checked;
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+
+      document.getElementById("whaAccept")?.addEventListener("change", (e) => {
+        const whaWrap = document.querySelector(".whatsapp-opt");
+        const whaError = document.getElementById("whaAcceptError");
+        if (e.target.checked) {
+          whaWrap?.classList.remove("has-error");
+          whaError?.classList.remove("show");
+        }
+      });
+    </script>
+  </body>
 </html>

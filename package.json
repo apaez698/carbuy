@@ -2,8 +2,18 @@
   "name": "vendoya",
   "version": "1.0.0",
   "description": "VendoYa - Vende tu auto en Quito",
-  "engines": { "node": "20.x" },
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
   }
 }

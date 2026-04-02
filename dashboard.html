@@ -1,597 +1,1195 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AutoCash — Dashboard de Métricas</title>
-<meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-<style>
-  :root {
-    --blue: #1E3A8A; --blue-dark: #0f1f4d; --blue-light: #EFF6FF;
-    --green: #10B981; --green-dark: #059669;
-    --cta: #2563EB; --bg: #F1F5F9;
-    --white: #fff; --gray: #E5E7EB; --gray-light: #F9FAFB;
-    --text: #111827; --text-mid: #4B5563;
-    --orange: #F59E0B; --red: #EF4444;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoCash — Dashboard de Métricas</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+      :root {
+        --blue: #1e3a8a;
+        --blue-dark: #0f1f4d;
+        --blue-light: #eff6ff;
+        --green: #10b981;
+        --green-dark: #059669;
+        --cta: #2563eb;
+        --bg: #f1f5f9;
+        --white: #fff;
+        --gray: #e5e7eb;
+        --gray-light: #f9fafb;
+        --text: #111827;
+        --text-mid: #4b5563;
+        --orange: #f59e0b;
+        --red: #ef4444;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  /* SIDEBAR */
-  .layout { display: flex; min-height: 100vh; }
-  .sidebar {
-    width: 240px; background: var(--blue-dark); flex-shrink: 0;
-    display: flex; flex-direction: column; padding: 24px 0;
-    position: sticky; top: 0; height: 100vh; overflow-y: auto;
-  }
-  .sidebar-logo {
-    padding: 0 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 16px;
-  }
-  .sidebar-logo .wordmark { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 900; }
-  .sidebar-logo .wordmark .v { color: white; }
-  .sidebar-logo .wordmark .y { color: var(--green); }
-  .sidebar-logo p { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+      /* SIDEBAR */
+      .layout {
+        display: flex;
+        min-height: 100vh;
+      }
+      .sidebar {
+        width: 240px;
+        background: var(--blue-dark);
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 0;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+      }
+      .sidebar-logo {
+        padding: 0 24px 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 16px;
+      }
+      .sidebar-logo .wordmark {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+      }
+      .sidebar-logo .wordmark .v {
+        color: white;
+      }
+      .sidebar-logo .wordmark .y {
+        color: var(--green);
+      }
+      .sidebar-logo p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
 
-  .nav-section { padding: 8px 16px; margin-bottom: 4px; }
-  .nav-label { color: rgba(255,255,255,0.4); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 0 8px 8px; }
-  .nav-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 12px; border-radius: 10px;
-    color: rgba(255,255,255,0.65); font-size: 14px; font-weight: 700;
-    cursor: pointer; transition: all .2s; text-decoration: none; margin-bottom: 2px;
-  }
-  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: white; }
-  .nav-item.active { background: var(--cta); color: white; }
-  .nav-item .icon { font-size: 18px; flex-shrink: 0; }
+      .nav-section {
+        padding: 8px 16px;
+        margin-bottom: 4px;
+      }
+      .nav-label {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 0 8px 8px;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        margin-bottom: 2px;
+      }
+      .nav-item:hover,
+      .nav-item.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+      .nav-item.active {
+        background: var(--cta);
+        color: white;
+      }
+      .nav-item .icon {
+        font-size: 18px;
+        flex-shrink: 0;
+      }
 
-  .sidebar-footer {
-    margin-top: auto; padding: 16px 24px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.4); font-size: 11px; font-weight: 600;
-  }
+      .sidebar-footer {
+        margin-top: auto;
+        padding: 16px 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 11px;
+        font-weight: 600;
+      }
 
-  /* MAIN */
-  .main { flex: 1; overflow-x: hidden; }
+      /* MAIN */
+      .main {
+        flex: 1;
+        overflow-x: hidden;
+      }
 
-  .topbar {
-    background: white; padding: 16px 32px;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid var(--gray);
-    position: sticky; top: 0; z-index: 50;
-  }
-  .topbar h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; color: var(--blue-dark); letter-spacing: 0.5px; }
-  .topbar-right { display: flex; align-items: center; gap: 12px; }
+      .topbar {
+        background: white;
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--gray);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .topbar h1 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--blue-dark);
+        letter-spacing: 0.5px;
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
 
-  .badge-live {
-    display: flex; align-items: center; gap: 6px;
-    background: #DCFCE7; color: var(--green-dark);
-    font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 50px;
-  }
-  .badge-live::before { content: ''; width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+      .badge-live {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #dcfce7;
+        color: var(--green-dark);
+        font-size: 12px;
+        font-weight: 800;
+        padding: 4px 12px;
+        border-radius: 50px;
+      }
+      .badge-live::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: var(--green);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
 
-  .btn-refresh {
-    background: var(--blue-light); color: var(--blue); border: none;
-    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;
-    padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all .2s;
-  }
-  .btn-refresh:hover { background: var(--blue); color: white; }
+      .btn-refresh {
+        background: var(--blue-light);
+        color: var(--blue);
+        border: none;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-refresh:hover {
+        background: var(--blue);
+        color: white;
+      }
 
-  /* CONTENT */
-  .content { padding: 28px 32px; }
+      .btn-danger {
+        background: #fee2e2;
+        color: #b91c1c;
+        border: none;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-danger:hover {
+        background: #ef4444;
+        color: white;
+      }
 
-  /* CONFIG BANNER */
-  .config-banner {
-    background: #FEF3C7; border: 2px solid #F59E0B;
-    border-radius: 12px; padding: 16px 20px;
-    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
-  }
-  .config-banner p { font-size: 14px; font-weight: 700; color: #92400E; }
-  .config-banner code {
-    background: #FDE68A; padding: 2px 8px; border-radius: 4px;
-    font-size: 12px; font-family: monospace; font-weight: 700;
-  }
+      /* CONTENT */
+      .content {
+        padding: 28px 32px;
+      }
 
-  /* KPI CARDS */
-  .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
+      /* CONFIG BANNER */
+      .config-banner {
+        background: #fef3c7;
+        border: 2px solid #f59e0b;
+        border-radius: 12px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .config-banner p {
+        font-size: 14px;
+        font-weight: 700;
+        color: #92400e;
+      }
+      .config-banner code {
+        background: #fde68a;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-family: monospace;
+        font-weight: 700;
+      }
 
-  .kpi-card {
-    background: white; border-radius: 16px; padding: 20px 24px;
-    box-shadow: 0 2px 12px rgba(30,58,138,0.07); border: 2px solid transparent;
-    transition: all .2s; position: relative; overflow: hidden;
-  }
-  .kpi-card:hover { border-color: var(--blue); transform: translateY(-2px); }
-  .kpi-card::after {
-    content: attr(data-icon); position: absolute; right: 16px; top: 50%;
-    transform: translateY(-50%); font-size: 48px; opacity: 0.07;
-  }
+      /* KPI CARDS */
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+      }
 
-  .kpi-label { font-size: 11px; font-weight: 800; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-  .kpi-value { font-family: 'Barlow Condensed', sans-serif; font-size: 40px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
-  .kpi-value.blue { color: var(--blue); }
-  .kpi-value.green { color: var(--green); }
-  .kpi-value.orange { color: var(--orange); }
-  .kpi-value.cta { color: var(--cta); }
-  .kpi-sub { font-size: 12px; font-weight: 600; color: var(--text-mid); }
-  .kpi-trend { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 50px; margin-top: 6px; }
-  .kpi-trend.up { background: #DCFCE7; color: var(--green-dark); }
-  .kpi-trend.down { background: #FEE2E2; color: var(--red); }
+      .kpi-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 2px 12px rgba(30, 58, 138, 0.07);
+        border: 2px solid transparent;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .kpi-card:hover {
+        border-color: var(--blue);
+        transform: translateY(-2px);
+      }
+      .kpi-card::after {
+        content: attr(data-icon);
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 48px;
+        opacity: 0.07;
+      }
 
-  /* CHARTS GRID */
-  .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 24px; }
-  .charts-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+      .kpi-label {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--text-mid);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+      .kpi-value {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 40px;
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .kpi-value.blue {
+        color: var(--blue);
+      }
+      .kpi-value.green {
+        color: var(--green);
+      }
+      .kpi-value.orange {
+        color: var(--orange);
+      }
+      .kpi-value.cta {
+        color: var(--cta);
+      }
+      .kpi-sub {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-mid);
+      }
+      .kpi-trend {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 50px;
+        margin-top: 6px;
+      }
+      .kpi-trend.up {
+        background: #dcfce7;
+        color: var(--green-dark);
+      }
+      .kpi-trend.down {
+        background: #fee2e2;
+        color: var(--red);
+      }
 
-  .chart-card {
-    background: white; border-radius: 16px; padding: 24px;
-    box-shadow: 0 2px 12px rgba(30,58,138,0.07);
-  }
-  .chart-card.full { grid-column: 1 / -1; }
+      /* CHARTS GRID */
+      .charts-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .charts-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
 
-  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-  .card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 800; color: var(--blue-dark); letter-spacing: 0.5px; }
-  .card-badge { font-size: 11px; font-weight: 800; color: var(--text-mid); background: var(--gray-light); padding: 4px 10px; border-radius: 50px; }
+      .chart-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 2px 12px rgba(30, 58, 138, 0.07);
+      }
+      .chart-card.full {
+        grid-column: 1 / -1;
+      }
 
-  .chart-wrap { position: relative; height: 220px; }
-  .chart-wrap.tall { height: 280px; }
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .card-title {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--blue-dark);
+        letter-spacing: 0.5px;
+      }
+      .card-badge {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--text-mid);
+        background: var(--gray-light);
+        padding: 4px 10px;
+        border-radius: 50px;
+      }
 
-  /* FUNNEL */
-  .funnel { display: flex; flex-direction: column; gap: 8px; }
-  .funnel-step {
-    display: flex; flex-direction: column; gap: 4px;
-  }
-  .funnel-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--text-mid); }
-  .funnel-label span:last-child { color: var(--text); }
-  .funnel-bar-track { background: var(--gray); border-radius: 50px; height: 10px; overflow: hidden; }
-  .funnel-bar-fill { height: 100%; border-radius: 50px; transition: width .8s ease; }
+      .chart-wrap {
+        position: relative;
+        height: 220px;
+      }
+      .chart-wrap.tall {
+        height: 280px;
+      }
 
-  /* LEADS TABLE */
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead tr { background: var(--blue-light); }
-  th { padding: 12px 14px; text-align: left; font-size: 11px; font-weight: 800; color: var(--blue-dark); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
-  td { padding: 12px 14px; border-bottom: 1px solid var(--gray); color: var(--text-mid); font-weight: 600; }
-  tr:hover td { background: var(--blue-light); }
-  tr:last-child td { border-bottom: none; }
+      /* FUNNEL */
+      .funnel {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .funnel-step {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .funnel-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-mid);
+      }
+      .funnel-label span:last-child {
+        color: var(--text);
+      }
+      .funnel-bar-track {
+        background: var(--gray);
+        border-radius: 50px;
+        height: 10px;
+        overflow: hidden;
+      }
+      .funnel-bar-fill {
+        height: 100%;
+        border-radius: 50px;
+        transition: width 0.8s ease;
+      }
 
-  .badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 11px; font-weight: 800; }
-  .badge.green { background: #DCFCE7; color: var(--green-dark); }
-  .badge.blue { background: var(--blue-light); color: var(--blue); }
-  .badge.orange { background: #FEF3C7; color: #92400E; }
-  .badge.gray { background: var(--gray); color: var(--text-mid); }
+      /* LEADS TABLE */
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      thead tr {
+        background: var(--blue-light);
+      }
+      th {
+        padding: 12px 14px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--blue-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+      }
+      td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--gray);
+        color: var(--text-mid);
+        font-weight: 600;
+      }
+      tr:hover td {
+        background: var(--blue-light);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
 
-  /* LOADING */
-  .loading { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 40px; color: var(--text-mid); font-weight: 700; font-size: 14px; }
-  .spinner { width: 20px; height: 20px; border: 3px solid var(--gray); border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+      .badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .badge.green {
+        background: #dcfce7;
+        color: var(--green-dark);
+      }
+      .badge.blue {
+        background: var(--blue-light);
+        color: var(--blue);
+      }
+      .badge.orange {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .badge.gray {
+        background: var(--gray);
+        color: var(--text-mid);
+      }
 
-  .empty { text-align: center; padding: 40px; color: var(--text-mid); font-weight: 600; font-size: 14px; }
+      /* LOADING */
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 40px;
+        color: var(--text-mid);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .spinner {
+        width: 20px;
+        height: 20px;
+        border: 3px solid var(--gray);
+        border-top-color: var(--blue);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-  @media(max-width:900px) {
-    .sidebar { display: none; }
-    .kpi-grid { grid-template-columns: 1fr 1fr; }
-    .charts-grid { grid-template-columns: 1fr; }
-    .charts-row { grid-template-columns: 1fr; }
-    .content { padding: 16px; }
-  }
-</style>
-</head>
-<body>
+      .empty {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-mid);
+        font-weight: 600;
+        font-size: 14px;
+      }
 
-<div class="layout">
+      @media (max-width: 900px) {
+        .sidebar {
+          display: none;
+        }
+        .kpi-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .charts-grid {
+          grid-template-columns: 1fr;
+        }
+        .charts-row {
+          grid-template-columns: 1fr;
+        }
+        .content {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div class="wordmark">
+            <span class="v">Vendo</span><span class="y">Ya</span>
+          </div>
+          <p>Dashboard · Admin</p>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Análisis</div>
+          <a class="nav-item active" data-target="section-resumen"
+            ><span class="icon">📊</span> Resumen</a
+          >
+          <a class="nav-item" data-target="section-leads"
+            ><span class="icon">🚗</span> Leads</a
+          >
+          <a class="nav-item" data-target="section-conversion"
+            ><span class="icon">📈</span> Conversión</a
+          >
+          <a class="nav-item" data-target="section-funnel"
+            ><span class="icon">🗺️</span> Funnel</a
+          >
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Datos</div>
+          <a class="nav-item" data-target="section-formularios"
+            ><span class="icon">📋</span> Formularios</a
+          >
+          <a class="nav-item" data-target="section-whatsapp"
+            ><span class="icon">💬</span> WhatsApp</a
+          >
+        </div>
+        <div class="sidebar-footer">
+          Auto-refresh cada 30s<br />
+          <span id="lastUpdate" style="color: rgba(255, 255, 255, 0.3)"
+            >Cargando...</span
+          >
+        </div>
+      </aside>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="wordmark"><span class="v">Vendo</span><span class="y">Ya</span></div>
-      <p>Dashboard · Admin</p>
+      <!-- MAIN -->
+      <main class="main">
+        <div class="topbar">
+          <h1>DASHBOARD — VENDOYA</h1>
+          <div class="topbar-right">
+            <div class="badge-live">EN VIVO</div>
+            <button class="btn-refresh" onclick="loadAll()">
+              ↻ Actualizar
+            </button>
+            <button class="btn-danger" onclick="clearTestData()">
+              🧹 Limpiar data de prueba
+            </button>
+          </div>
+        </div>
+
+        <div class="content">
+          <!-- CONFIG BANNER (se oculta cuando hay datos) -->
+          <div class="config-banner" id="configBanner">
+            <span style="font-size: 24px">⚙️</span>
+            <p>
+              Para ver datos reales, configura <code>SUPABASE_URL</code>,
+              <code>SUPABASE_SERVICE_KEY</code> y
+              <code>DASHBOARD_PASSWORD</code> en Vercel → Settings → Environment
+              Variables.
+            </p>
+          </div>
+
+          <!-- KPI CARDS -->
+          <div class="kpi-grid" id="section-resumen">
+            <div class="kpi-card" data-icon="👁">
+              <div class="kpi-label">Visitas totales</div>
+              <div class="kpi-value blue" id="kpi-visits">—</div>
+              <div class="kpi-sub">Sesiones únicas</div>
+              <div class="kpi-trend up" id="kpi-visits-trend">
+                ↑ Cargando...
+              </div>
+            </div>
+            <div class="kpi-card" data-icon="🚗">
+              <div class="kpi-label">Leads recibidos</div>
+              <div class="kpi-value green" id="kpi-leads">—</div>
+              <div class="kpi-sub">Formularios completos</div>
+              <div class="kpi-trend up" id="kpi-leads-trend">↑ Cargando...</div>
+            </div>
+            <div class="kpi-card" data-icon="📊">
+              <div class="kpi-label">Tasa de conversión</div>
+              <div class="kpi-value cta" id="kpi-conv">—</div>
+              <div class="kpi-sub">Leads / Visitas</div>
+              <div class="kpi-trend up" id="kpi-conv-trend">— vs ayer</div>
+            </div>
+            <div class="kpi-card" data-icon="💬" id="section-whatsapp">
+              <div class="kpi-label">WhatsApp clicks</div>
+              <div class="kpi-value orange" id="kpi-wha">—</div>
+              <div class="kpi-sub">Contactos iniciados</div>
+              <div class="kpi-trend up" id="kpi-wha-trend">↑ Cargando...</div>
+            </div>
+          </div>
+
+          <!-- CHARTS ROW 1 -->
+          <div class="charts-grid" id="section-conversion">
+            <div class="chart-card">
+              <div class="card-header">
+                <span class="card-title">LEADS POR DÍA (30 días)</span>
+                <span class="card-badge" id="leads-period"
+                  >Últimos 30 días</span
+                >
+              </div>
+              <div class="chart-wrap tall">
+                <canvas id="chartLeadsDia"></canvas>
+              </div>
+            </div>
+            <div class="chart-card">
+              <div class="card-header">
+                <span class="card-title">TOP MARCAS</span>
+                <span class="card-badge">Por volumen</span>
+              </div>
+              <div class="chart-wrap tall">
+                <canvas id="chartMarcas"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHARTS ROW 2 -->
+          <div class="charts-row">
+            <div class="chart-card" id="section-funnel">
+              <div class="card-header">
+                <span class="card-title">FUNNEL DE PASOS</span>
+                <span class="card-badge">Abandono</span>
+              </div>
+              <div class="funnel" id="funnelContainer">
+                <div class="loading">
+                  <div class="spinner"></div>
+                  Cargando...
+                </div>
+              </div>
+            </div>
+            <div class="chart-card">
+              <div class="card-header">
+                <span class="card-title">LEADS POR CIUDAD</span>
+                <span class="card-badge">Distribución</span>
+              </div>
+              <div class="chart-wrap">
+                <canvas id="chartCiudades"></canvas>
+              </div>
+            </div>
+            <div class="chart-card" id="section-formularios">
+              <div class="card-header">
+                <span class="card-title">SCROLL DEPTH</span>
+                <span class="card-badge">Engagement</span>
+              </div>
+              <div class="chart-wrap">
+                <canvas id="chartScroll"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- ÚLTIMOS LEADS -->
+          <div class="chart-card" id="section-leads">
+            <div class="card-header">
+              <span class="card-title">ÚLTIMOS LEADS RECIBIDOS</span>
+              <span class="card-badge" id="leads-count-badge">Cargando...</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Auto</th>
+                    <th>Año</th>
+                    <th>Km</th>
+                    <th>Estado</th>
+                    <th>Estimado</th>
+                    <th>Celular</th>
+                    <th>Ciudad</th>
+                    <th>Fuente</th>
+                  </tr>
+                </thead>
+                <tbody id="leadsTable">
+                  <tr>
+                    <td colspan="10">
+                      <div class="loading">
+                        <div class="spinner"></div>
+                        Cargando datos...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-    <div class="nav-section">
-      <div class="nav-label">Análisis</div>
-      <a class="nav-item active"><span class="icon">📊</span> Resumen</a>
-      <a class="nav-item"><span class="icon">🚗</span> Leads</a>
-      <a class="nav-item"><span class="icon">📈</span> Conversión</a>
-      <a class="nav-item"><span class="icon">🗺️</span> Funnel</a>
-    </div>
-    <div class="nav-section">
-      <div class="nav-label">Datos</div>
-      <a class="nav-item"><span class="icon">📋</span> Formularios</a>
-      <a class="nav-item"><span class="icon">💬</span> WhatsApp</a>
-    </div>
-    <div class="sidebar-footer">
-      Auto-refresh cada 30s<br>
-      <span id="lastUpdate" style="color:rgba(255,255,255,0.3)">Cargando...</span>
-    </div>
-  </aside>
 
-  <!-- MAIN -->
-  <main class="main">
-    <div class="topbar">
-      <h1>DASHBOARD — VENDOYA</h1>
-      <div class="topbar-right">
-        <div class="badge-live">EN VIVO</div>
-        <button class="btn-refresh" onclick="loadAll()">↻ Actualizar</button>
-      </div>
-    </div>
+    <script>
+      // ════════════════════════════════════════════════════
+      //  ⚙️  CONFIG DASHBOARD — solo el password aquí
+      //  Todas las queries van a /api/metrics?key=PASSWORD
+      //  Supabase keys viven en Vercel (nunca en browser)
+      // ════════════════════════════════════════════════════
+      const DASH_PASS = prompt("🔐 Contraseña del dashboard:") || "";
 
-    <div class="content">
+      async function fetchMetric(q) {
+        const res = await fetch(
+          `/api/metrics?key=${encodeURIComponent(DASH_PASS)}&q=${q}`,
+        );
+        if (res.status === 401) {
+          alert("Contraseña incorrecta");
+          location.reload();
+          return null;
+        }
+        if (!res.ok) return null;
+        return res.json();
+      }
 
-      <!-- CONFIG BANNER (se oculta cuando hay datos) -->
-      <div class="config-banner" id="configBanner">
-        <span style="font-size:24px">⚙️</span>
-        <p>Para ver datos reales, configura <code>SUPABASE_URL</code>, <code>SUPABASE_SERVICE_KEY</code> y <code>DASHBOARD_PASSWORD</code> en Vercel → Settings → Environment Variables.</p>
-      </div>
+      async function clearTestData() {
+        const ok = confirm(
+          "Esta accion eliminara leads, eventos y sesiones de prueba. Deseas continuar?",
+        );
+        if (!ok) return;
 
-      <!-- KPI CARDS -->
-      <div class="kpi-grid">
-        <div class="kpi-card" data-icon="👁">
-          <div class="kpi-label">Visitas totales</div>
-          <div class="kpi-value blue" id="kpi-visits">—</div>
-          <div class="kpi-sub">Sesiones únicas</div>
-          <div class="kpi-trend up" id="kpi-visits-trend">↑ Cargando...</div>
-        </div>
-        <div class="kpi-card" data-icon="🚗">
-          <div class="kpi-label">Leads recibidos</div>
-          <div class="kpi-value green" id="kpi-leads">—</div>
-          <div class="kpi-sub">Formularios completos</div>
-          <div class="kpi-trend up" id="kpi-leads-trend">↑ Cargando...</div>
-        </div>
-        <div class="kpi-card" data-icon="📊">
-          <div class="kpi-label">Tasa de conversión</div>
-          <div class="kpi-value cta" id="kpi-conv">—</div>
-          <div class="kpi-sub">Leads / Visitas</div>
-          <div class="kpi-trend up" id="kpi-conv-trend">— vs ayer</div>
-        </div>
-        <div class="kpi-card" data-icon="💬">
-          <div class="kpi-label">WhatsApp clicks</div>
-          <div class="kpi-value orange" id="kpi-wha">—</div>
-          <div class="kpi-sub">Contactos iniciados</div>
-          <div class="kpi-trend up" id="kpi-wha-trend">↑ Cargando...</div>
-        </div>
-      </div>
+        const res = await fetch(
+          `/api/reset-data?key=${encodeURIComponent(DASH_PASS)}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ confirm: "DELETE_TEST_DATA" }),
+          },
+        );
 
-      <!-- CHARTS ROW 1 -->
-      <div class="charts-grid">
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">LEADS POR DÍA (30 días)</span>
-            <span class="card-badge" id="leads-period">Últimos 30 días</span>
-          </div>
-          <div class="chart-wrap tall">
-            <canvas id="chartLeadsDia"></canvas>
-          </div>
-        </div>
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">TOP MARCAS</span>
-            <span class="card-badge">Por volumen</span>
-          </div>
-          <div class="chart-wrap tall">
-            <canvas id="chartMarcas"></canvas>
-          </div>
-        </div>
-      </div>
+        if (!res.ok) {
+          alert("No se pudo limpiar la data. Verifica la clave del dashboard.");
+          return;
+        }
 
-      <!-- CHARTS ROW 2 -->
-      <div class="charts-row">
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">FUNNEL DE PASOS</span>
-            <span class="card-badge">Abandono</span>
-          </div>
-          <div class="funnel" id="funnelContainer">
-            <div class="loading"><div class="spinner"></div> Cargando...</div>
-          </div>
-        </div>
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">LEADS POR CIUDAD</span>
-            <span class="card-badge">Distribución</span>
-          </div>
-          <div class="chart-wrap">
-            <canvas id="chartCiudades"></canvas>
-          </div>
-        </div>
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">SCROLL DEPTH</span>
-            <span class="card-badge">Engagement</span>
-          </div>
-          <div class="chart-wrap">
-            <canvas id="chartScroll"></canvas>
-          </div>
-        </div>
-      </div>
+        alert("Data de prueba eliminada correctamente.");
+        loadAll();
+      }
 
-      <!-- ÚLTIMOS LEADS -->
-      <div class="chart-card">
-        <div class="card-header">
-          <span class="card-title">ÚLTIMOS LEADS RECIBIDOS</span>
-          <span class="card-badge" id="leads-count-badge">Cargando...</span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Nombre</th>
-                <th>Auto</th>
-                <th>Año</th>
-                <th>Km</th>
-                <th>Estado</th>
-                <th>Estimado</th>
-                <th>Celular</th>
-                <th>Ciudad</th>
-                <th>Fuente</th>
-              </tr>
-            </thead>
-            <tbody id="leadsTable">
-              <tr><td colspan="10"><div class="loading"><div class="spinner"></div> Cargando datos...</div></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      // ════════════════════════════════════════════════════
+      //  CHARTS STATE
+      // ════════════════════════════════════════════════════
+      const charts = {};
+      const COLORS = [
+        "#1E3A8A",
+        "#10B981",
+        "#2563EB",
+        "#F59E0B",
+        "#EF4444",
+        "#8B5CF6",
+        "#06B6D4",
+        "#EC4899",
+        "#14B8A6",
+        "#F97316",
+      ];
 
-    </div>
-  </main>
-</div>
+      function makeChart(id, config) {
+        if (charts[id]) charts[id].destroy();
+        charts[id] = new Chart(document.getElementById(id), config);
+      }
 
-<script>
-// ════════════════════════════════════════════════════
-//  ⚙️  CONFIG DASHBOARD — solo el password aquí
-//  Todas las queries van a /api/metrics?key=PASSWORD
-//  Supabase keys viven en Vercel (nunca en browser)
-// ════════════════════════════════════════════════════
-const DASH_PASS = prompt('🔐 Contraseña del dashboard:') || '';
+      // ════════════════════════════════════════════════════
+      //  LOAD ALL
+      // ════════════════════════════════════════════════════
+      async function loadAll() {
+        document.getElementById("lastUpdate").textContent = "Actualizando...";
+        await Promise.all([
+          loadKPIs(),
+          loadLeadsDia(),
+          loadMarcas(),
+          loadCiudades(),
+          loadFunnel(),
+          loadScroll(),
+          loadCamposVacios(),
+          loadLeadsTable(),
+        ]);
+        document.getElementById("lastUpdate").textContent =
+          "Actualizado " +
+          new Date().toLocaleTimeString("es-EC", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+      }
 
-async function fetchMetric(q) {
-  const res = await fetch(`/api/metrics?key=${encodeURIComponent(DASH_PASS)}&q=${q}`);
-  if (res.status === 401) {
-    alert('Contraseña incorrecta'); location.reload(); return null;
-  }
-  if (!res.ok) return null;
-  return res.json();
-}
+      // ── KPIs ──
+      async function loadKPIs() {
+        const d = await fetchMetric("kpis");
+        if (!d) return;
 
-// ════════════════════════════════════════════════════
-//  CHARTS STATE
-// ════════════════════════════════════════════════════
-const charts = {};
-const COLORS = ['#1E3A8A','#10B981','#2563EB','#F59E0B','#EF4444','#8B5CF6','#06B6D4','#EC4899','#14B8A6','#F97316'];
+        const conv =
+          d.totalSessions > 0
+            ? ((d.totalLeads / d.totalSessions) * 100).toFixed(1)
+            : 0;
 
-function makeChart(id, config) {
-  if (charts[id]) charts[id].destroy();
-  charts[id] = new Chart(document.getElementById(id), config);
-}
+        document.getElementById("kpi-visits").textContent =
+          d.totalSessions.toLocaleString();
+        document.getElementById("kpi-leads").textContent =
+          d.totalLeads.toLocaleString();
+        document.getElementById("kpi-conv").textContent = conv + "%";
+        document.getElementById("kpi-wha").textContent =
+          d.whaClicks.toLocaleString();
 
-// ════════════════════════════════════════════════════
-//  LOAD ALL
-// ════════════════════════════════════════════════════
-async function loadAll() {
-  document.getElementById('lastUpdate').textContent = 'Actualizando...';
-  await Promise.all([
-    loadKPIs(), loadLeadsDia(), loadMarcas(),
-    loadCiudades(), loadFunnel(), loadScroll(),
-    loadCamposVacios(), loadLeadsTable()
-  ]);
-  document.getElementById('lastUpdate').textContent =
-    'Actualizado ' + new Date().toLocaleTimeString('es-EC', {hour:'2-digit',minute:'2-digit'});
-}
+        setTrend("kpi-visits-trend", d.sesHoy, d.sesAyer, "hoy vs ayer");
+        setTrend("kpi-leads-trend", d.leadsHoy, d.leadsAyer, "hoy vs ayer");
 
-// ── KPIs ──
-async function loadKPIs() {
-  const d = await fetchMetric('kpis');
-  if (!d) return;
+        const convHoy =
+          d.sesHoy > 0 ? ((d.leadsHoy / d.sesHoy) * 100).toFixed(1) : 0;
+        const convAyer =
+          d.sesAyer > 0 ? ((d.leadsAyer / d.sesAyer) * 100).toFixed(1) : 0;
+        document.getElementById("kpi-conv-trend").textContent =
+          `${convHoy}% hoy vs ${convAyer}% ayer`;
 
-  const conv = d.totalSessions > 0
-    ? ((d.totalLeads / d.totalSessions) * 100).toFixed(1) : 0;
+        if (d.totalSessions > 0)
+          document.getElementById("configBanner").style.display = "none";
+      }
 
-  document.getElementById('kpi-visits').textContent = d.totalSessions.toLocaleString();
-  document.getElementById('kpi-leads').textContent  = d.totalLeads.toLocaleString();
-  document.getElementById('kpi-conv').textContent   = conv + '%';
-  document.getElementById('kpi-wha').textContent    = d.whaClicks.toLocaleString();
+      function setTrend(id, cur, prev, label) {
+        const el = document.getElementById(id);
+        const diff = (cur || 0) - (prev || 0);
+        const pct = prev > 0 ? Math.abs(Math.round((diff / prev) * 100)) : 0;
+        el.textContent =
+          (diff >= 0 ? "↑ +" : "↓ -") +
+          Math.abs(diff) +
+          " (" +
+          pct +
+          "%) " +
+          label;
+        el.className = "kpi-trend " + (diff >= 0 ? "up" : "down");
+      }
 
-  setTrend('kpi-visits-trend', d.sesHoy,    d.sesAyer,    'hoy vs ayer');
-  setTrend('kpi-leads-trend',  d.leadsHoy,  d.leadsAyer,  'hoy vs ayer');
+      // ── Leads por día ──
+      async function loadLeadsDia() {
+        const d = await fetchMetric("leads_dia");
+        if (!d) return;
+        const counts = {};
+        (d.data || []).forEach((r) => {
+          const day = r.created_at.slice(0, 10);
+          counts[day] = (counts[day] || 0) + 1;
+        });
+        const labels = [],
+          values = [];
+        for (let i = 29; i >= 0; i--) {
+          const dt = new Date();
+          dt.setDate(dt.getDate() - i);
+          const key = dt.toISOString().slice(0, 10);
+          labels.push(
+            dt.toLocaleDateString("es-EC", { month: "short", day: "numeric" }),
+          );
+          values.push(counts[key] || 0);
+        }
+        makeChart("chartLeadsDia", {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              {
+                label: "Leads",
+                data: values,
+                backgroundColor: "rgba(30,58,138,0.15)",
+                borderColor: "#1E3A8A",
+                borderWidth: 2,
+                borderRadius: 6,
+                hoverBackgroundColor: "#1E3A8A",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { maxTicksLimit: 10, font: { size: 11 } },
+              },
+              y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1, font: { size: 11 } },
+                grid: { color: "rgba(0,0,0,0.05)" },
+              },
+            },
+          },
+        });
+      }
 
-  const convHoy  = d.sesHoy  > 0 ? ((d.leadsHoy  / d.sesHoy)  * 100).toFixed(1) : 0;
-  const convAyer = d.sesAyer > 0 ? ((d.leadsAyer / d.sesAyer) * 100).toFixed(1) : 0;
-  document.getElementById('kpi-conv-trend').textContent = `${convHoy}% hoy vs ${convAyer}% ayer`;
+      // ── Marcas ──
+      async function loadMarcas() {
+        const d = await fetchMetric("marcas");
+        if (!d) return;
+        const counts = {};
+        (d.data || []).forEach((r) => {
+          if (r.marca) counts[r.marca] = (counts[r.marca] || 0) + 1;
+        });
+        const sorted = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 8);
+        makeChart("chartMarcas", {
+          type: "doughnut",
+          data: {
+            labels: sorted.map(([k]) => k),
+            datasets: [
+              {
+                data: sorted.map(([, v]) => v),
+                backgroundColor: COLORS,
+                borderWidth: 2,
+                borderColor: "white",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: { font: { size: 11, weight: "700" }, padding: 10 },
+              },
+            },
+            cutout: "60%",
+          },
+        });
+      }
 
-  if (d.totalSessions > 0) document.getElementById('configBanner').style.display = 'none';
-}
+      // ── Ciudades ──
+      async function loadCiudades() {
+        const d = await fetchMetric("ciudades");
+        if (!d) return;
+        const counts = {};
+        (d.data || []).forEach((r) => {
+          if (r.ciudad) counts[r.ciudad] = (counts[r.ciudad] || 0) + 1;
+        });
+        const sorted = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 6);
+        makeChart("chartCiudades", {
+          type: "bar",
+          data: {
+            labels: sorted.map(([k]) => k),
+            datasets: [
+              {
+                label: "Leads",
+                data: sorted.map(([, v]) => v),
+                backgroundColor: COLORS.slice(0, sorted.length),
+                borderRadius: 8,
+                borderSkipped: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: "y",
+            plugins: { legend: { display: false } },
+            scales: {
+              x: {
+                beginAtZero: true,
+                ticks: { stepSize: 1, font: { size: 11 } },
+                grid: { color: "rgba(0,0,0,0.05)" },
+              },
+              y: {
+                grid: { display: false },
+                ticks: { font: { size: 12, weight: "700" } },
+              },
+            },
+          },
+        });
+      }
 
-function setTrend(id, cur, prev, label) {
-  const el   = document.getElementById(id);
-  const diff = (cur||0) - (prev||0);
-  const pct  = prev > 0 ? Math.abs(Math.round((diff/prev)*100)) : 0;
-  el.textContent = (diff >= 0 ? '↑ +' : '↓ -') + Math.abs(diff) + ' (' + pct + '%) ' + label;
-  el.className   = 'kpi-trend ' + (diff >= 0 ? 'up' : 'down');
-}
-
-// ── Leads por día ──
-async function loadLeadsDia() {
-  const d = await fetchMetric('leads_dia');
-  if (!d) return;
-  const counts = {};
-  (d.data||[]).forEach(r => {
-    const day = r.created_at.slice(0,10);
-    counts[day] = (counts[day]||0) + 1;
-  });
-  const labels = [], values = [];
-  for (let i = 29; i >= 0; i--) {
-    const dt = new Date(); dt.setDate(dt.getDate()-i);
-    const key = dt.toISOString().slice(0,10);
-    labels.push(dt.toLocaleDateString('es-EC',{month:'short',day:'numeric'}));
-    values.push(counts[key]||0);
-  }
-  makeChart('chartLeadsDia', {
-    type:'bar', data:{labels, datasets:[{
-      label:'Leads', data:values,
-      backgroundColor:'rgba(30,58,138,0.15)', borderColor:'#1E3A8A',
-      borderWidth:2, borderRadius:6, hoverBackgroundColor:'#1E3A8A'
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{x:{grid:{display:false},ticks:{maxTicksLimit:10,font:{size:11}}},
-              y:{beginAtZero:true,ticks:{stepSize:1,font:{size:11}},grid:{color:'rgba(0,0,0,0.05)'}}}}
-  });
-}
-
-// ── Marcas ──
-async function loadMarcas() {
-  const d = await fetchMetric('marcas');
-  if (!d) return;
-  const counts = {};
-  (d.data||[]).forEach(r => { if(r.marca) counts[r.marca]=(counts[r.marca]||0)+1; });
-  const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  makeChart('chartMarcas', {
-    type:'doughnut',
-    data:{labels:sorted.map(([k])=>k), datasets:[{
-      data:sorted.map(([,v])=>v), backgroundColor:COLORS, borderWidth:2, borderColor:'white'
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11,weight:'700'},padding:10}}},cutout:'60%'}
-  });
-}
-
-// ── Ciudades ──
-async function loadCiudades() {
-  const d = await fetchMetric('ciudades');
-  if (!d) return;
-  const counts = {};
-  (d.data||[]).forEach(r => { if(r.ciudad) counts[r.ciudad]=(counts[r.ciudad]||0)+1; });
-  const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  makeChart('chartCiudades', {
-    type:'bar',
-    data:{labels:sorted.map(([k])=>k), datasets:[{
-      label:'Leads', data:sorted.map(([,v])=>v),
-      backgroundColor:COLORS.slice(0,sorted.length), borderRadius:8, borderSkipped:false
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
-      plugins:{legend:{display:false}},
-      scales:{x:{beginAtZero:true,ticks:{stepSize:1,font:{size:11}},grid:{color:'rgba(0,0,0,0.05)'}},
-              y:{grid:{display:false},ticks:{font:{size:12,weight:'700'}}}}}
-  });
-}
-
-// ── Funnel ──
-async function loadFunnel() {
-  const d = await fetchMetric('funnel');
-  if (!d) return;
-  const c = {s1:0,c1:0,s2:0,c2:0,s3:0,c3:0,sub:0,wha:0};
-  (d.data||[]).forEach(r => {
-    if(r.event_type==='step_start'    && r.step===1) c.s1++;
-    if(r.event_type==='step_complete' && r.step===1) c.c1++;
-    if(r.event_type==='step_start'    && r.step===2) c.s2++;
-    if(r.event_type==='step_complete' && r.step===2) c.c2++;
-    if(r.event_type==='step_start'    && r.step===3) c.s3++;
-    if(r.event_type==='step_complete' && r.step===3) c.c3++;
-    if(r.event_type==='form_submit')    c.sub++;
-    if(r.event_type==='whatsapp_click') c.wha++;
-  });
-  const base = c.s1||1;
-  const steps = [
-    {label:'1. Datos del auto',    n:c.s1,  color:'#1E3A8A'},
-    {label:'2. Estado y extras',   n:c.s2,  color:'#2563EB'},
-    {label:'3. Datos contacto',    n:c.s3,  color:'#10B981'},
-    {label:'✅ Formulario enviado',n:c.sub, color:'#059669'},
-    {label:'💬 Click WhatsApp',    n:c.wha, color:'#25D366'}
-  ];
-  document.getElementById('funnelContainer').innerHTML = steps.map(s => {
-    const pct = Math.round((s.n/base)*100);
-    return `<div class="funnel-step">
+      // ── Funnel ──
+      async function loadFunnel() {
+        const d = await fetchMetric("funnel");
+        if (!d) return;
+        const c = { s1: 0, c1: 0, s2: 0, c2: 0, s3: 0, c3: 0, sub: 0, wha: 0 };
+        (d.data || []).forEach((r) => {
+          if (r.event_type === "step_start" && r.step === 1) c.s1++;
+          if (r.event_type === "step_complete" && r.step === 1) c.c1++;
+          if (r.event_type === "step_start" && r.step === 2) c.s2++;
+          if (r.event_type === "step_complete" && r.step === 2) c.c2++;
+          if (r.event_type === "step_start" && r.step === 3) c.s3++;
+          if (r.event_type === "step_complete" && r.step === 3) c.c3++;
+          if (r.event_type === "form_submit") c.sub++;
+          if (r.event_type === "whatsapp_click") c.wha++;
+        });
+        const base = c.s1 || 1;
+        const steps = [
+          { label: "1. Datos del auto", n: c.s1, color: "#1E3A8A" },
+          { label: "2. Estado y extras", n: c.s2, color: "#2563EB" },
+          { label: "3. Datos contacto", n: c.s3, color: "#10B981" },
+          { label: "✅ Formulario enviado", n: c.sub, color: "#059669" },
+          { label: "💬 Click WhatsApp", n: c.wha, color: "#25D366" },
+        ];
+        document.getElementById("funnelContainer").innerHTML = steps
+          .map((s) => {
+            const pct = Math.round((s.n / base) * 100);
+            return `<div class="funnel-step">
       <div class="funnel-label"><span>${s.label}</span><span>${s.n} (${pct}%)</span></div>
       <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:${pct}%;background:${s.color}"></div></div>
     </div>`;
-  }).join('');
-}
+          })
+          .join("");
+      }
 
-// ── Scroll depth ──
-async function loadScroll() {
-  const d = await fetchMetric('scroll');
-  if (!d) return;
-  const b = {25:0,50:0,75:0,90:0,100:0};
-  (d.data||[]).forEach(r => { const p=r.event_data?.value; if(b[p]!==undefined) b[p]++; });
-  makeChart('chartScroll', {
-    type:'bar',
-    data:{labels:['25%','50%','75%','90%','100%'],datasets:[{
-      label:'Usuarios', data:Object.values(b),
-      backgroundColor:['#BFDBFE','#93C5FD','#60A5FA','#3B82F6','#1E3A8A'],
-      borderRadius:8, borderSkipped:false
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{size:11}},grid:{color:'rgba(0,0,0,0.05)'}},x:{grid:{display:false}}}}
-  });
-}
+      // ── Scroll depth ──
+      async function loadScroll() {
+        const d = await fetchMetric("scroll");
+        if (!d) return;
+        const b = { 25: 0, 50: 0, 75: 0, 90: 0, 100: 0 };
+        (d.data || []).forEach((r) => {
+          const p = r.event_data?.value;
+          if (b[p] !== undefined) b[p]++;
+        });
+        makeChart("chartScroll", {
+          type: "bar",
+          data: {
+            labels: ["25%", "50%", "75%", "90%", "100%"],
+            datasets: [
+              {
+                label: "Usuarios",
+                data: Object.values(b),
+                backgroundColor: [
+                  "#BFDBFE",
+                  "#93C5FD",
+                  "#60A5FA",
+                  "#3B82F6",
+                  "#1E3A8A",
+                ],
+                borderRadius: 8,
+                borderSkipped: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1, font: { size: 11 } },
+                grid: { color: "rgba(0,0,0,0.05)" },
+              },
+              x: { grid: { display: false } },
+            },
+          },
+        });
+      }
 
-// ── Campos vacíos ──
-async function loadCamposVacios() {
-  const d = await fetchMetric('campos_vacios');
-  if (!d) return;
-  const counts = {};
-  (d.data||[]).forEach(r => { if(r.field_name) counts[r.field_name]=(counts[r.field_name]||0)+1; });
-  const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8);
+      // ── Campos vacíos ──
+      async function loadCamposVacios() {
+        const d = await fetchMetric("campos_vacios");
+        if (!d) return;
+        const counts = {};
+        (d.data || []).forEach((r) => {
+          if (r.field_name)
+            counts[r.field_name] = (counts[r.field_name] || 0) + 1;
+        });
+        const sorted = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 8);
 
-  // Renderizar en el card de scroll (reusando espacio) o en el funnel
-  // Añadir texto debajo del scroll chart
-  const canvas = document.getElementById('chartScroll');
-  const existing = document.getElementById('campos-vacios-list');
-  if (existing) existing.remove();
+        // Renderizar en el card de scroll (reusando espacio) o en el funnel
+        // Añadir texto debajo del scroll chart
+        const canvas = document.getElementById("chartScroll");
+        const existing = document.getElementById("campos-vacios-list");
+        if (existing) existing.remove();
 
-  if (sorted.length > 0) {
-    const div = document.createElement('div');
-    div.id = 'campos-vacios-list';
-    div.style.cssText = 'margin-top:12px;font-size:12px;';
-    div.innerHTML = '<div style="font-weight:800;color:var(--blue-dark);margin-bottom:8px;font-size:11px;text-transform:uppercase;letter-spacing:1px">Campos más abandonados</div>' +
-      sorted.map(([k,v]) =>
-        `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f3f4f6;color:var(--text-mid);font-weight:700">
+        if (sorted.length > 0) {
+          const div = document.createElement("div");
+          div.id = "campos-vacios-list";
+          div.style.cssText = "margin-top:12px;font-size:12px;";
+          div.innerHTML =
+            '<div style="font-weight:800;color:var(--blue-dark);margin-bottom:8px;font-size:11px;text-transform:uppercase;letter-spacing:1px">Campos más abandonados</div>' +
+            sorted
+              .map(
+                ([k, v]) =>
+                  `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f3f4f6;color:var(--text-mid);font-weight:700">
           <span>${k}</span><span style="color:var(--red);font-weight:800">${v}x</span>
-        </div>`
-      ).join('');
-    canvas.parentNode.appendChild(div);
-  }
-}
+        </div>`,
+              )
+              .join("");
+          canvas.parentNode.appendChild(div);
+        }
+      }
 
-// ── Tabla leads ──
-async function loadLeadsTable() {
-  const d = await fetchMetric('leads_tabla');
-  if (!d) return;
+      // ── Tabla leads ──
+      async function loadLeadsTable() {
+        const d = await fetchMetric("leads_tabla");
+        if (!d) return;
 
-  document.getElementById('leads-count-badge').textContent = (d.count||0) + ' total';
-  const tbody = document.getElementById('leadsTable');
+        document.getElementById("leads-count-badge").textContent =
+          (d.count || 0) + " total";
+        const tbody = document.getElementById("leadsTable");
 
-  if (!d.data || d.data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="10"><div class="empty">📭 Sin leads aún.</div></td></tr>';
-    return;
-  }
+        if (!d.data || d.data.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="10"><div class="empty">📭 Sin leads aún.</div></td></tr>';
+          return;
+        }
 
-  tbody.innerHTML = d.data.map(r => {
-    const fecha = new Date(r.created_at).toLocaleDateString('es-EC',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
-    const badge = r.estado_general==='Excelente'?'green':r.estado_general==='Bueno'?'blue':'orange';
-    const whaNum = '593' + (r.celular||'').replace(/^0/,'');
-    const whaMsg = encodeURIComponent(`Hola ${r.nombre}, te contactamos de AutoCash sobre tu ${r.marca} ${r.modelo}`);
-    return `<tr>
+        tbody.innerHTML = d.data
+          .map((r) => {
+            const fecha = new Date(r.created_at).toLocaleDateString("es-EC", {
+              day: "2-digit",
+              month: "short",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+            const badge =
+              r.estado_general === "Excelente"
+                ? "green"
+                : r.estado_general === "Bueno"
+                  ? "blue"
+                  : "orange";
+            const whaNum = "593" + (r.celular || "").replace(/^0/, "");
+            const whaMsg = encodeURIComponent(
+              `Hola ${r.nombre}, te contactamos de AutoCash sobre tu ${r.marca} ${r.modelo}`,
+            );
+            return `<tr>
       <td style="color:var(--text);font-weight:700;white-space:nowrap">${fecha}</td>
-      <td style="color:var(--text);font-weight:700">${r.nombre||'—'}</td>
-      <td><strong>${r.marca||'—'} ${r.modelo||''}</strong></td>
-      <td>${r.anio||'—'}</td>
-      <td style="white-space:nowrap">${r.kilometraje||'—'}</td>
-      <td><span class="badge ${badge}">${r.estado_general||'—'}</span></td>
-      <td style="color:var(--green);font-weight:800;white-space:nowrap">${r.estimado_texto||'—'}</td>
-      <td><a href="https://wa.me/${whaNum}?text=${whaMsg}" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none">📱 ${r.celular||'—'}</a></td>
-      <td>${r.ciudad||'—'}</td>
-      <td><span class="badge gray">${r.utm_source||'orgánico'}</span></td>
+      <td style="color:var(--text);font-weight:700">${r.nombre || "—"}</td>
+      <td><strong>${r.marca || "—"} ${r.modelo || ""}</strong></td>
+      <td>${r.anio || "—"}</td>
+      <td style="white-space:nowrap">${r.kilometraje || "—"}</td>
+      <td><span class="badge ${badge}">${r.estado_general || "—"}</span></td>
+      <td style="color:var(--green);font-weight:800;white-space:nowrap">${r.estimado_texto || "—"}</td>
+      <td><a href="https://wa.me/${whaNum}?text=${whaMsg}" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none">📱 ${r.celular || "—"}</a></td>
+      <td>${r.ciudad || "—"}</td>
+      <td><span class="badge gray">${r.utm_source || "orgánico"}</span></td>
     </tr>`;
-  }).join('');
-}
+          })
+          .join("");
+      }
 
-// ── INIT ──
-if (DASH_PASS) {
-  loadAll();
-  setInterval(loadAll, 30000);
-}
-</script>
-</body>
+      // ── INIT ──
+      if (DASH_PASS) {
+        loadAll();
+        setInterval(loadAll, 30000);
+      }
+
+      document.querySelectorAll(".nav-item[data-target]").forEach((item) => {
+        item.addEventListener("click", () => {
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((x) => x.classList.remove("active"));
+          item.classList.add("active");
+          const targetId = item.getAttribute("data-target");
+          const target = document.getElementById(targetId);
+          if (target)
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    </script>
+  </body>
 </html>
