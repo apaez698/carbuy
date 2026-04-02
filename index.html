@@ -815,6 +815,37 @@
         border-radius: 50px;
       }
 
+      .estimate-actions {
+        margin-top: 18px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .btn-estimate {
+        min-width: 220px;
+        justify-content: center;
+      }
+
+      .btn-estimate:disabled {
+        opacity: 0.75;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .estimate-api-error {
+        display: none;
+        margin-top: 14px;
+        color: #fecaca;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .estimate-api-error.show {
+        display: block;
+      }
+
       /* CONTACTO */
       .contact-banner {
         background: var(--blue-light);
@@ -1414,15 +1445,17 @@
 
               <div class="field">
                 <label for="modelo">Modelo *</label>
-                <input
-                  type="text"
-                  id="modelo"
-                  placeholder="Ej: Corolla, Aveo, Tucson…"
-                  required
-                  oninput="updateEstimate()"
-                  data-track="modelo"
-                />
-                <span class="error-msg" role="alert">Ingresa el modelo</span>
+                <div class="select-wrapper">
+                  <select
+                    id="modelo"
+                    required
+                    onchange="updateEstimate()"
+                    data-track="modelo"
+                  >
+                    <option value="">Seleccionar modelo</option>
+                  </select>
+                </div>
+                <span class="error-msg" role="alert">Selecciona el modelo</span>
               </div>
 
               <div class="field">
@@ -1441,46 +1474,34 @@
               </div>
 
               <div class="field">
-                <label for="tipo">Tipo de carrocería</label>
+                <label for="tipo">Tipo de carrocería *</label>
                 <div class="select-wrapper">
                   <select
                     id="tipo"
+                    required
                     onchange="updateEstimate()"
                     data-track="tipo"
                   >
                     <option value="">Seleccionar tipo</option>
-                    <option>Sedán</option>
-                    <option>SUV</option>
-                    <option>Hatchback</option>
-                    <option>Camioneta / Pick-up</option>
-                    <option>Station Wagon</option>
-                    <option>Coupé</option>
-                    <option>Van / Furgoneta</option>
-                    <option>Otro</option>
+                    <option value="SEDÁN">Sedán</option>
+                    <option value="SUV">SUV</option>
+                    <option value="HATCHBACK">Hatchback</option>
+                    <option value="PICKUP">Camioneta / Pick-up</option>
+                    <option value="VAN">Van / Furgoneta</option>
+                    <option value="COUPÉ">Coupé</option>
+                    <option value="OTRO">Otro</option>
                   </select>
                 </div>
+                <span class="error-msg" role="alert"
+                  >Selecciona el tipo de carrocería</span
+                >
               </div>
 
-              <div class="field">
-                <label for="combustible">Combustible</label>
-                <div class="select-wrapper">
-                  <select
-                    id="combustible"
-                    onchange="updateEstimate()"
-                    data-track="combustible"
-                  >
-                    <option value="">Seleccionar</option>
-                    <option>Gasolina</option>
-                    <option>Diésel</option>
-                    <option>Híbrido</option>
-                    <option>Eléctrico</option>
-                    <option>GLP (Gas)</option>
-                  </select>
-                </div>
-              </div>
+              <!-- Combustible: campo oculto (API ahora solo acepta DESCONOCIDO) -->
+              <input type="hidden" id="combustible" value="DESCONOCIDO" />
 
               <div class="field">
-                <label for="transmision">Transmisión</label>
+                <label for="transmision">Transmisión *</label>
                 <div class="select-wrapper">
                   <select
                     id="transmision"
@@ -1488,51 +1509,76 @@
                     data-track="transmision"
                   >
                     <option value="">Seleccionar</option>
-                    <option>Automático</option>
-                    <option>Manual</option>
-                    <option>CVT</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="kilometraje">Kilometraje *</label>
-                <div class="select-wrapper">
-                  <select
-                    id="kilometraje"
-                    required
-                    onchange="updateEstimate()"
-                    data-track="kilometraje"
-                  >
-                    <option value="">Seleccionar rango</option>
-                    <option value="0-20000">0 – 20.000 km</option>
-                    <option value="20001-50000">20.001 – 50.000 km</option>
-                    <option value="50001-80000">50.001 – 80.000 km</option>
-                    <option value="80001-120000">80.001 – 120.000 km</option>
-                    <option value="120001-180000">120.001 – 180.000 km</option>
-                    <option value="180001+">Más de 180.000 km</option>
                   </select>
                 </div>
                 <span class="error-msg" role="alert"
-                  >Selecciona el kilometraje</span
+                  >Selecciona la transmisión</span
                 >
               </div>
 
               <div class="field">
-                <label for="color">Color</label>
+                <label for="kilometraje">Kilometraje *</label>
+                <input
+                  type="number"
+                  id="kilometraje"
+                  placeholder="Ej: 85000"
+                  min="0"
+                  step="1"
+                  required
+                  oninput="updateEstimate()"
+                  data-track="kilometraje"
+                />
+                <span class="error-msg" role="alert"
+                  >Ingresa kilometraje válido</span
+                >
+              </div>
+
+              <div class="field">
+                <label for="cilindrada">Cilindrada (L) *</label>
+                <input
+                  type="number"
+                  id="cilindrada"
+                  placeholder="Ej: 1.6"
+                  min="0.6"
+                  max="8"
+                  step="0.1"
+                  required
+                  oninput="updateEstimate()"
+                  data-track="cilindrada"
+                />
+                <span class="error-msg" role="alert"
+                  >Ingresa cilindrada entre 0.6 y 8.0 litros</span
+                >
+              </div>
+
+              <div class="field">
+                <label for="color">Color *</label>
                 <div class="select-wrapper">
-                  <select id="color" data-track="color">
+                  <select
+                    id="color"
+                    data-track="color"
+                    onchange="updateEstimate()"
+                  >
                     <option value="">Seleccionar</option>
-                    <option>Blanco</option>
-                    <option>Negro</option>
-                    <option>Gris / Plata</option>
-                    <option>Rojo</option>
-                    <option>Azul</option>
-                    <option>Beige / Champán</option>
-                    <option>Verde</option>
-                    <option>Otro</option>
                   </select>
                 </div>
+                <span class="error-msg" role="alert">Selecciona el color</span>
+              </div>
+
+              <div class="field">
+                <label for="provincia">Provincia *</label>
+                <div class="select-wrapper">
+                  <select
+                    id="provincia"
+                    data-track="provincia"
+                    onchange="updateEstimate()"
+                  >
+                    <option value="">Seleccionar provincia</option>
+                  </select>
+                </div>
+                <span class="error-msg" role="alert"
+                  >Selecciona la provincia</span
+                >
               </div>
 
               <div class="field full">
@@ -1560,10 +1606,25 @@
               Mas detalles = mejor analisis para tu caso
             </div>
 
+            <!-- Inputs ocultos con valores fijos para el nuevo modelo (API solo acepta DESCONOCIDO) -->
+            <input type="hidden" id="estado_carroceria" value="DESCONOCIDO" />
+            <input type="hidden" id="estado_motor" value="DESCONOCIDO" />
+
             <div style="margin-bottom: 28px">
               <label style="display: block; margin-bottom: 12px"
                 >Estado general del vehículo *</label
               >
+              <p
+                style="
+                  font-size: 13px;
+                  color: var(--text-mid);
+                  font-weight: 600;
+                  margin-bottom: 14px;
+                  margin-top: -6px;
+                "
+              >
+                Elige la opción que mejor describe la condición de tu auto
+              </p>
               <div class="radio-cards">
                 <div class="radio-card">
                   <input
@@ -1573,17 +1634,29 @@
                     value="Excelente"
                     onchange="updateEstimate()"
                   />
-                  <label for="e1"
-                    ><span class="card-icon">⭐⭐⭐⭐⭐</span>Excelente<small
+                  <label for="e1">
+                    <span class="card-icon">🏆</span>
+                    Excelente
+                    <small
                       style="
                         display: block;
                         font-size: 11px;
                         opacity: 0.7;
                         margin-top: 4px;
                       "
-                      >Como nuevo</small
-                    ></label
-                  >
+                      >Como nuevo, sin detalles</small
+                    >
+                    <small
+                      style="
+                        display: block;
+                        font-size: 10px;
+                        color: var(--green);
+                        font-weight: 700;
+                        margin-top: 6px;
+                      "
+                      >Carrocería: OK · Motor: Bueno</small
+                    >
+                  </label>
                 </div>
                 <div class="radio-card">
                   <input
@@ -1594,17 +1667,29 @@
                     onchange="updateEstimate()"
                     checked
                   />
-                  <label for="e2"
-                    ><span class="card-icon">⭐⭐⭐⭐</span>Bueno<small
+                  <label for="e2">
+                    <span class="card-icon">👍</span>
+                    Bueno
+                    <small
                       style="
                         display: block;
                         font-size: 11px;
                         opacity: 0.7;
                         margin-top: 4px;
                       "
-                      >Detalles menores</small
-                    ></label
-                  >
+                      >Detalles menores, funciona bien</small
+                    >
+                    <small
+                      style="
+                        display: block;
+                        font-size: 10px;
+                        color: var(--green);
+                        font-weight: 700;
+                        margin-top: 6px;
+                      "
+                      >Carrocería: Regular · Motor: Bueno</small
+                    >
+                  </label>
                 </div>
                 <div class="radio-card">
                   <input
@@ -1614,19 +1699,44 @@
                     value="Regular"
                     onchange="updateEstimate()"
                   />
-                  <label for="e3"
-                    ><span class="card-icon">⭐⭐⭐</span>Regular<small
+                  <label for="e3">
+                    <span class="card-icon">🔧</span>
+                    Regular
+                    <small
                       style="
                         display: block;
                         font-size: 11px;
                         opacity: 0.7;
                         margin-top: 4px;
                       "
-                      >Necesita trabajo</small
-                    ></label
-                  >
+                      >Necesita trabajo o reparaciones</small
+                    >
+                    <small
+                      style="
+                        display: block;
+                        font-size: 10px;
+                        color: #f59e0b;
+                        font-weight: 700;
+                        margin-top: 6px;
+                      "
+                      >Carrocería: Regular · Motor: Regular</small
+                    >
+                  </label>
                 </div>
               </div>
+              <span
+                class="error-msg"
+                id="estadoError"
+                role="alert"
+                style="
+                  display: none;
+                  color: #ef4444;
+                  font-size: 12px;
+                  font-weight: 700;
+                  margin-top: 6px;
+                "
+                >Selecciona el estado del vehículo</span
+              >
             </div>
 
             <div style="margin-bottom: 28px">
@@ -1729,14 +1839,42 @@
             </div>
 
             <div class="price-estimate" id="priceEstimate" aria-live="polite">
-              <div class="est-label">🔧 ESTIMADOR EN CONSTRUCCION</div>
-              <div class="est-range" id="estRange">Proximamente</div>
-              <div class="est-note" id="estNote">
-                Por ahora no mostramos un valor en pantalla. Te contactaremos
-                por WhatsApp con el siguiente paso.
+              <div class="est-label">ESTIMADOR DE VALOR</div>
+              <div class="est-range" id="estRange">--</div>
+              <div class="est-note" id="estValueLabel">Precio estimado</div>
+              <div class="est-range" id="estRangeValue" style="font-size: 38px">
+                --
               </div>
-              <div class="est-disclaimer">
-                ⚠️ Pronto integraremos un analisis avanzado de cotizacion
+              <div class="est-note" id="estRangeLabel">Rango estimado</div>
+              <div
+                class="est-range"
+                id="estRangeInterval"
+                style="font-size: 34px"
+              >
+                --
+              </div>
+              <div class="est-note" id="estNote">
+                Completa los datos del vehículo y consulta el valor estimado.
+              </div>
+              <div class="est-disclaimer" id="estDisclaimer">
+                Valores referenciales sujetos a revisión física del vehículo.
+              </div>
+              <div class="estimate-actions">
+                <button
+                  type="button"
+                  class="btn btn-next btn-estimate"
+                  id="btnEstimate"
+                  onclick="consultarValor()"
+                >
+                  Consultar valor
+                </button>
+              </div>
+              <div
+                class="estimate-api-error"
+                id="estimateApiError"
+                role="alert"
+              >
+                Estamos mejorando nuestra plataforma.
               </div>
             </div>
           </div>
@@ -2040,6 +2178,7 @@
       //  Este archivo es 100% seguro para subir a GitHub
       // ════════════════════════════════════════════════════
       const WHA_NUMBER = "593963225661";
+      const AUTOVALOR_API_BASE = "https://autovalor-ec.onrender.com";
 
       // ════════════════════════════════════════════════════
       //  📡  API CLIENT — llama a tus rutas de Vercel
@@ -2142,16 +2281,228 @@
       });
 
       // ════════════════════════════════════════════════════
-      //  AÑOS
+      //  AÑOS + METADATA ESTIMADOR
       // ════════════════════════════════════════════════════
       const selAnio = document.getElementById("anio");
       const currentYear = new Date().getFullYear();
-      for (let y = currentYear; y >= 1990; y--) {
+      let estimatorCatalog = {};
+
+      // Mapeo de marcas a modelos (para dependencia marca->modelo)
+      const BRAND_MODEL_MAP = {
+        AUDI: ["A1", "A5", "Q5"],
+        BAIC: ["D50", "X30", "X35"],
+        BMW: ["X1", "X5"],
+        BYD: ["F3", "SEAGULL", "YUAN"],
+        CHANGAN: ["ALSVIN V3", "CS15", "CS35", "CS55"],
+        CHERY: ["ARRIZO5", "TIGGO", "TIGGO2", "TIGGO4", "TIGGO7"],
+        CHEVROLET: [
+          "AVEO",
+          "BEAT",
+          "CAPTIVA",
+          "CAVALIER",
+          "CRUZE",
+          "ONIX",
+          "SAIL",
+          "SPARK",
+        ],
+        CITROEN: ["C3", "C5"],
+        "D.F.S.K. (DONGFENG)": ["GLORY", "K01", "SX5"],
+        DAIHATSU: ["TERIOS"],
+        DODGE: ["JOURNEY"],
+        DONGFENG: ["AX7"],
+        FAW: ["X40", "X80"],
+        FIAT: ["500", "ARGO", "PULSE"],
+        FORD: ["ESCAPE", "EXPLORER", "F150", "RANGER"],
+        FOTON: ["TUNLAND"],
+        "GAC MOTOR": ["GS4"],
+        GEELY: ["AZKARRA"],
+        "GREAT WALL": ["POER", "WINGLE"],
+        HAVAL: ["H2", "H3", "H5", "H6"],
+        HONDA: ["CIVIC", "CR-V", "WR-V"],
+        HYUNDAI: ["ACCENT", "CRETA", "ELANTRA", "I-10", "SANTA FE", "TUCSON"],
+        "JAC AUTOS": ["JS4", "T6", "T8"],
+        "JAC MOTORS": ["JS4", "T6", "T8"],
+        JEEP: ["COMPASS", "GRAND CHEROKEE", "PATRIOT"],
+        JETOUR: ["DASHING", "X70"],
+        JMC: ["VIGUS"],
+        KIA: ["CERATO", "PICANTO", "RIO", "SELTOS", "SPORTAGE"],
+        KYC: ["MONTANA"],
+        LEXUS: ["RX"],
+        LIVAN: ["X3 PRO"],
+        MAZDA: ["2", "3", "6", "CX-5", "CX-30"],
+        "MERCEDES BENZ": ["C180", "C200", "CLA"],
+        "MG MOTOR": ["MG5", "RX5", "ZS"],
+        MINI: ["COOPER"],
+        MITSUBISHI: ["ASX", "MONTERO", "OUTLANDER", "TRITON"],
+        NISSAN: ["ALTIMA", "FRONTIER", "MARCH", "SENTRA", "VERSA", "X TRAIL"],
+        OPEL: ["GRANDLAND"],
+        PEUGEOT: ["208", "3008", "301", "408"],
+        RAM: ["700"],
+        RENAULT: ["CAPTUR", "DUSTER", "LOGAN", "SANDERO"],
+        SHINERAY: ["SWM"],
+        SINOTRUK: ["VGV"],
+        SOUEAST: ["S3", "S5"],
+        SSANGYONG: ["KORANDO"],
+        SUZUKI: ["FRONX", "JIMNY", "SWIFT", "VITARA"],
+        TOYOTA: [
+          "AGYA",
+          "CAMRY",
+          "COROLLA",
+          "COROLLA CROSS",
+          "FORTUNER",
+          "HILUX",
+          "LAND CRUISER PRADO",
+          "PRIUS",
+          "RAV4",
+          "YARIS",
+        ],
+        VOLKSWAGEN: [
+          "AMAROK",
+          "GOL",
+          "JETTA",
+          "POLO",
+          "SAVEIRO",
+          "T-CROSS",
+          "TIGUAN",
+          "VIRTUS",
+        ],
+        ZOTYE: ["Z100"],
+        "ZX AUTO": ["VIGUS"],
+      };
+      for (let y = currentYear + 1; y >= 1980; y--) {
         const o = document.createElement("option");
         o.value = y;
         o.textContent = y;
         selAnio.appendChild(o);
       }
+
+      function setSelectOptions(selectId, values, placeholder) {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        select.innerHTML = "";
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = placeholder;
+        select.appendChild(defaultOption);
+
+        (values || []).forEach((item) => {
+          const value =
+            item && typeof item === "object" ? item.value : String(item || "");
+          const label =
+            item && typeof item === "object" ? item.label : String(item || "");
+          const normalized = normalizeCatalogText(value);
+
+          // Permitir DESCONOCIDO en modelo; rechazar en otros campos
+          const isDesconocido =
+            normalized === "DESCONOCIDO" ||
+            normalized === "UNKNOWN" ||
+            normalized === "NO DEFINIDO" ||
+            normalized === "N/A";
+
+          if (isDesconocido && selectId !== "modelo") {
+            return; // Rechaza DESCONOCIDO para otros campos
+          }
+
+          const option = document.createElement("option");
+          option.value = String(value);
+          option.textContent =
+            normalized === "DESCONOCIDO" ? "Desconocido" : String(label);
+          select.appendChild(option);
+        });
+      }
+
+      function normalizeCatalogText(value) {
+        return String(value || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toUpperCase()
+          .trim();
+      }
+
+      // tipo del API es una categoría de venta interna, no carrocería.
+      // Se auto-determina por año para no exponer opciones confusas al usuario.
+      // tipo ahora es carrocería (será el valor del select tipo)
+
+      // provincia: simple mapeo directo a 6 provincias válidas reales
+      function getProvinciaOptions(values) {
+        const validProvinces = [
+          { value: "AZUAY", label: "Azuay" },
+          { value: "EL ORO", label: "El Oro" },
+          { value: "GUAYAS", label: "Guayas" },
+          { value: "ORELLANA", label: "Orellana" },
+          { value: "PICHINCHA", label: "Pichincha" },
+          {
+            value: "SANTO DOMINGO DE LOS TSÁCHILAS",
+            label: "Santo Domingo de los Tsáchilas",
+          },
+        ];
+        return validProvinces;
+      }
+
+      // Refrescar modelos cuando cambia la marca
+      function refreshModeloByMarca() {
+        const marca = (document.getElementById("marca")?.value || "").trim();
+        const modelos = BRAND_MODEL_MAP[marca] || [];
+
+        setSelectOptions(
+          "modelo",
+          modelos,
+          marca ? "Seleccionar modelo" : "Selecciona primero una marca",
+        );
+
+        const modeloSelect = document.getElementById("modelo");
+        if (modeloSelect) {
+          modeloSelect.disabled = !marca || modelos.length === 0;
+        }
+      }
+
+      async function loadEstimatorMetadata() {
+        const apiError = document.getElementById("estimateApiError");
+
+        try {
+          const res = await fetch(AUTOVALOR_API_BASE + "/metadata", {
+            method: "GET",
+          });
+
+          if (!res.ok) throw new Error("No se pudo cargar metadata");
+
+          const metadata = await res.json();
+          const categoricalValues = metadata?.categorical_values || {};
+          estimatorCatalog = categoricalValues;
+
+          setSelectOptions("color", categoricalValues.color, "Seleccionar");
+          // Se cargan solo las marcas válidas (metadata.marca está ya filtrado)
+          // Cargar marcas que existan en BRAND_MODEL_MAP
+          const marcasDisponibles = categoricalValues.marca.filter(
+            (m) => BRAND_MODEL_MAP[m],
+          );
+          setSelectOptions("marca", marcasDisponibles, "Seleccionar marca");
+          // Modelo se puebla dinámicamente al seleccionar marca
+          setSelectOptions(
+            "provincia",
+            getProvinciaOptions(categoricalValues.provincia),
+            "Seleccionar provincia",
+          );
+          setSelectOptions(
+            "transmision",
+            categoricalValues.transmision,
+            "Seleccionar",
+          );
+        } catch (err) {
+          console.error("[AutoValor] Error cargando /metadata:", err);
+          apiError.textContent =
+            "Estamos mejorando nuestra plataforma. No se pudo cargar la metadata del estimador.";
+          apiError.classList.add("show");
+        }
+      }
+
+      // Event listener: cuando cambia marca, refrescar modelos disponibles
+      document.getElementById("marca")?.addEventListener("change", () => {
+        refreshModeloByMarca();
+        clearFieldError("modelo");
+        updateEstimate();
+      });
 
       // ════════════════════════════════════════════════════
       //  STEP MANAGEMENT
@@ -2273,37 +2624,321 @@
       // ════════════════════════════════════════════════════
       //  ESTIMADOR
       // ════════════════════════════════════════════════════
-      function updateEstimate() {
-        const marca = document.getElementById("marca").value;
-        const anio = parseInt(document.getElementById("anio").value);
-        const km = document.getElementById("kilometraje").value;
-        const transmision = document.getElementById("transmision").value;
-        const estado =
-          document.querySelector('input[name="estado"]:checked')?.value ||
-          "Bueno";
-        const rtv =
-          document.querySelector('input[name="rtv"]:checked')?.value || "No";
 
-        if (!marca || !anio || !km) {
-          document.getElementById("estRange").textContent = "Proximamente";
-          document.getElementById("estNote").textContent =
-            "Por ahora no mostramos un valor en pantalla. Te contactaremos por WhatsApp con el siguiente paso.";
-          return;
+      // ESTADO_MAP: YA NO SE USA (API solo acepta DESCONOCIDO para estado campos)
+      // Los valores estado_carroceria y estado_motor son fijos en los inputs ocultos
+
+      function updateEstimate() {
+        document.getElementById("estimateApiError")?.classList.remove("show");
+      }
+
+      function clearFieldError(id) {
+        const el = document.getElementById(id);
+        const field = el?.closest(".field");
+        field?.classList.remove("has-error");
+      }
+
+      function setFieldError(id, message) {
+        const el = document.getElementById(id);
+        const field = el?.closest(".field");
+        if (!field) return;
+
+        field.classList.add("has-error");
+        const msg = field.querySelector(".error-msg");
+        if (msg && message) msg.textContent = message;
+      }
+
+      function parsePredictNumeric(value, fallback = null) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : fallback;
+      }
+
+      function formatUsd(value) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(value);
+      }
+
+      function buildVehiclePayload() {
+        const fieldsToReset = [
+          "anio",
+          "kilometraje",
+          "cilindrada",
+          "color",
+          "combustible",
+          "estado_carroceria",
+          "estado_motor",
+          "marca",
+          "modelo",
+          "provincia",
+          "tipo",
+          "transmision",
+        ];
+        fieldsToReset.forEach(clearFieldError);
+
+        let valid = true;
+        const nowYear = new Date().getFullYear() + 1;
+
+        const anio = parseInt(document.getElementById("anio")?.value || "", 10);
+        if (!Number.isInteger(anio) || anio < 1980 || anio > nowYear) {
+          setFieldError(
+            "anio",
+            "Ingresa un año válido entre 1980 y " + nowYear + ".",
+          );
+          valid = false;
         }
 
-        document.getElementById("estRange").textContent = "Proximamente";
-        document.getElementById("estNote").textContent =
-          `Recibimos tus datos del ${marca} ${anio}. La cotizacion detallada llegara por WhatsApp.`;
+        const kilometraje = parseFloat(
+          document.getElementById("kilometraje")?.value || "",
+        );
+        if (!Number.isFinite(kilometraje) || kilometraje < 0) {
+          setFieldError("kilometraje", "Ingresa un kilometraje válido (>= 0).");
+          valid = false;
+        }
 
-        track("estimate_view", {
-          value: "proximamente",
-          marca,
-          anio,
-          km,
-          transmision,
-          estado,
-          rtv,
+        const cilindrada = parseFloat(
+          document.getElementById("cilindrada")?.value || "",
+        );
+        if (
+          !Number.isFinite(cilindrada) ||
+          cilindrada < 0.6 ||
+          cilindrada > 8
+        ) {
+          setFieldError(
+            "cilindrada",
+            "Ingresa cilindrada en litros entre 0.6 y 8.0 (ejemplo: 1.6).",
+          );
+          valid = false;
+        }
+
+        // Estos campos se cargan del formulario
+        const requiredFields = [
+          "color",
+          "marca",
+          "modelo",
+          "provincia",
+          "transmision",
+          "tipo",
+        ];
+
+        const categoricalValues = {};
+        requiredFields.forEach((id) => {
+          const value = (document.getElementById(id)?.value || "").trim();
+          if (!value) {
+            setFieldError(id, "Este campo es obligatorio.");
+            valid = false;
+          }
+          categoricalValues[id] = value;
         });
+
+        if (!valid) return null;
+
+        // Los campos DESCONOCIDO se guardan aquí pero se pueden excluir en /predict
+        categoricalValues.combustible = "DESCONOCIDO";
+        categoricalValues.estado_carroceria = "DESCONOCIDO";
+        categoricalValues.estado_motor = "DESCONOCIDO";
+
+        return {
+          anio,
+          kilometraje,
+          cilindrada,
+          ...categoricalValues,
+        };
+      }
+
+      // Payload optimizado para /predict (excluye campos que API rechaza)
+      function buildPredictPayload(fullPayload) {
+        return {
+          anio: fullPayload.anio,
+          kilometraje: fullPayload.kilometraje,
+          cilindrada: fullPayload.cilindrada,
+          color: fullPayload.color,
+          marca: fullPayload.marca,
+          provincia: fullPayload.provincia,
+          transmision: fullPayload.transmision,
+          tipo: fullPayload.tipo,
+          combustible: "DESCONOCIDO", // Siempre DESCONOCIDO para API
+          estado_carroceria: "DESCONOCIDO", // Siempre DESCONOCIDO para API
+          estado_motor: "DESCONOCIDO", // Siempre DESCONOCIDO para API
+          modelo: "DESCONOCIDO", // SIEMPRE DESCONOCIDO para API (no usar modelo real)
+        };
+      }
+
+      function setEstimateView(predictedValue, rangeMin, rangeMax) {
+        const estRange = document.getElementById("estRange");
+        const estValue = document.getElementById("estRangeValue");
+        const estInterval = document.getElementById("estRangeInterval");
+        const estNote = document.getElementById("estNote");
+
+        estRange.textContent = "Resultado";
+        estValue.textContent = formatUsd(predictedValue);
+        estInterval.textContent =
+          formatUsd(rangeMin) + " - " + formatUsd(rangeMax);
+        estNote.textContent =
+          "Este valor es una estimación automática. Puede cambiar tras la revisión física.";
+      }
+
+      function showEstimateApiError(message) {
+        const apiError = document.getElementById("estimateApiError");
+        apiError.textContent = message;
+        apiError.classList.add("show");
+      }
+
+      function logApiError(context, status, payload, responseData) {
+        console.group(
+          "%c[AutoValor] " + context,
+          "color:#ef4444;font-weight:bold",
+        );
+        console.error("Status:", status);
+        console.error("Payload enviado:", JSON.stringify(payload, null, 2));
+        console.error("Respuesta API:", responseData);
+        if (responseData?.error?.details) {
+          console.table(
+            Object.entries(responseData.error.details).map(
+              ([field, detail]) => ({
+                campo: field,
+                problema:
+                  typeof detail === "string"
+                    ? detail
+                    : Array.isArray(detail)
+                      ? detail[0]
+                      : JSON.stringify(detail),
+              }),
+            ),
+          );
+        }
+        console.groupEnd();
+      }
+
+      async function consultarValor() {
+        const btn = document.getElementById("btnEstimate");
+        const apiError = document.getElementById("estimateApiError");
+        apiError.classList.remove("show");
+
+        const vehicleFullPayload = buildVehiclePayload();
+        if (!vehicleFullPayload) return;
+
+        // Crear payload optimizado para /predict (excluye modelo y otros campos no soportados)
+        const vehicleForPredict = buildPredictPayload(vehicleFullPayload);
+
+        console.group(
+          "%c[AutoValor] Consultando /predict",
+          "color:#2563eb;font-weight:bold",
+        );
+        console.log("Payload completo (guardado):", vehicleFullPayload);
+        console.log("Payload para /predict:", vehicleForPredict);
+        console.groupEnd();
+
+        btn.disabled = true;
+        btn.textContent = "Consultando...";
+
+        try {
+          const res = await fetch(AUTOVALOR_API_BASE + "/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ vehicle: vehicleForPredict }),
+          });
+
+          const data = await res.json().catch((parseErr) => {
+            console.error(
+              "[AutoValor] Error parseando JSON de respuesta:",
+              parseErr,
+            );
+            return {};
+          });
+
+          if (!res.ok) {
+            logApiError(
+              "Error HTTP " + res.status + " en /predict",
+              res.status,
+              vehicleForPredict,
+              data,
+            );
+
+            const details = data?.error?.details || {};
+            Object.entries(details).forEach(([field, detail]) => {
+              if (typeof detail === "string") {
+                setFieldError(field, detail);
+              } else if (Array.isArray(detail) && detail.length > 0) {
+                setFieldError(field, String(detail[0]));
+              } else if (detail && typeof detail === "object") {
+                const opts = Array.isArray(detail.valid_options)
+                  ? detail.valid_options.slice(0, 5).join(", ")
+                  : "";
+                const msg = opts
+                  ? "Valor inválido. Opciones sugeridas: " + opts
+                  : "Valor inválido para este campo.";
+                setFieldError(field, msg);
+              }
+            });
+
+            showEstimateApiError(
+              "Estamos mejorando nuestra plataforma. No pudimos calcular el valor en este momento.",
+            );
+            return;
+          }
+
+          console.log("[AutoValor] Respuesta exitosa:", data);
+
+          const predictedValue = parsePredictNumeric(data?.predicted_value);
+          if (!Number.isFinite(predictedValue)) {
+            console.error(
+              "[AutoValor] predicted_value inválido:",
+              data?.predicted_value,
+              "| Respuesta completa:",
+              data,
+            );
+            showEstimateApiError(
+              "Estamos mejorando nuestra plataforma. La respuesta del estimador no fue válida.",
+            );
+            return;
+          }
+
+          let rangeMin = parsePredictNumeric(
+            data?.range_min ?? data?.lower_bound ?? data?.min_value,
+          );
+          let rangeMax = parsePredictNumeric(
+            data?.range_max ?? data?.upper_bound ?? data?.max_value,
+          );
+
+          if (!Number.isFinite(rangeMin) || !Number.isFinite(rangeMax)) {
+            console.warn(
+              "[AutoValor] Rango no disponible en respuesta, calculando ±8%.",
+              { rangeMin: data?.range_min, rangeMax: data?.range_max },
+            );
+            rangeMin = Math.max(0, predictedValue * 0.92);
+            rangeMax = predictedValue * 1.08;
+          }
+
+          if (rangeMin > rangeMax) {
+            const t = rangeMin;
+            rangeMin = rangeMax;
+            rangeMax = t;
+          }
+
+          setEstimateView(predictedValue, rangeMin, rangeMax);
+
+          track("estimate_view", {
+            value: predictedValue,
+            marca: vehicleFullPayload.marca,
+            anio: vehicleFullPayload.anio,
+            km: vehicleFullPayload.kilometraje,
+            transmision: vehicleFullPayload.transmision,
+          });
+        } catch (err) {
+          console.error(
+            "[AutoValor] Error de red o inesperado en /predict:",
+            err,
+          );
+          showEstimateApiError(
+            "Estamos mejorando nuestra plataforma. No pudimos conectarnos con el estimador.",
+          );
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Consultar valor";
+        }
       }
 
       // ════════════════════════════════════════════════════
@@ -2512,6 +3147,8 @@
       //  INIT
       // ════════════════════════════════════════════════════
       initSession();
+      loadEstimatorMetadata();
+      // syncEstadoHidden ya no se usa (estado_carroceria/estado_motor son fijos DESCONOCIDO)
       track("page_view", {
         url: window.location.href,
         referrer: document.referrer,
