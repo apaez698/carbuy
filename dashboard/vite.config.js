@@ -11,7 +11,11 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
-      include: ["src/App.jsx"],
+      include: [
+        "src/App.jsx",
+        "src/components/MetricDebug.jsx",
+        "src/hooks/useMetric.js",
+      ],
       thresholds: {
         lines: 100,
         functions: 100,

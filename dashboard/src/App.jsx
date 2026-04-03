@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PasswordGate from "./components/PasswordGate.jsx";
+import MetricDebug from "./components/MetricDebug.jsx";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -8,7 +9,7 @@ function App() {
     return <PasswordGate onAuth={setPassword} />;
   }
 
-  return <p>Autenticado</p>;
+  return <MetricDebug password={password} />;
 }
 
 export default App
