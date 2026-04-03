@@ -48,6 +48,7 @@ describe("/api/flags", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.flags.NEW_LEADS_VIEW).toBe(true);
     expect(res.body.flags.SHOW_EXPORT_BUTTON).toBe(false);
+    expect(res.body.flags.COTIZADOR_BUTTON).toBe(false);
   });
 
   it("POST requires dashboard key", async () => {
@@ -79,5 +80,21 @@ describe("/api/flags", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body.flags.SHOW_EXPORT_BUTTON).toBe(true);
+  });
+
+  it("POST updates COTIZADOR_BUTTON", async () => {
+    process.env.DASHBOARD_PASSWORD = "secret";
+
+    const req = {
+      method: "POST",
+      query: { key: "secret" },
+      body: { name: "COTIZADOR_BUTTON", value: true },
+    };
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.flags.COTIZADOR_BUTTON).toBe(true);
   });
 });

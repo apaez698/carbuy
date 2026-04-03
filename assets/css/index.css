@@ -126,6 +126,87 @@ nav ul a.active {
   padding-bottom: 2px;
 }
 
+.cotizador-cta {
+  background: #1fd382;
+  color: #083b29;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(31, 211, 130, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.cotizador-cta:hover {
+  transform: translateY(-2px);
+}
+
+.cotizador-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 9, 31, 0.5);
+  padding: 20px;
+}
+
+.cotizador-modal.is-open {
+  display: flex;
+}
+
+.cotizador-modal-card {
+  width: min(460px, 100%);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 20px 55px rgba(2, 10, 35, 0.3);
+  padding: 28px;
+  position: relative;
+}
+
+.cotizador-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-mid);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cotizador-modal-card h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  letter-spacing: 0.3px;
+  font-size: 34px;
+  color: var(--blue-dark);
+}
+
+.cotizador-modal-body {
+  min-height: 80px;
+}
+
+.cotizador-modal-open {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  background: #1fd382;
+  color: #083b29;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+body.cotizador-modal-open {
+  overflow: hidden;
+}
+
 /* HERO */
 .hero {
   background: linear-gradient(
@@ -1131,5 +1212,13 @@ footer strong {
   .prog-label {
     display: none;
   }
+
+  .cotizador-cta {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 160;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
 }
-    

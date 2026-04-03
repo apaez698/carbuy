@@ -109,7 +109,8 @@ VALUES
   ('NEW_LEADS_VIEW', FALSE),
   ('SHOW_EXPORT_BUTTON', FALSE),
   ('FORM_V1_HIDDEN', FALSE),
-  ('FORM_V2_ENABLED', FALSE)
+  ('FORM_V2_ENABLED', FALSE),
+  ('COTIZADOR_BUTTON', FALSE)
 ON CONFLICT (name) DO NOTHING;
 
 -- ============================================================

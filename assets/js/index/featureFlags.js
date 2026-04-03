@@ -1,8 +1,11 @@
+import { applyCotizadorButtonFlag } from "./cotizadorButton.js";
+
 const FLAG_DEFAULTS = {
   NEW_LEADS_VIEW: false,
   SHOW_EXPORT_BUTTON: false,
   FORM_V1_HIDDEN: false,
   FORM_V2_ENABLED: false,
+  COTIZADOR_BUTTON: false,
 };
 
 const FLAG_CACHE_KEY_PREFIX = "ff_";
@@ -67,6 +70,8 @@ function applyFormFlags(flags) {
   if (newForm) {
     newForm.style.display = flags.FORM_V2_ENABLED ? "" : "none";
   }
+
+  applyCotizadorButtonFlag(flags);
 }
 
 export function isFeatureEnabled(name) {

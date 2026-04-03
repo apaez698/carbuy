@@ -5,6 +5,7 @@ const FLAG_DEFAULTS = {
   SHOW_EXPORT_BUTTON: false,
   FORM_V1_HIDDEN: false,
   FORM_V2_ENABLED: false,
+  COTIZADOR_BUTTON: false,
 };
 
 function normalizeFlags(rows) {
@@ -12,11 +13,53 @@ function normalizeFlags(rows) {
 
   for (const row of rows || []) {
     if (Object.prototype.hasOwnProperty.call(FLAG_DEFAULTS, row.name)) {
-      merged[row.name] = Boolean(row.enabled);
+      const rawValue =
+        row.enabled !== undefined && row.enabled !== null
+          ? row.enabled
+          : row.value;
+      merged[row.name] = Boolean(rawValue);
     }
   }
 
   return merged;
+}
+
+async function fetchFlagsRows(sb) {
+  const byEnabled = await sb.from("feature_flags").select("name, enabled");
+  if (!byEnabled.error) {
+    return byEnabled;
+  }
+
+  const byValue = await sb.from("feature_flags").select("name, value");
+  return byValue;
+}
+
+async function upsertFlagValue(sb, name, value) {
+  const timestamp = new Date().toISOString();
+
+  const withEnabled = await sb.from("feature_flags").upsert(
+    {
+      name,
+      enabled: Boolean(value),
+      updated_at: timestamp,
+    },
+    { onConflict: "name" },
+  );
+
+  if (!withEnabled.error) {
+    return withEnabled;
+  }
+
+  const withValue = await sb.from("feature_flags").upsert(
+    {
+      name,
+      value: Boolean(value),
+      updated_at: timestamp,
+    },
+    { onConflict: "name" },
+  );
+
+  return withValue;
 }
 
 export default async function handler(req, res) {
@@ -28,9 +71,7 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === "GET") {
-      const { data, error } = await sb
-        .from("feature_flags")
-        .select("name, enabled");
+      const { data, error } = await fetchFlagsRows(sb);
 
       if (error) {
         throw error;
@@ -51,22 +92,13 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Flag no soportado" });
     }
 
-    const { error: upsertError } = await sb.from("feature_flags").upsert(
-      {
-        name,
-        enabled: Boolean(value),
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "name" },
-    );
+    const { error: upsertError } = await upsertFlagValue(sb, name, value);
 
     if (upsertError) {
       throw upsertError;
     }
 
-    const { data, error } = await sb
-      .from("feature_flags")
-      .select("name, enabled");
+    const { data, error } = await fetchFlagsRows(sb);
 
     if (error) {
       throw error;

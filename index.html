@@ -169,6 +169,15 @@
         </li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
+      <button
+        type="button"
+        id="cotizadorButton"
+        class="cotizador-cta"
+        aria-label="Abrir cotizador de auto"
+        hidden
+      >
+        Cotizar auto
+      </button>
     </nav>
 
     <!-- HERO -->
@@ -1067,6 +1076,35 @@
       <strong>AutoCash</strong> — Vendemos tu auto, fácil y rápido &nbsp;|&nbsp;
       📍 Quito, Ecuador &nbsp;|&nbsp; © 2025
     </footer>
+
+    <div
+      class="cotizador-modal"
+      id="cotizadorModal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="cotizadorModalTitle"
+    >
+      <div class="cotizador-modal-card">
+        <button
+          type="button"
+          class="cotizador-modal-close"
+          id="cotizadorModalClose"
+          aria-label="Cerrar modal"
+        >
+          ×
+        </button>
+        <h3 id="cotizadorModalTitle">Cotizar auto</h3>
+        <div class="cotizador-modal-body"></div>
+        <button
+          type="button"
+          class="cotizador-modal-open"
+          id="cotizadorOpenForm"
+        >
+          Abrir formulario V1
+        </button>
+      </div>
+    </div>
 
     <script type="module" src="/assets/js/index.js"></script>
   </body>

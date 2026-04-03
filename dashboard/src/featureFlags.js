@@ -3,6 +3,7 @@ export const FLAGS = {
   SHOW_EXPORT_BUTTON: false,
   FORM_V1_HIDDEN: false,
   FORM_V2_ENABLED: false,
+  COTIZADOR_BUTTON: false,
 };
 
 function hasLocalStorage() {

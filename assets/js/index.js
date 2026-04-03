@@ -13,6 +13,10 @@ import {
   toggleWhatsappAccept,
 } from "./index/submit.js";
 import { loadFeatureFlags } from "./index/featureFlags.js";
+import {
+  initCotizadorModal,
+  openFormularioV1,
+} from "./index/cotizadorButton.js";
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  YEAR DROPDOWN
@@ -81,6 +85,9 @@ document.addEventListener("focusout", (e) => {
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 initSession();
 loadFeatureFlags();
+initCotizadorModal({
+  onOpenFormulario: () => openFormularioV1({ showStepFn: showStep }),
+});
 loadEstimatorMetadata();
 refreshModeloByMarca();
 toggleModeloOtroField();

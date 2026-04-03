@@ -6,6 +6,7 @@ const FLAG_DESCRIPTIONS = {
   SHOW_EXPORT_BUTTON: "Muestra el botón de exportar datos en el dashboard.",
   FORM_V1_HIDDEN: "Oculta el formulario actual de la página principal.",
   FORM_V2_ENABLED: "Muestra el nuevo formulario en la página principal.",
+  COTIZADOR_BUTTON: "Muestra el botón 'Cotizar auto' en la landing principal.",
 };
 
 function FlagRow({ name, dashboardPassword }) {
