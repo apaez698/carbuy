@@ -6,6 +6,7 @@ import Layout from "./components/Layout.jsx";
 import OverviewPage from "./pages/OverviewPage.jsx";
 import LeadsFunnelPage from "./pages/LeadsFunnelPage.jsx";
 import ComingSoonPage from "./pages/ComingSoonPage.jsx";
+import FlagsPage from "./pages/FlagsPage.jsx";
 
 function getLastUpdateLabel() {
   return `Actualizado ${new Date().toLocaleTimeString("es-EC", {
@@ -67,6 +68,10 @@ function App() {
           <Route
             path="/whatsapp"
             element={<ComingSoonPage title="WhatsApp" />}
+          />
+          <Route
+            path="/flags"
+            element={<FlagsPage password={password} />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

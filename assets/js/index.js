@@ -12,6 +12,7 @@ import {
   toggleCheck,
   toggleWhatsappAccept,
 } from "./index/submit.js";
+import { loadFeatureFlags } from "./index/featureFlags.js";
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 //  YEAR DROPDOWN
@@ -79,6 +80,7 @@ document.addEventListener("focusout", (e) => {
 //  INIT
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 initSession();
+loadFeatureFlags();
 loadEstimatorMetadata();
 refreshModeloByMarca();
 toggleModeloOtroField();

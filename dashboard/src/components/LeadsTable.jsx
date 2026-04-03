@@ -1,9 +1,19 @@
 import useMetric from '../hooks/useMetric.js';
+import useFlag from '../hooks/useFlag.js';
 import { buildWhatsAppLink } from '../utils/whatsapp.js';
 import ChartCard from './ChartCard.jsx';
 
 export default function LeadsTable({ password }) {
+  const [newLeadsViewEnabled] = useFlag('NEW_LEADS_VIEW');
   const { data, isLoading } = useMetric(password, 'leads_tabla');
+
+  if (!newLeadsViewEnabled) {
+    return (
+      <ChartCard title="Últimos leads" sectionId="section-leads">
+        <p style={{ padding: '24px', margin: 0 }}>Nueva vista (en construcción)</p>
+      </ChartCard>
+    );
+  }
 
   if (isLoading) {
     return (

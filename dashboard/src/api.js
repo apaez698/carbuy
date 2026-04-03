@@ -30,3 +30,40 @@ export async function clearTestData(dashPass) {
 
   return res.ok;
 }
+
+export async function fetchFlags() {
+  try {
+    const res = await fetch("/api/flags");
+    if (!res.ok) return null;
+
+    const payload = await res.json();
+    return payload.flags || null;
+  } catch {
+    return null;
+  }
+}
+
+export async function updateFlag(dashPass, name, value) {
+  try {
+    const res = await fetch(`/api/flags?key=${encodeURIComponent(dashPass)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, value }),
+    });
+
+    if (res.status === 401) {
+      throw new AuthError();
+    }
+
+    if (!res.ok) return null;
+
+    const payload = await res.json();
+    return payload.flags || null;
+  } catch (error) {
+    if (error instanceof AuthError) {
+      throw error;
+    }
+
+    return null;
+  }
+}

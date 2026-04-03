@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import FlagPanel from "./FlagPanel.jsx";
 
 const NAV_ITEMS = [
   { id: "section-resumen", icon: "📊", label: "Resumen", path: "/" },
@@ -57,8 +58,7 @@ function Layout({
     if (location.pathname === "/conversion" && item.id === "section-conversion") return true;
     if (location.pathname === "/funnel" && item.id === "section-funnel") return true;
     if (location.pathname === "/formularios" && item.id === "section-formularios") return true;
-    if (location.pathname === "/whatsapp" && item.id === "section-whatsapp") return true;
-    return activeSection === item.id;
+    if (location.pathname === "/whatsapp" && item.id === "section-whatsapp") return true;    if (location.pathname === "/flags" && item.id === "section-flags") return true;    return activeSection === item.id;
   };
 
   const updateLabel = lastUpdate || "Cargando...";
@@ -118,6 +118,20 @@ function Layout({
           ))}
         </div>
 
+        <div className="nav-section">
+          <div className="nav-label">Config</div>
+          <button
+            type="button"
+            className={`nav-item ${location.pathname === "/flags" ? "active" : ""}`.trim()}
+            data-target="section-flags"
+            style={{ background: "none", border: "none", textAlign: "left", width: "100%" }}
+            onClick={() => handleSectionClick({ id: "section-flags", path: "/flags" })}
+          >
+            <span className="icon">🚩</span>
+            Feature Flags
+          </button>
+        </div>
+
         <div className="sidebar-footer">
           Auto-refresh cada 30s
           <br />
@@ -139,6 +153,7 @@ function Layout({
               🧹 Limpiar data de prueba
             </button>
           </div>
+          <FlagPanel dashboardPassword={password} />
         </div>
 
         <div className="content">{children}</div>

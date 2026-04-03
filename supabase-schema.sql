@@ -96,6 +96,23 @@ CREATE TABLE IF NOT EXISTS sessions (
 );
 
 -- ============================================================
+--  3.1 FEATURE FLAGS - Config centralizada
+-- ============================================================
+CREATE TABLE IF NOT EXISTS feature_flags (
+  name        TEXT PRIMARY KEY,
+  enabled     BOOLEAN NOT NULL DEFAULT FALSE,
+  updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+INSERT INTO feature_flags (name, enabled)
+VALUES
+  ('NEW_LEADS_VIEW', FALSE),
+  ('SHOW_EXPORT_BUTTON', FALSE),
+  ('FORM_V1_HIDDEN', FALSE),
+  ('FORM_V2_ENABLED', FALSE)
+ON CONFLICT (name) DO NOTHING;
+
+-- ============================================================
 --  4. INDEXES para performance del dashboard
 -- ============================================================
 CREATE INDEX IF NOT EXISTS idx_leads_created_at    ON leads (created_at DESC);
@@ -113,6 +130,7 @@ CREATE INDEX IF NOT EXISTS idx_sessions_converted  ON sessions (converted);
 ALTER TABLE leads    ENABLE ROW LEVEL SECURITY;
 ALTER TABLE events   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE feature_flags ENABLE ROW LEVEL SECURITY;
 
 -- Anon puede insertar (desde la web pública)
 CREATE POLICY "anon_insert_leads"    ON leads    FOR INSERT TO anon WITH CHECK (TRUE);
@@ -124,6 +142,9 @@ CREATE POLICY "anon_update_sessions" ON sessions FOR UPDATE TO anon USING (TRUE)
 CREATE POLICY "auth_read_leads"      ON leads    FOR SELECT TO authenticated USING (TRUE);
 CREATE POLICY "auth_read_events"     ON events   FOR SELECT TO authenticated USING (TRUE);
 CREATE POLICY "auth_read_sessions"   ON sessions FOR SELECT TO authenticated USING (TRUE);
+CREATE POLICY "auth_read_feature_flags" ON feature_flags FOR SELECT TO authenticated USING (TRUE);
+CREATE POLICY "auth_write_feature_flags" ON feature_flags FOR INSERT TO authenticated WITH CHECK (TRUE);
+CREATE POLICY "auth_update_feature_flags" ON feature_flags FOR UPDATE TO authenticated USING (TRUE);
 
 -- ============================================================
 --  6. VIEWS útiles para el dashboard
