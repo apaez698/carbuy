@@ -13,9 +13,10 @@ export default defineConfig({
       reporter: ["text", "html"],
       include: [
         "src/App.jsx",
-        "src/components/MetricDebug.jsx",
+        "src/components/FunnelChart.jsx",
         "src/hooks/useMetric.js",
         "src/utils/metrics.js",
+        "src/utils/whatsapp.js",
       ],
       thresholds: {
         lines: 100,

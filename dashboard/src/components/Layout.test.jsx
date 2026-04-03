@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { MemoryRouter } from "react-router-dom";
 import Layout from "./Layout.jsx";
 
 afterEach(() => {
@@ -8,15 +9,17 @@ afterEach(() => {
 
 function renderLayout(props = {}) {
   return render(
-    <Layout
-      password="secret"
-      onRefresh={vi.fn()}
-      onClearData={vi.fn()}
-      lastUpdate="Hace 1 min"
-      {...props}
-    >
-      <p>Contenido</p>
-    </Layout>,
+    <MemoryRouter>
+      <Layout
+        password="secret"
+        onRefresh={vi.fn()}
+        onClearData={vi.fn()}
+        lastUpdate="Hace 1 min"
+        {...props}
+      >
+        <p>Contenido</p>
+      </Layout>
+    </MemoryRouter>,
   );
 }
 

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PasswordGate from "./components/PasswordGate.jsx";
 import Layout from "./components/Layout.jsx";
-import KpiGrid from "./components/KpiGrid.jsx";
+import OverviewPage from "./pages/OverviewPage.jsx";
+import LeadsFunnelPage from "./pages/LeadsFunnelPage.jsx";
+import ComingSoonPage from "./pages/ComingSoonPage.jsx";
 
 function getLastUpdateLabel() {
   return `Actualizado ${new Date().toLocaleTimeString("es-EC", {
@@ -28,7 +31,7 @@ function App() {
   }, [password]);
 
   const handleRefresh = () => {
-    queryClient.invalidateQueries({ queryKey: ["metric"] });
+    queryClient.refetchQueries({ queryKey: ["metric"], type: "active" });
     setLastUpdate(getLastUpdateLabel());
   };
 
@@ -37,13 +40,38 @@ function App() {
   }
 
   return (
-    <Layout
-      password={password}
-      lastUpdate={lastUpdate}
-      onRefresh={handleRefresh}
-    >
-      <KpiGrid password={password} />
-    </Layout>
+    <BrowserRouter>
+      <Layout
+        password={password}
+        lastUpdate={lastUpdate}
+        onRefresh={handleRefresh}
+      >
+        <Routes>
+          <Route path="/" element={<OverviewPage password={password} />} />
+          <Route
+            path="/conversion"
+            element={<ComingSoonPage title="Conversión" />}
+          />
+          <Route
+            path="/leads"
+            element={<LeadsFunnelPage password={password} mode="leads" />}
+          />
+          <Route
+            path="/funnel"
+            element={<LeadsFunnelPage password={password} mode="funnel" />}
+          />
+          <Route
+            path="/formularios"
+            element={<ComingSoonPage title="Formularios" />}
+          />
+          <Route
+            path="/whatsapp"
+            element={<ComingSoonPage title="WhatsApp" />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 

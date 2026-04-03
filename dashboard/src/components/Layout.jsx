@@ -1,15 +1,34 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const NAV_ITEMS = [
-  { id: "section-resumen", icon: "📊", label: "Resumen" },
-  { id: "section-leads", icon: "🚗", label: "Leads" },
-  { id: "section-conversion", icon: "📈", label: "Conversión" },
-  { id: "section-funnel", icon: "🗺️", label: "Funnel" },
+  { id: "section-resumen", icon: "📊", label: "Resumen", path: "/" },
+  { id: "section-leads", icon: "🚗", label: "Leads", path: "/leads" },
+  {
+    id: "section-conversion",
+    icon: "📈",
+    label: "Conversión",
+    path: "/conversion",
+    comingSoon: true,
+  },
+  { id: "section-funnel", icon: "🗺️", label: "Funnel", path: "/funnel" },
 ];
 
 const DATA_ITEMS = [
-  { id: "section-formularios", icon: "📋", label: "Formularios" },
-  { id: "section-whatsapp", icon: "💬", label: "WhatsApp" },
+  {
+    id: "section-formularios",
+    icon: "📋",
+    label: "Formularios",
+    path: "/formularios",
+    comingSoon: true,
+  },
+  {
+    id: "section-whatsapp",
+    icon: "💬",
+    label: "WhatsApp",
+    path: "/whatsapp",
+    comingSoon: true,
+  },
 ];
 
 function Layout({
@@ -21,10 +40,25 @@ function Layout({
   onSectionChange,
 }) {
   const [activeSection, setActiveSection] = useState("section-resumen");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleSectionClick = (id) => {
-    setActiveSection(id);
-    if (onSectionChange) onSectionChange(id);
+  const handleSectionClick = (item) => {
+    setActiveSection(item.id);
+    if (onSectionChange) onSectionChange(item.id);
+    if (item.path && location.pathname !== item.path) {
+      navigate(item.path);
+    }
+  };
+
+  const isItemActive = (item) => {
+    if (location.pathname === "/" && item.id === "section-resumen") return true;
+    if (location.pathname === "/leads" && item.id === "section-leads") return true;
+    if (location.pathname === "/conversion" && item.id === "section-conversion") return true;
+    if (location.pathname === "/funnel" && item.id === "section-funnel") return true;
+    if (location.pathname === "/formularios" && item.id === "section-formularios") return true;
+    if (location.pathname === "/whatsapp" && item.id === "section-whatsapp") return true;
+    return activeSection === item.id;
   };
 
   const updateLabel = lastUpdate || "Cargando...";
@@ -43,30 +77,44 @@ function Layout({
         <div className="nav-section">
           <div className="nav-label">Análisis</div>
           {NAV_ITEMS.map((item) => (
-            <a
+            <button
               key={item.id}
-              className={`nav-item ${activeSection === item.id ? "active" : ""}`.trim()}
+              type="button"
+              className={`nav-item ${isItemActive(item) ? "active" : ""}`.trim()}
               data-target={item.id}
-              onClick={() => handleSectionClick(item.id)}
+              style={{ background: "none", border: "none", textAlign: "left", width: "100%" }}
+              onClick={() => handleSectionClick(item)}
             >
               <span className="icon">{item.icon}</span>
               {item.label}
-            </a>
+              {item.comingSoon ? (
+                <span style={{ opacity: 0.65, marginLeft: 6, fontSize: 12 }}>
+                  (en construcción)
+                </span>
+              ) : null}
+            </button>
           ))}
         </div>
 
         <div className="nav-section">
           <div className="nav-label">Datos</div>
           {DATA_ITEMS.map((item) => (
-            <a
+            <button
               key={item.id}
-              className={`nav-item ${activeSection === item.id ? "active" : ""}`.trim()}
+              type="button"
+              className={`nav-item ${isItemActive(item) ? "active" : ""}`.trim()}
               data-target={item.id}
-              onClick={() => handleSectionClick(item.id)}
+              style={{ background: "none", border: "none", textAlign: "left", width: "100%" }}
+              onClick={() => handleSectionClick(item)}
             >
               <span className="icon">{item.icon}</span>
               {item.label}
-            </a>
+              {item.comingSoon ? (
+                <span style={{ opacity: 0.65, marginLeft: 6, fontSize: 12 }}>
+                  (en construcción)
+                </span>
+              ) : null}
+            </button>
           ))}
         </div>
 
