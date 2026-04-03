@@ -1,7 +1,14 @@
+import { useState } from "react";
+import PasswordGate from "./components/PasswordGate.jsx";
+
 function App() {
-  return (
-    <h1>Dashboard React</h1>
-  )
+  const [password, setPassword] = useState("");
+
+  if (!password) {
+    return <PasswordGate onAuth={setPassword} />;
+  }
+
+  return <p>Autenticado</p>;
 }
 
 export default App
