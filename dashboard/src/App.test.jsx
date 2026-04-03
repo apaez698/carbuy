@@ -34,9 +34,7 @@ describe("App", () => {
     expect(screen.getByRole("button", { name: "Entrar" })).toBeInTheDocument();
   });
 
-  it("shows loading message after submit", () => {
-    vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
-
+  it("shows layout content after submit", () => {
     renderWithQueryClient(<App />);
 
     fireEvent.change(screen.getByLabelText("Contraseña del dashboard"), {
@@ -44,6 +42,8 @@ describe("App", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Entrar" }));
 
-    expect(screen.getByText("Cargando...")).toBeInTheDocument();
+    expect(screen.getByText("Vendo")).toBeInTheDocument();
+    expect(screen.getByText("Ya")).toBeInTheDocument();
+    expect(screen.getByText("Contenido")).toBeInTheDocument();
   });
 });
