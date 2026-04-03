@@ -1,12 +1,17 @@
 {
   "version": 2,
+  "buildCommand": "cd dashboard && npm install && npm run build",
+  "outputDirectory": ".",
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/robots.txt", "dest": "/robots.txt" },
     { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
     { "src": "/terminos", "dest": "/terminos.html" },
     { "src": "/privacidad", "dest": "/privacidad.html" },
-    { "src": "/dashboard", "dest": "/dashboard.html" },
+    { "src": "/dashboard/assets/(.*)", "dest": "/dashboard/dist/assets/$1" },
+    { "src": "/dashboard/(.*)", "dest": "/dashboard/dist/index.html" },
+    { "src": "/dashboard", "dest": "/dashboard/dist/index.html" },
+    { "src": "/dashboard-legacy", "dest": "/dashboard-legacy.html" },
     { "src": "/", "dest": "/index.html" }
   ]
 }

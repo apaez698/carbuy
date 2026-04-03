@@ -4,8 +4,9 @@
   "description": "VendoYa - Vende tu auto en Quito",
   "type": "module",
   "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "dashboard:dev": "cd dashboard && npm run dev",
+    "test": "vitest run tests",
+    "test:watch": "vitest tests"
   },
   "engines": {
     "node": "20.x"
