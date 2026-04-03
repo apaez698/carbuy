@@ -15,6 +15,7 @@ export default defineConfig({
         "src/App.jsx",
         "src/components/MetricDebug.jsx",
         "src/hooks/useMetric.js",
+        "src/utils/metrics.js",
       ],
       thresholds: {
         lines: 100,
