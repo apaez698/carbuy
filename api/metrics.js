@@ -6,6 +6,11 @@
 // ============================================================
 import { getSupabase } from "./_supabase.js";
 
+function fromPublic(sb, tableName) {
+  const scoped = typeof sb.schema === "function" ? sb.schema("public") : sb;
+  return scoped.from(tableName);
+}
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -163,6 +168,19 @@ export default async function handler(req, res) {
           .eq("event_type", "step_complete")
           .not("time_on_step", "is", null);
         return res.status(200).json({ data: data || [] });
+      }
+
+      // ── Feedback beta de testers ──
+      case "beta_feedback": {
+        const { data, count } = await fromPublic(sb, "beta_feedback")
+          .select(
+            "id, created_at, section1_data_entry, section1_understanding, section1_missing_data, section2_price_justice, section2_price_details, section2_recommend, section3_contact_visibility, section3_next_steps, section4_navigation, section4_issues, section4_improvements, name, contact",
+            { count: "exact" },
+          )
+          .order("created_at", { ascending: false })
+          .limit(200);
+
+        return res.status(200).json({ data: data || [], count: count || 0 });
       }
 
       default:

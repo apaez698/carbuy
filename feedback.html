@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback AutoCash Beta</title>
+    <meta
+      name="description"
+      content="Comparte tu experiencia con AutoCash beta. Tu feedback nos ayuda a mejorar el calculo, contacto y diseno de la plataforma."
+    />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/feedback.css" />
+  </head>
+  <body>
+    <main class="feedback-page">
+      <header class="hero">
+        <a class="home-link" href="/" aria-label="Volver al inicio">AutoCash</a>
+        <p class="eyebrow">Encuesta beta</p>
+        <h1>Tu feedback sobre AutoCash</h1>
+        <p class="intro">
+          Acabas de probar el sistema. Nos gustaria entender que te parecio en
+          cada aspecto. Tus respuestas nos ayudan a mejorar. Tiempo estimado: 5
+          minutos.
+        </p>
+      </header>
+
+      <form id="feedbackForm" class="feedback-form" novalidate>
+        <section class="card" aria-labelledby="sec1-title">
+          <span class="step-number">1</span>
+          <h2 id="sec1-title">Calculo del precio de tu auto</h2>
+          <p class="section-help">
+            Nos preguntamos si fue facil completar los datos y si entendiste
+            como se calculo el precio final.
+          </p>
+
+          <fieldset>
+            <legend>
+              Que tan facil fue ingresar los datos de tu vehiculo?
+            </legend>
+            <div
+              class="scale"
+              role="radiogroup"
+              aria-label="Facilidad de ingreso de datos"
+            >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_data_entry"
+                  value="1"
+                  required
+                />1 Muy dificil</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_data_entry"
+                  value="2"
+                />2</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_data_entry"
+                  value="3"
+                />3</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_data_entry"
+                  value="4"
+                />4</label
+              >
+              <label
+                ><input type="radio" name="section1_data_entry" value="5" />5
+                Muy facil</label
+              >
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Entendiste como se llego al precio final?</legend>
+            <div
+              class="scale"
+              role="radiogroup"
+              aria-label="Comprension del precio final"
+            >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_understanding"
+                  value="1"
+                  required
+                />1 No entendi</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_understanding"
+                  value="2"
+                />2</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_understanding"
+                  value="3"
+                />3</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section1_understanding"
+                  value="4"
+                />4</label
+              >
+              <label
+                ><input type="radio" name="section1_understanding" value="5" />5
+                Totalmente claro</label
+              >
+            </div>
+          </fieldset>
+
+          <label class="input-group">
+            <span>Falto informacion o datos para calcular mejor?</span>
+            <textarea
+              name="section1_missing_data"
+              rows="3"
+              placeholder="Por ejemplo: marca, modelo, historial de mantenimiento"
+            ></textarea>
+          </label>
+        </section>
+
+        <section class="card" aria-labelledby="sec2-title">
+          <span class="step-number">2</span>
+          <h2 id="sec2-title">Te parecio justo el rango de precios?</h2>
+          <p class="section-help">
+            Queremos saber si el precio fue competitivo y si coincide con tu
+            expectativa.
+          </p>
+
+          <fieldset>
+            <legend>Como evaluarias la justicia del precio ofrecido?</legend>
+            <div
+              class="choices"
+              role="radiogroup"
+              aria-label="Justicia del precio"
+            >
+              <label
+                ><input
+                  type="radio"
+                  name="section2_price_justice"
+                  value="higher"
+                  required
+                />Fue mas alto de lo que esperaba (positivo)</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section2_price_justice"
+                  value="fair"
+                />Fue justo, acorde al mercado</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section2_price_justice"
+                  value="lower"
+                />Fue mas bajo de lo esperado (me sorprendio)</label
+              >
+            </div>
+          </fieldset>
+
+          <label class="input-group">
+            <span>Si quieres, cuentanos por que</span>
+            <textarea
+              name="section2_price_details"
+              rows="3"
+              placeholder="Que te hizo pensar que el precio fue alto, justo o bajo"
+            ></textarea>
+          </label>
+
+          <fieldset>
+            <legend>Recomendarias usar AutoCash para valuar tu auto?</legend>
+            <div
+              class="scale"
+              role="radiogroup"
+              aria-label="Recomendacion de AutoCash"
+            >
+              <label
+                ><input
+                  type="radio"
+                  name="section2_recommend"
+                  value="1"
+                  required
+                />1 No</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section2_recommend"
+                  value="2"
+                />2</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section2_recommend"
+                  value="3"
+                />3</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section2_recommend"
+                  value="4"
+                />4</label
+              >
+              <label
+                ><input type="radio" name="section2_recommend" value="5" />5
+                Totalmente</label
+              >
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="card" aria-labelledby="sec3-title">
+          <span class="step-number">3</span>
+          <h2 id="sec3-title">Fue facil contactarse</h2>
+          <p class="section-help">
+            Evaluamos si las opciones de contacto y los siguientes pasos fueron
+            claros.
+          </p>
+
+          <fieldset>
+            <legend>Que tan visible fue la opcion de contacto?</legend>
+            <div
+              class="scale"
+              role="radiogroup"
+              aria-label="Visibilidad de contacto"
+            >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_contact_visibility"
+                  value="1"
+                  required
+                />1 Oculta</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_contact_visibility"
+                  value="2"
+                />2</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_contact_visibility"
+                  value="3"
+                />3</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_contact_visibility"
+                  value="4"
+                />4</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_contact_visibility"
+                  value="5"
+                />5 Muy clara</label
+              >
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Entendiste cuales eran los proximos pasos?</legend>
+            <div
+              class="scale"
+              role="radiogroup"
+              aria-label="Claridad de proximos pasos"
+            >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_next_steps"
+                  value="1"
+                  required
+                />1 Confundido</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_next_steps"
+                  value="2"
+                />2</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_next_steps"
+                  value="3"
+                />3</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section3_next_steps"
+                  value="4"
+                />4</label
+              >
+              <label
+                ><input type="radio" name="section3_next_steps" value="5" />5
+                Totalmente claro</label
+              >
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="card" aria-labelledby="sec4-title">
+          <span class="step-number">4</span>
+          <h2 id="sec4-title">Feedback de diseno e interfaz</h2>
+          <p class="section-help">
+            Nos interesa saber si la navegacion fue intuitiva y si encontraste
+            fricciones.
+          </p>
+
+          <fieldset>
+            <legend>Que tan intuitiva fue la navegacion general?</legend>
+            <div
+              class="scale"
+              role="radiogroup"
+              aria-label="Navegacion general"
+            >
+              <label
+                ><input
+                  type="radio"
+                  name="section4_navigation"
+                  value="1"
+                  required
+                />1 Confusa</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section4_navigation"
+                  value="2"
+                />2</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section4_navigation"
+                  value="3"
+                />3</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="section4_navigation"
+                  value="4"
+                />4</label
+              >
+              <label
+                ><input type="radio" name="section4_navigation" value="5" />5
+                Muy clara</label
+              >
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Hubo problemas con...</legend>
+            <div class="checks" id="issuesGroup">
+              <label
+                ><input
+                  type="checkbox"
+                  name="section4_issues"
+                  value="loading"
+                />Velocidad de carga / performance</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="section4_issues"
+                  value="buttons"
+                />Botones o controles no funcionaban</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="section4_issues"
+                  value="responsive"
+                />Vista en mobile/tablet</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="section4_issues"
+                  value="text"
+                />Claridad de textos o instrucciones</label
+              >
+              <label
+                ><input type="checkbox" name="section4_issues" value="none" />No
+                tuve problemas</label
+              >
+            </div>
+          </fieldset>
+
+          <label class="input-group">
+            <span>Que te gustaria mejorar o agregar?</span>
+            <textarea
+              name="section4_improvements"
+              rows="4"
+              placeholder="Diseno, colores, funcionalidades, flujo..."
+            ></textarea>
+          </label>
+        </section>
+
+        <section class="card" aria-labelledby="sec5-title">
+          <span class="step-number">5</span>
+          <h2 id="sec5-title">Datos de contacto (opcional)</h2>
+          <p class="section-help">
+            Para poder seguirte, agradecer o aclarar algo de tu feedback.
+          </p>
+
+          <div class="grid-two">
+            <label class="input-group">
+              <span>Nombre</span>
+              <input
+                type="text"
+                name="name"
+                placeholder="Tu nombre (opcional)"
+                maxlength="255"
+              />
+            </label>
+            <label class="input-group">
+              <span>WhatsApp o email</span>
+              <input
+                type="text"
+                name="contact"
+                placeholder="+58 412 345 6789 o correo@ejemplo.com"
+                maxlength="255"
+              />
+            </label>
+          </div>
+        </section>
+
+        <div class="submit-row">
+          <p
+            id="formMessage"
+            class="form-message"
+            role="status"
+            aria-live="polite"
+          ></p>
+          <button type="submit" id="submitButton">Enviar feedback</button>
+        </div>
+      </form>
+    </main>
+
+    <script type="module" src="/assets/js/feedback.js"></script>
+  </body>
+</html>

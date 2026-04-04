@@ -30,6 +30,12 @@ const DATA_ITEMS = [
     path: "/whatsapp",
     comingSoon: true,
   },
+  {
+    id: "section-feedback-beta",
+    icon: "🧪",
+    label: "Feedback Beta",
+    path: "/feedback-beta",
+  },
 ];
 
 function Layout({
@@ -66,6 +72,11 @@ function Layout({
     )
       return true;
     if (location.pathname === "/whatsapp" && item.id === "section-whatsapp")
+      return true;
+    if (
+      location.pathname === "/feedback-beta" &&
+      item.id === "section-feedback-beta"
+    )
       return true;
     if (location.pathname === "/flags" && item.id === "section-flags")
       return true;

@@ -9,6 +9,7 @@ import LeadsFunnelPage from "./pages/LeadsFunnelPage.jsx";
 import ComingSoonPage from "./pages/ComingSoonPage.jsx";
 import FlagsPage from "./pages/FlagsPage.jsx";
 import CachePage from "./pages/CachePage.jsx";
+import FeedbackBetaPage from "./pages/FeedbackBetaPage.jsx";
 
 function getLastUpdateLabel() {
   return `Actualizado ${new Date().toLocaleTimeString("es-EC", {
@@ -40,7 +41,7 @@ function App() {
 
   const handleClearData = async () => {
     const shouldDelete = window.confirm(
-      "Esta accion eliminara leads, eventos y sesiones de prueba. Deseas continuar?",
+      "Esta accion eliminara leads, eventos, sesiones y feedback beta de prueba. Deseas continuar?",
     );
     if (!shouldDelete) return;
 
@@ -98,6 +99,10 @@ function App() {
           <Route
             path="/whatsapp"
             element={<ComingSoonPage title="WhatsApp" />}
+          />
+          <Route
+            path="/feedback-beta"
+            element={<FeedbackBetaPage password={password} />}
           />
           <Route path="/flags" element={<FlagsPage password={password} />} />
           <Route path="/cache" element={<CachePage password={password} />} />

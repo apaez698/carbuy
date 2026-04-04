@@ -50,7 +50,33 @@ describe("POST /api/reset-data", () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
-    expect(mockFrom).toHaveBeenCalledTimes(3);
+    expect(mockFrom).toHaveBeenCalledTimes(4);
+    expect(mockFrom).toHaveBeenCalledWith("beta_feedback");
+    expect(res.body.ok).toBe(true);
+  });
+
+  it("no falla si beta_feedback no existe en el entorno", async () => {
+    mockNeq
+      .mockResolvedValueOnce({ error: null })
+      .mockResolvedValueOnce({ error: null })
+      .mockResolvedValueOnce({ error: null })
+      .mockResolvedValueOnce({
+        error: {
+          code: "PGRST205",
+          message: "table missing",
+        },
+      });
+
+    const req = {
+      method: "POST",
+      query: { key: "secret" },
+      body: { confirm: "DELETE_TEST_DATA" },
+    };
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
     expect(res.body.ok).toBe(true);
   });
 

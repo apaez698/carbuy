@@ -1,0 +1,260 @@
+:root {
+  --bg: #f8f4ec;
+  --bg-accent: #d9efe4;
+  --paper: #fffdf8;
+  --ink: #172019;
+  --muted: #5a665d;
+  --line: #d5ddd6;
+  --brand: #1f8f63;
+  --brand-strong: #12704c;
+  --warn: #9d3217;
+  --radius: 18px;
+  --shadow: 0 20px 45px rgba(18, 64, 45, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(
+      circle at 8% 4%,
+      var(--bg-accent) 0,
+      rgba(217, 239, 228, 0) 34%
+    ),
+    radial-gradient(circle at 92% 10%, #f5dcb6 0, rgba(245, 220, 182, 0) 28%),
+    var(--bg);
+  line-height: 1.45;
+}
+
+.feedback-page {
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  padding: 34px 0 80px;
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.home-link {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 800;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid transparent;
+}
+
+.home-link:hover {
+  border-bottom-color: var(--brand);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--brand-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+h1,
+h2,
+legend {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h1 {
+  margin: 6px 0 10px;
+  font-size: clamp(32px, 4.2vw, 48px);
+  line-height: 1.08;
+}
+
+.intro {
+  margin: 0;
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.feedback-form {
+  display: grid;
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+
+.step-number {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  background: #e7f6ee;
+  color: var(--brand-strong);
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 31px);
+}
+
+.section-help {
+  margin: 8px 0 20px;
+  color: var(--muted);
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 18px;
+}
+
+legend {
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.scale,
+.choices,
+.checks {
+  display: grid;
+  gap: 10px;
+}
+
+.scale label,
+.choices label,
+.checks label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f7faf8;
+  border: 1px solid #e3ebe5;
+  border-radius: 12px;
+  padding: 11px 13px;
+}
+
+.scale label:has(input:checked),
+.choices label:has(input:checked),
+.checks label:has(input:checked) {
+  border-color: var(--brand);
+  background: #edf8f2;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.input-group {
+  display: grid;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.input-group > span {
+  font-weight: 600;
+}
+
+textarea,
+input[type="text"] {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #ccd8cf;
+  background: #fff;
+  padding: 11px 12px;
+  font: inherit;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+  outline: 2px solid #89d2b0;
+  outline-offset: 1px;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.submit-row {
+  display: grid;
+  gap: 12px;
+}
+
+.form-message {
+  min-height: 24px;
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.form-message.error {
+  color: var(--warn);
+}
+
+.form-message.success {
+  color: var(--brand-strong);
+}
+
+button[type="submit"] {
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  width: fit-content;
+  font:
+    700 16px "Space Grotesk",
+    sans-serif;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #1f8f63, #3bab7e);
+  cursor: pointer;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 760px) {
+  .feedback-page {
+    width: min(980px, 94vw);
+    padding-top: 20px;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+
+  .grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .scale label,
+  .choices label,
+  .checks label {
+    align-items: flex-start;
+  }
+}

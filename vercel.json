@@ -6,6 +6,7 @@
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/robots.txt", "dest": "/robots.txt" },
     { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
+    { "src": "/feedback-beta-autocash-2026", "dest": "/feedback.html" },
     { "src": "/terminos", "dest": "/terminos.html" },
     { "src": "/privacidad", "dest": "/privacidad.html" },
     { "src": "/dashboard/assets/(.*)", "dest": "/dashboard/dist/assets/$1" },

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /dashboard
+Disallow: /feedback-beta-autocash-2026
 
 Sitemap: https://autocash-one.vercel.app/sitemap.xml
