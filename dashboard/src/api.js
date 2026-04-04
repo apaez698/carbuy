@@ -19,16 +19,31 @@ export async function fetchMetric(dashPass, query) {
 }
 
 export async function clearTestData(dashPass) {
-  const res = await fetch(
-    `/api/reset-data?key=${encodeURIComponent(dashPass)}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ confirm: "DELETE_TEST_DATA" }),
-    },
-  );
+  try {
+    const res = await fetch(
+      `/api/reset-data?key=${encodeURIComponent(dashPass)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confirm: "DELETE_TEST_DATA" }),
+      },
+    );
 
-  return res.ok;
+    let payload = null;
+    try {
+      payload = await res.json();
+    } catch {
+      payload = null;
+    }
+
+    return {
+      ok: res.ok,
+      status: res.status,
+      error: payload?.error || null,
+    };
+  } catch {
+    return { ok: false, status: 0, error: "network_error" };
+  }
 }
 
 export async function fetchFlags() {

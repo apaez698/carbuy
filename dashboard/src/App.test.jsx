@@ -1,4 +1,11 @@
-import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { vi } from "vitest";
@@ -108,6 +115,29 @@ describe("App", () => {
     expect(screen.getByText(/Actualizado/)).toBeInTheDocument();
   });
 
+  it("calls reset-data endpoint when clicking clear test data", async () => {
+    vi.stubGlobal("confirm", vi.fn().mockReturnValue(true));
+    vi.stubGlobal("alert", vi.fn());
+
+    renderWithQueryClient(<App />);
+
+    fireEvent.change(screen.getByLabelText("Contraseña del dashboard"), {
+      target: { value: "mi-clave" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Entrar" }));
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /Limpiar data de prueba/i }),
+    );
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        "/api/reset-data?key=mi-clave",
+        expect.objectContaining({ method: "POST" }),
+      );
+    });
+  });
+
   it("navigates to dedicated leads page from sidebar", async () => {
     renderWithQueryClient(<App />);
 
@@ -135,9 +165,13 @@ describe("App", () => {
     fireEvent.click(screen.getByRole("button", { name: /Conversión/ }));
 
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "Conversión" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: "Conversión" }),
+      ).toBeInTheDocument();
     });
-    expect(screen.getByText("🚧 Aún lo estamos construyendo.")).toBeInTheDocument();
+    expect(
+      screen.getByText("🚧 Aún lo estamos construyendo."),
+    ).toBeInTheDocument();
   });
 
   it("navigates to funnel page with only funnel info", async () => {
@@ -166,14 +200,22 @@ describe("App", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /Formularios/ }));
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "Formularios" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: "Formularios" }),
+      ).toBeInTheDocument();
     });
-    expect(screen.getByText("🚧 Aún lo estamos construyendo.")).toBeInTheDocument();
+    expect(
+      screen.getByText("🚧 Aún lo estamos construyendo."),
+    ).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /WhatsApp/ }));
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "WhatsApp" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: "WhatsApp" }),
+      ).toBeInTheDocument();
     });
-    expect(screen.getByText("🚧 Aún lo estamos construyendo.")).toBeInTheDocument();
+    expect(
+      screen.getByText("🚧 Aún lo estamos construyendo."),
+    ).toBeInTheDocument();
   });
 });

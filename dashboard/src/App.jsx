@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { clearTestData } from "./api.js";
 import PasswordGate from "./components/PasswordGate.jsx";
 import Layout from "./components/Layout.jsx";
 import OverviewPage from "./pages/OverviewPage.jsx";
@@ -36,6 +37,33 @@ function App() {
     setLastUpdate(getLastUpdateLabel());
   };
 
+  const handleClearData = async () => {
+    const shouldDelete = window.confirm(
+      "Esta accion eliminara leads, eventos y sesiones de prueba. Deseas continuar?",
+    );
+    if (!shouldDelete) return;
+
+    const result = await clearTestData(password);
+    if (!result.ok) {
+      if (result.status === 401) {
+        window.alert("No autorizado. Verifica la clave del dashboard.");
+        return;
+      }
+
+      if (result.status === 400) {
+        window.alert("No se pudo limpiar la data: confirmacion invalida.");
+        return;
+      }
+
+      window.alert("No se pudo limpiar la data. Intenta nuevamente.");
+      return;
+    }
+
+    queryClient.refetchQueries({ queryKey: ["metric"], type: "active" });
+    setLastUpdate(getLastUpdateLabel());
+    window.alert("Data de prueba eliminada correctamente.");
+  };
+
   if (!password) {
     return <PasswordGate onAuth={setPassword} />;
   }
@@ -46,6 +74,7 @@ function App() {
         password={password}
         lastUpdate={lastUpdate}
         onRefresh={handleRefresh}
+        onClearData={handleClearData}
       >
         <Routes>
           <Route path="/" element={<OverviewPage password={password} />} />
@@ -69,10 +98,7 @@ function App() {
             path="/whatsapp"
             element={<ComingSoonPage title="WhatsApp" />}
           />
-          <Route
-            path="/flags"
-            element={<FlagsPage password={password} />}
-          />
+          <Route path="/flags" element={<FlagsPage password={password} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
@@ -80,4 +106,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

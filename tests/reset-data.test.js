@@ -53,4 +53,31 @@ describe("POST /api/reset-data", () => {
     expect(mockFrom).toHaveBeenCalledTimes(3);
     expect(res.body.ok).toBe(true);
   });
+
+  it("acepta body como string JSON", async () => {
+    const req = {
+      method: "POST",
+      query: { key: "secret" },
+      body: JSON.stringify({ confirm: "DELETE_TEST_DATA" }),
+    };
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.ok).toBe(true);
+  });
+
+  it("rechaza confirmacion invalida", async () => {
+    const req = {
+      method: "POST",
+      query: { key: "secret" },
+      body: { confirm: "WRONG" },
+    };
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(400);
+  });
 });

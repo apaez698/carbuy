@@ -1,17 +1,38 @@
 import { getSupabase } from "./_supabase.js";
 
+function readConfirmToken(body) {
+  if (!body) return null;
+
+  if (typeof body === "string") {
+    try {
+      const parsed = JSON.parse(body);
+      return parsed?.confirm || null;
+    } catch {
+      return null;
+    }
+  }
+
+  if (typeof body === "object") {
+    return body.confirm || null;
+  }
+
+  return null;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { key } = req.query;
+  const rawKey = req.query?.key;
+  const key = Array.isArray(rawKey) ? rawKey[0] : rawKey;
   const validPass = process.env.DASHBOARD_PASSWORD;
   if (!validPass || key !== validPass) {
     return res.status(401).json({ error: "No autorizado" });
   }
 
-  if (req.body?.confirm !== "DELETE_TEST_DATA") {
+  const confirmToken = readConfirmToken(req.body);
+  if (confirmToken !== "DELETE_TEST_DATA") {
     return res.status(400).json({ error: "Confirmacion invalida" });
   }
 
