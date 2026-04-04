@@ -904,6 +904,18 @@ textarea {
   box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45);
 }
 
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue), var(--cta));
+  color: white;
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+  width: 100%;
+  justify-content: center;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(30, 58, 138, 0.45);
+}
+
 /* SUCCESS */
 .success-screen {
   display: none;
@@ -1220,5 +1232,428 @@ footer strong {
     z-index: 160;
     padding: 12px 16px;
     font-size: 15px;
+  }
+}
+
+/* ============================================================
+   FORMULARIO V2 - ESTILOS CONSOLIDADOS
+   ============================================================ */
+
+.form-v2-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* ========== NAVEGACIÓN Y PROGRESO V2 ========== */
+.form-nav-v2 {
+  padding: 20px 40px;
+}
+
+/* ========== CONTENIDO DE FASE ========== */
+.form-phase {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.phase-content {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+/* ========== CAMPOS V2 ========== */
+.form-section-v2 .field {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-section-v2 .field.has-error input,
+.form-section-v2 .field.has-error select,
+.form-section-v2 .field.has-error textarea {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.form-section-v2 .field.has-error input:focus,
+.form-section-v2 .field.has-error select:focus,
+.form-section-v2 .field.has-error textarea:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.error-msg {
+  display: block;
+  font-size: 13px;
+  color: #dc2626;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.error-msg:empty {
+  display: none;
+}
+
+/* ========== CHECKBOX CON PERMISO ========== */
+.whatsapp-opt-v2 {
+  background: var(--blue-light);
+  border: 1px solid #dbeafe;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 24px;
+  transition: border-color 0.2s ease;
+}
+
+.whatsapp-opt-v2.has-error {
+  border-color: #fca5a5;
+  background-color: #fef2f2;
+}
+
+.form-section-v2 .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.form-section-v2 .checkbox-label input[type="checkbox"] {
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: var(--green);
+}
+
+.form-section-v2 .checkbox-text a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid var(--blue);
+}
+
+.form-section-v2 .checkbox-text a:hover {
+  text-decoration: underline;
+}
+
+.error-msg-wha {
+  display: none;
+  font-size: 13px;
+  color: #dc2626;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.error-msg-wha.show {
+  display: block;
+}
+
+.legal-note {
+  font-size: 12px;
+  color: var(--text-mid);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(30, 58, 138, 0.2);
+  line-height: 1.5;
+}
+
+/* ========== BOTONES V2 ========== */
+.form-actions-v2 {
+  display: flex;
+  gap: 16px;
+}
+
+.form-section-v2 .btn-next:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== RESULTADO V2 ========== */
+.result-screen-v2 {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-screen-v2[hidden] {
+  display: none !important;
+}
+
+.result-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.result-content {
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(30, 58, 138, 0.12);
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-header {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  color: white;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.result-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.result-header p {
+  font-size: 15px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.result-value {
+  padding: 40px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--gray);
+}
+
+.valor-estimado {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--green);
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+}
+
+.rango {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.precision {
+  font-size: 14px;
+  color: var(--text-mid);
+  font-weight: 600;
+}
+
+.result-meeting-section {
+  padding: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(2, 132, 199, 0.05),
+    rgba(34, 197, 94, 0.05)
+  );
+  border-left: 4px solid var(--cta);
+  margin: 20px 0;
+  border-radius: var(--radius-sm);
+}
+
+.result-meeting-section h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  margin: 0 0 12px;
+}
+
+.result-meeting-section p {
+  font-size: 14px;
+  color: var(--text-mid);
+  margin: 12px 0;
+  font-weight: 600;
+}
+
+.meeting-benefits {
+  list-style: none;
+  margin: 16px 0;
+  padding: 0;
+}
+
+.meeting-benefits li {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 600;
+  padding: 10px 0;
+  margin-left: 0;
+}
+
+.meeting-benefits li::before {
+  content: "";
+}
+
+.meeting-time {
+  background: white;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-light);
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin: 16px 0;
+}
+
+.result-summary {
+  padding: 24px;
+}
+
+.result-summary h4 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  margin: 0 0 16px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-light);
+  font-size: 14px;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row .label {
+  font-weight: 700;
+  color: var(--text-mid);
+}
+
+.summary-row .value {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.result-actions {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--gray);
+}
+
+#btnAgendarV2 {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+#btnAgendarV2:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: white;
+  font-size: 16px;
+  padding: 14px 24px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 800;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+.btn-whatsapp:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+}
+
+.btn-secondary {
+  background: var(--gray-light);
+  color: var(--text);
+  border: 1px solid var(--gray);
+}
+
+.btn-secondary:hover {
+  background: var(--gray);
+  border-color: var(--text-mid);
+}
+
+/* ========== RESPONSIVO V2 ========== */
+@media (max-width: 640px) {
+  .form-v2-container {
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+
+  .phase-content {
+    padding: 24px;
+  }
+
+  .phase-content h2 {
+    font-size: 24px;
+  }
+
+  .result-header {
+    padding: 24px 20px;
+  }
+
+  .result-header h2 {
+    font-size: 24px;
+  }
+
+  .result-value {
+    padding: 32px 20px;
+  }
+
+  .valor-estimado {
+    font-size: 44px;
+  }
+
+  .result-actions {
+    padding: 20px;
+  }
+
+  .form-actions-v2 {
+    flex-direction: column;
+  }
+
+  .btn-back {
+    flex: 1;
   }
 }

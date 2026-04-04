@@ -237,10 +237,10 @@
       </div>
     </section>
 
-    <!-- FORM (nuevo diseño — se activa con flag FORM_V2_ENABLED) -->
+    <!-- FORM V2 (nuevo diseño — se activa con flag FORM_V2_ENABLED) -->
     <section
       id="formulario-nuevo"
-      class="form-section"
+      class="form-section form-section-v2"
       aria-label="Nuevo formulario de venta"
       style="display: none"
     >
@@ -248,12 +248,214 @@
         <div class="form-header">
           <div class="form-header-icon" aria-hidden="true">🚗</div>
           <div>
-            <h2>NUEVO FORMULARIO</h2>
-            <p>En construcción — próximamente disponible</p>
+            <h2>FORMULARIO DE VENTA</h2>
+            <p>Completa los 3 pasos para recibir la respuesta por WhatsApp</p>
+          </div>
+        </div>
+
+        <!-- NAVEGACIÓN Y PROGRESO -->
+        <div id="formNavV2" class="progress-bar form-nav-v2">
+          <div class="prog-step">
+            <div id="phaseIndicator1" class="prog-dot active">1</div>
+            <span id="phaseLabel1" class="prog-label active">Contacto</span>
+          </div>
+          <div id="phaseLine1" class="prog-line"></div>
+          <div class="prog-step">
+            <div id="phaseIndicator2" class="prog-dot">2</div>
+            <span id="phaseLabel2" class="prog-label">Vehículo</span>
+          </div>
+          <div id="phaseLine2" class="prog-line"></div>
+          <div class="prog-step">
+            <div id="phaseIndicator3" class="prog-dot">3</div>
+            <span id="phaseLabel3" class="prog-label">Resultado</span>
+          </div>
+        </div>
+
+        <div class="form-body">
+          <!-- FASE 1: DATOS DE CONTACTO -->
+          <div data-phase="1" class="form-phase">
+            <div class="phase-content">
+              <div class="step-title">DATOS DE CONTACTO</div>
+              <div class="step-subtitle">
+                Necesitamos tus datos para poder contactarte y cotizar tu auto.
+              </div>
+
+              <div class="form-grid one">
+                <!-- Nombre -->
+                <div class="field">
+                  <label for="nombreV2">Nombre Completo</label>
+                  <input
+                    type="text"
+                    id="nombreV2"
+                    placeholder="Ej: Juan Pérez"
+                    required
+                  />
+                  <span class="error-msg"></span>
+                </div>
+
+                <!-- Celular -->
+                <div class="field">
+                  <label for="celularV2">Celular</label>
+                  <input
+                    type="tel"
+                    id="celularV2"
+                    placeholder="Ej: +593 99 123 4567 o 0991234567"
+                    required
+                  />
+                  <span class="error-msg"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="field">
+                  <label for="emailV2">Correo Electrónico</label>
+                  <input
+                    type="email"
+                    id="emailV2"
+                    placeholder="Ej: tu@correo.com"
+                    required
+                  />
+                  <span class="error-msg"></span>
+                </div>
+              </div>
+
+              <!-- Permiso WhatsApp -->
+              <div class="whatsapp-opt-v2">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="aceptaWhaV2" />
+                  <span class="checkbox-text">
+                    Autorizo el contacto via WhatsApp y aceptó la
+                    <a href="/privacidad.html" target="_blank"
+                      >política de privacidad</a
+                    >
+                    según la legislación ecuatoriana.
+                  </span>
+                </label>
+                <div class="error-msg-wha"></div>
+                <div class="legal-note">
+                  <strong>Aviso Legal:</strong> Tus datos serán utilizados solo
+                  para contactarte sobre tu cotización. Cumplimos con la Ley
+                  Orgánica de Protección de Datos Personales de Ecuador.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FASE 2: DATOS DEL VEHÍCULO -->
+          <div data-phase="2" class="form-phase" hidden>
+            <div class="phase-content">
+              <div class="step-title">DATOS DEL VEHÍCULO</div>
+              <div class="step-subtitle">
+                Completa la información de tu vehículo para generar una
+                cotización.
+              </div>
+
+              <div class="form-grid">
+                <!-- Marca -->
+                <div class="field">
+                  <label for="marcaV2">Marca</label>
+                  <select id="marcaV2" required>
+                    <option value="">Selecciona la marca...</option>
+                  </select>
+                  <span class="error-msg"></span>
+                </div>
+
+                <!-- Modelo -->
+                <div class="field">
+                  <label for="modeloV2">Modelo</label>
+                  <select id="modeloV2" required>
+                    <option value="">Selecciona el modelo...</option>
+                  </select>
+                  <span class="error-msg"></span>
+                </div>
+
+                <!-- Año -->
+                <div class="field">
+                  <label for="anioV2">Año</label>
+                  <input
+                    type="number"
+                    id="anioV2"
+                    placeholder="Ej: 2020"
+                    min="1980"
+                    required
+                  />
+                  <span class="error-msg"></span>
+                </div>
+
+                <!-- Kilometraje -->
+                <div class="field">
+                  <label for="kilometrajeV2">Kilometraje</label>
+                  <input
+                    type="number"
+                    id="kilometrajeV2"
+                    placeholder="Ej: 85000"
+                    min="0"
+                    required
+                  />
+                  <span class="error-msg"></span>
+                </div>
+
+                <!-- Cilindraje -->
+                <div class="field full">
+                  <label for="cilindrajeV2">Cilindraje (L)</label>
+                  <input
+                    type="number"
+                    id="cilindrajeV2"
+                    placeholder="Ej: 1.6"
+                    min="0.6"
+                    max="8"
+                    step="0.1"
+                    required
+                  />
+                  <span class="error-msg"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FASE 3: RESULTADO -->
+          <div data-phase="3" class="form-phase" hidden>
+            <div id="resultContentV2" class="phase-content">
+              <!-- Se llenará dinámicamente -->
+            </div>
+          </div>
+
+          <!-- BOTONES DE NAVEGACIÓN -->
+          <div class="form-nav form-actions-v2">
+            <button
+              id="btnBackV2"
+              class="btn btn-back"
+              style="visibility: hidden"
+            >
+              ← Atrás
+            </button>
+            <button id="btnNextV2" class="btn btn-next">Siguiente →</button>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- PANTALLA DE RESULTADO V2 -->
+    <div id="resultScreenV2" class="result-screen-v2" hidden>
+      <div class="result-container">
+        <div id="resultDataV2" class="result-content">
+          <!-- Se llena dinámicamente -->
+        </div>
+
+        <div class="result-actions">
+          <a
+            id="whatsappLinkV2"
+            href="#"
+            target="_blank"
+            class="btn btn-whatsapp"
+          >
+            💬 Enviar por WhatsApp
+          </a>
+          <button class="btn btn-secondary" onclick="location.reload()">
+            Cotizar otro auto
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- FORM -->
     <section
