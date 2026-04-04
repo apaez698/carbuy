@@ -161,13 +161,13 @@
       </a>
       <ul role="navigation" aria-label="Menú principal">
         <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#como-funciona">Como funciona</a></li>
         <li>
           <a href="#formulario" class="active" aria-current="page"
-            >Enviar datos</a
+            >Cotizar ahora</a
           >
         </li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#como-estimamos-valor">Cómo estimamos valor</a></li>
+        <li><a href="/proceso.html">Proceso completo</a></li>
       </ul>
       <button
         type="button"
@@ -183,28 +183,29 @@
     <!-- HERO -->
     <section class="hero" id="inicio" aria-label="Vende tu auto en Quito">
       <div class="hero-text">
-        <span class="hero-badge">💬 Respuesta por WhatsApp en minutos</span>
+        <span class="hero-badge">🤖 IA + asesoría real en minutos</span>
         <h1>Tu auto vale<em>dinero hoy</em></h1>
         <p>
-          Completa tus datos y recibe la cotizacion de seguimiento directamente
-          por WhatsApp. Te contactamos rapido para continuar el proceso.
+          Llegas, dejas tus datos y nuestra IA genera una cotización referencial
+          en segundos. Después te acompañamos por WhatsApp, agendamos una
+          asesoría y convertimos esa referencia en una oferta clara y confiable.
         </p>
         <div class="hero-features" role="list">
           <div class="hero-feat" role="listitem">
             <div class="icon" aria-hidden="true">⚡</div>
-            Confirmacion y seguimiento por WhatsApp
+            IA de valoración para una primera señal de precio al instante
           </div>
           <div class="hero-feat" role="listitem">
             <div class="icon" aria-hidden="true">🔍</div>
-            Revisión técnica gratuita
+            Reunión con asesor para validar detalles clave
           </div>
           <div class="hero-feat" role="listitem">
             <div class="icon" aria-hidden="true">💬</div>
-            Te contactamos por WhatsApp
+            Comunicación en tiempo real por WhatsApp
           </div>
           <div class="hero-feat" role="listitem">
             <div class="icon" aria-hidden="true">✅</div>
-            Garantía legal ✔
+            Trámites y cierre 100% acompañados por AutoCash
           </div>
         </div>
       </div>
@@ -218,19 +219,25 @@
           <div class="steps-list">
             <div class="step" role="listitem">
               <div class="step-num" aria-hidden="true">1</div>
-              <span>Llena el formulario con los datos de tu auto</span>
+              <span>Completa el formulario con tus datos y los del auto</span>
             </div>
             <div class="step" role="listitem">
               <div class="step-num" aria-hidden="true">2</div>
-              <span>Recibe seguimiento y orientacion por WhatsApp</span>
+              <span
+                >Recibe una estimación referencial inmediata impulsada por
+                IA</span
+              >
             </div>
             <div class="step" role="listitem">
               <div class="step-num" aria-hidden="true">3</div>
-              <span>Nuestro equipo AutoCash te contacta para la revisión</span>
+              <span>Te contactamos por WhatsApp y agendamos una asesoría</span>
             </div>
             <div class="step" role="listitem">
               <div class="step-num" aria-hidden="true">4</div>
-              <span>¡Vende tu auto al mejor precio!</span>
+              <span
+                >Recibes una propuesta final y nosotros gestionamos
+                trámites</span
+              >
             </div>
           </div>
         </div>
@@ -348,6 +355,13 @@
                 Completa la información de tu vehículo para generar una
                 cotización.
               </div>
+              <button
+                type="button"
+                class="est-method-link est-method-link-inline"
+                data-open-valuation-modal
+              >
+                Ver cómo funciona la estimación IA sin salir del formulario
+              </button>
 
               <div class="form-grid">
                 <!-- Marca -->
@@ -968,6 +982,13 @@
               <div class="est-disclaimer" id="estDisclaimer">
                 Valores referenciales sujetos a revisión física del vehículo.
               </div>
+              <button
+                type="button"
+                class="est-method-link"
+                data-open-valuation-modal
+              >
+                ¿Cómo estimamos este valor con IA?
+              </button>
               <div class="estimate-actions">
                 <button
                   type="button"
@@ -1209,23 +1230,68 @@
       <div class="trust-grid">
         <div class="trust-card">
           <div class="t-icon" aria-hidden="true">🔍</div>
-          <h4>REVISIÓN TÉCNICA GRATIS</h4>
-          <p>Nuestros expertos evalúan tu auto sin ningún costo adicional</p>
+          <h4>ASESORÍA QUE GENERA CONFIANZA</h4>
+          <p>
+            Revisamos contigo los detalles del auto para convertir la estimación
+            en una propuesta sólida
+          </p>
         </div>
         <div class="trust-card">
           <div class="t-icon" aria-hidden="true">💰</div>
-          <h4>MEJOR PRECIO</h4>
-          <p>Pagamos el precio justo del mercado por tu vehículo usado</p>
+          <h4>OFERTA COMPETITIVA Y CLARA</h4>
+          <p>
+            Nuestra referencia de mercado + validación humana mejora la calidad
+            de la oferta final
+          </p>
         </div>
         <div class="trust-card">
           <div class="t-icon" aria-hidden="true">⚡</div>
-          <h4>PAGO RÁPIDO</h4>
-          <p>Cerramos el trato y te pagamos en menos de 24 horas</p>
+          <h4>COMUNICACIÓN EN TIEMPO REAL</h4>
+          <p>
+            Seguimiento continuo por WhatsApp para mantener el proceso rápido y
+            transparente
+          </p>
         </div>
         <div class="trust-card">
           <div class="t-icon" aria-hidden="true">📋</div>
-          <h4>SIN TRÁMITES</h4>
-          <p>Nos encargamos de todo el papeleo y transferencia</p>
+          <h4>TRÁMITES TODO-INCLUIDO</h4>
+          <p>
+            Nos encargamos del papeleo y transferencia para que vendas sin
+            complicaciones
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="valuation-section"
+      id="como-estimamos-valor"
+      aria-label="Cómo estimamos el valor de tu auto"
+    >
+      <div class="valuation-card">
+        <h2>¿Cómo estimamos el valor de tu auto?</h2>
+        <p>
+          Nuestra plataforma usa IA con un modelo de
+          <strong>árbol de regresión entrenado</strong> sobre variables reales
+          de mercado: marca, modelo, año, kilometraje, condición reportada y
+          señales históricas de comportamiento de precios.
+        </p>
+        <p>
+          Este motor permite entregar una estimación rápida y consistente como
+          punto de partida para la decisión. Es una tecnología pensada para
+          clientes que buscan velocidad y para inversionistas que valoran
+          procesos escalables con criterio de datos.
+        </p>
+        <p>
+          <strong>Importante:</strong> hoy la fidelidad del modelo no es total,
+          por lo que el resultado siempre es <strong>referencial</strong>. La
+          cotización final se define con la revisión del asesor, el estado real
+          del vehículo y la negociación comercial.
+        </p>
+        <div class="valuation-badges" role="list" aria-label="Ventajas">
+          <span role="listitem">IA aplicada al pricing automotriz</span>
+          <span role="listitem">Decisiones más rápidas y trazables</span>
+          <span role="listitem">Oferta final validada por un experto</span>
         </div>
       </div>
     </section>
@@ -1237,37 +1303,38 @@
       <div class="seo-card">
         <h2>Vender tu auto usado en Quito con AutoCash</h2>
         <p>
-          AutoCash es una opcion para personas que buscan vender su auto usado
-          en Quito de forma simple y con seguimiento directo por WhatsApp.
-          Nuestro formulario esta pensado para recoger los datos necesarios del
-          vehiculo y acelerar el contacto del equipo.
+          AutoCash combina tecnología y asesoría para que vender tu auto sea un
+          proceso claro: empiezas con una cotización referencial, sigues con
+          atención en tiempo real por WhatsApp y cierras con una oferta final
+          acompañada por un asesor.
         </p>
         <p>
-          Si estas buscando como vender carro en Quito, cotizar tu auto o
-          recibir atencion rapida para iniciar el proceso, en AutoCash puedes
-          dejar tus datos y continuar el flujo con asesoria por WhatsApp.
+          Si buscas vender tu carro en Quito sin trámites complejos, aquí lo
+          haces todo en línea, con seguimiento humano y soporte completo en la
+          gestión documental.
         </p>
         <div class="faq-list" id="faq">
           <h3>Preguntas frecuentes</h3>
           <details>
             <summary>Como inicio el proceso para vender mi auto?</summary>
             <p>
-              Completa el formulario en 3 pasos y confirma tu numero de
-              WhatsApp. Nuestro equipo te escribe para continuar.
+              Completa el formulario, recibe una estimación inicial y confirma
+              tu WhatsApp. Luego agendamos una reunión con un asesor para
+              construir la propuesta final.
             </p>
           </details>
           <details>
-            <summary>AutoCash trabaja solo en Quito?</summary>
+            <summary>La cotización automática es el precio final?</summary>
             <p>
-              La cobertura principal es Quito y se revisan solicitudes de otras
-              ciudades segun disponibilidad.
+              No. Es un valor referencial generado por IA. La cotización final
+              depende de la validación comercial y técnica del asesor.
             </p>
           </details>
           <details>
-            <summary>Por que es importante ingresar bien mi celular?</summary>
+            <summary>Qué pasa después de enviar mis datos?</summary>
             <p>
-              Porque la continuidad del proceso es por WhatsApp. Recomendamos
-              usar +593XXXXXXXXX para evitar errores.
+              Te contactamos por WhatsApp para avanzar en tiempo real, resolver
+              dudas, agendar una reunión y cerrar con acompañamiento completo.
             </p>
           </details>
         </div>
@@ -1305,6 +1372,72 @@
         >
           Abrir formulario V1
         </button>
+      </div>
+    </div>
+
+    <div
+      class="cotizador-modal"
+      id="valuationInfoModal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="valuationInfoModalTitle"
+    >
+      <div class="cotizador-modal-card valuation-modal-card">
+        <button
+          type="button"
+          class="cotizador-modal-close"
+          id="valuationInfoModalClose"
+          aria-label="Cerrar modal"
+        >
+          ×
+        </button>
+        <div class="valuation-modal-hero">
+          <span class="valuation-modal-chip">Estimación inteligente</span>
+          <h3 id="valuationInfoModalTitle">
+            Tu precio en minutos, con respaldo humano
+          </h3>
+          <p>
+            Usamos IA para darte una estimación rápida con datos del mercado, y
+            luego nuestros asesores la ajustan contigo para llegar a una oferta
+            clara y confiable.
+          </p>
+        </div>
+        <div class="cotizador-modal-body valuation-modal-body">
+          <div class="valuation-modal-grid" role="list" aria-label="Ventajas">
+            <article class="valuation-modal-item" role="listitem">
+              <h4>Velocidad real</h4>
+              <p>
+                Nuestra IA analiza tus datos y te muestra una estimación
+                referencial en segundos para que tomes decisiones más rápido.
+              </p>
+            </article>
+            <article class="valuation-modal-item" role="listitem">
+              <h4>Transparencia total</h4>
+              <p>
+                Verás un valor orientativo basado en información del vehículo y
+                señales de mercado.
+              </p>
+            </article>
+            <article class="valuation-modal-item" role="listitem">
+              <h4>Asesoría que ajusta el valor</h4>
+              <p>
+                Luego un asesor valida detalles clave para darte una cotización
+                final más precisa y negociada contigo.
+              </p>
+            </article>
+          </div>
+
+          <div class="valuation-modal-note">
+            <strong>Importante:</strong> el valor inicial es referencial y puede
+            cambiar tras la validación comercial y técnica del auto.
+          </div>
+
+          <p class="valuation-modal-continue">
+            Puedes cerrar esta ventana y seguir con tu formulario sin perder
+            ningún dato.
+          </p>
+        </div>
       </div>
     </div>
 

@@ -88,6 +88,41 @@ document.addEventListener("focusout", (e) => {
   });
 });
 
+function initValuationInfoModal(doc = document) {
+  const modal = doc.getElementById("valuationInfoModal");
+  const closeButton = doc.getElementById("valuationInfoModalClose");
+  const triggers = doc.querySelectorAll("[data-open-valuation-modal]");
+
+  if (!modal || !closeButton || triggers.length === 0) return;
+
+  const openModal = () => {
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    doc.body.classList.add("cotizador-modal-open");
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    doc.body.classList.remove("cotizador-modal-open");
+  };
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", openModal);
+  });
+
+  closeButton.addEventListener("click", closeModal);
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+
+  doc.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.classList.contains("is-open")) {
+      closeModal();
+    }
+  });
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 //  SETUP V2 (Formulario V2)
 // ══════════════════════════════════════════════════════════════════════════════
@@ -133,6 +168,7 @@ function setupFormV2BrandModels() {
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 async function initApp() {
   initSession();
+  initValuationInfoModal();
   const flags = await loadFeatureFlags();
 
   // Inicializar formulario V1 o V2 según feature flags

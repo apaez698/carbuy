@@ -37,6 +37,9 @@ body {
 
 #inicio,
 #como-funciona,
+#proceso-completo,
+#como-estimamos-valor,
+#asesoria-cierre,
 #formulario,
 #contacto {
   scroll-margin-top: 90px;
@@ -756,6 +759,33 @@ textarea {
   justify-content: center;
 }
 
+.est-method-link {
+  margin-top: 14px;
+  border: none;
+  background: transparent;
+  color: #bfdbfe;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.est-method-link:hover {
+  color: #ffffff;
+}
+
+.est-method-link-inline {
+  margin-bottom: 14px;
+  margin-top: 6px;
+  color: var(--blue);
+  text-align: left;
+}
+
+.est-method-link-inline:hover {
+  color: var(--blue-dark);
+}
+
 .btn-estimate {
   min-width: 220px;
   justify-content: center;
@@ -1032,6 +1062,193 @@ textarea {
   padding: 0 24px;
 }
 
+.process-section,
+.valuation-section {
+  max-width: 960px;
+  margin: 0 auto 28px;
+  padding: 0 24px;
+}
+
+.process-card,
+.valuation-card {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08);
+}
+
+.process-card h2,
+.valuation-card h2 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 30px;
+  color: var(--blue-dark);
+  letter-spacing: 0.4px;
+  margin-bottom: 12px;
+}
+
+.process-card > p,
+.valuation-card p {
+  color: var(--text-mid);
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+
+.process-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 14px;
+}
+
+.process-step-card {
+  background: var(--blue-light);
+  border: 1px solid rgba(30, 58, 138, 0.16);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.process-step-card span {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.process-step-card h3 {
+  color: var(--blue-dark);
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.process-step-card p {
+  color: var(--text-mid);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.valuation-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.valuation-badges span {
+  background: #ecfeff;
+  color: #155e75;
+  border: 1px solid #bae6fd;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.valuation-modal-card {
+  width: min(560px, 100%);
+  padding: 0;
+  overflow: hidden;
+}
+
+.valuation-modal-hero {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue), #2563eb);
+  color: white;
+  padding: 24px 26px 20px;
+}
+
+.valuation-modal-chip {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.2);
+  color: #d1fae5;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.valuation-modal-hero h3 {
+  font-size: 30px;
+  line-height: 1.05;
+  margin: 0 0 10px;
+}
+
+.valuation-modal-hero p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.valuation-modal-body {
+  padding: 22px 26px 26px;
+}
+
+.valuation-modal-body p {
+  color: var(--text-mid);
+  line-height: 1.7;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.valuation-modal-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.valuation-modal-item {
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.valuation-modal-item h4 {
+  color: var(--blue-dark);
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0 0 5px;
+}
+
+.valuation-modal-item p {
+  color: var(--text-mid);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.valuation-modal-note {
+  margin-top: 12px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #9a3412;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.valuation-modal-continue {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-mid);
+  font-weight: 700;
+}
+
 .seo-section {
   max-width: 960px;
   margin: 0 auto 60px;
@@ -1217,6 +1434,9 @@ footer strong {
   }
   .trust-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .process-grid {
+    grid-template-columns: 1fr;
   }
   .form-nav {
     padding: 20px;
@@ -1651,6 +1871,24 @@ footer strong {
 
   .form-actions-v2 {
     flex-direction: column;
+  }
+
+  .process-card,
+  .valuation-card,
+  .seo-card {
+    padding: 20px;
+  }
+
+  .valuation-modal-hero {
+    padding: 20px 18px 18px;
+  }
+
+  .valuation-modal-hero h3 {
+    font-size: 25px;
+  }
+
+  .valuation-modal-body {
+    padding: 18px;
   }
 
   .btn-back {
