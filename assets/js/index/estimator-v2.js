@@ -15,7 +15,6 @@ import { track, api, SESSION_ID, utmParams } from "./tracking.js";
 // ============================================================
 let currentPhase = 1;
 let phaseStartTime = Date.now();
-let predictDefaultsCache = null;
 let formData = {
   // Fase 1: Contacto
   nombre: "",
@@ -156,9 +155,9 @@ function updatePhaseIndicators(n) {
   const btnNext = document.getElementById("btnNextV2");
   if (btnNext) {
     if (n === 3) {
-      btnNext.textContent = "✅ Enviar cotización";
-      btnNext.className = "btn btn-submit";
+      btnNext.style.display = "none";
     } else {
+      btnNext.style.display = "";
       btnNext.textContent = "Siguiente →";
       btnNext.className = "btn btn-next";
     }
@@ -551,44 +550,55 @@ async function consultarEstimado() {
       btn.textContent = "Calculando estimado...";
     }
 
-    const predictDefaults = await getPredictDefaults();
-
-    // El upstream de pricing requiere modelo permitido; usar DESCONOCIDO evita 422.
-    const marcaSeleccionada =
-      (document.getElementById("marcaV2")?.value || "").trim() ||
-      formData.marca;
+    // Defaults requeridos para campos que Formulario V2 no captura.
+    const predictDefaults = {
+      tipo: "SUV",
+      transmision: "MANUAL",
+      combustible: "DESCONOCIDO",
+      provincia: "PICHINCHA",
+      color: "NEGRO",
+      estado_motor: "DESCONOCIDO",
+      estado_carroceria: "DESCONOCIDO",
+    };
 
     const payload = {
-      anio: formData.anio,
-      kilometraje: formData.kilometraje,
-      cilindrada: formData.cilindraje,
-      marca: marcaSeleccionada === "OTRA" ? "DESCONOCIDO" : formData.marca,
-      modelo: "DESCONOCIDO",
-      transmision: normalizeTransmisionForPredict(predictDefaults.transmision),
-      tipo: predictDefaults.tipo,
-      color: predictDefaults.color,
-      provincia: predictDefaults.provincia,
-      combustible: "DESCONOCIDO",
-      estado_carroceria: "DESCONOCIDO",
-      estado_motor: "DESCONOCIDO",
+      anio: Number(formData.anio),
+      kilometraje: Number(formData.kilometraje),
+      cilindrada: Number(formData.cilindraje),
+      marca: normalizePredictText(formData.marca) || "DESCONOCIDO",
+      modelo: normalizePredictText(formData.modelo) || "DESCONOCIDO",
+      ...predictDefaults,
+    };
+
+    const cacheVehicle = {
+      ...payload,
+      marca: normalizePredictText(formData.marca) || payload.marca,
+      modelo: normalizePredictText(formData.modelo) || payload.modelo,
     };
 
     console.log("[FormV2] Consultando estimado:", payload);
 
-    const res = await fetch("/api/pricing-predict", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        vehicle: payload,
-        cache_vehicle: {
-          ...payload,
-          marca: formData.marca,
-          modelo: formData.modelo,
-        },
-      }),
-    });
+    let { res, data } = await fetchPredict(payload, cacheVehicle);
 
-    const data = await res.json();
+    if (
+      !res.ok &&
+      res.status === 422 &&
+      payload.modelo &&
+      payload.modelo !== "DESCONOCIDO"
+    ) {
+      // Reintento para modelos no reconocidos por upstream.
+      const fallbackPayload = {
+        ...payload,
+        modelo: "DESCONOCIDO",
+      };
+      console.warn(
+        "[FormV2] Reintentando predict con modelo DESCONOCIDO por error 422",
+      );
+      ({ res, data } = await fetchPredict(fallbackPayload, {
+        ...cacheVehicle,
+        modelo: cacheVehicle.modelo || payload.modelo,
+      }));
+    }
 
     if (!res.ok) {
       console.error("[FormV2] Error estimador:", data);
@@ -656,51 +666,24 @@ function parsePredictNumeric(value, fallback = null) {
   return Number.isFinite(n) ? n : fallback;
 }
 
-function normalizeTransmisionForPredict(value) {
-  const raw = String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toUpperCase()
-    .trim();
-
-  if (raw === "MANUAL") return "MANUAL";
-  return "AUTOMÁTICA";
+function normalizePredictText(value) {
+  return String(value || "")
+    .trim()
+    .toUpperCase();
 }
 
-async function getPredictDefaults() {
-  if (predictDefaultsCache) return predictDefaultsCache;
+async function fetchPredict(vehicle, cacheVehicle) {
+  const res = await fetch("/api/pricing-predict", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      vehicle,
+      cache_vehicle: cacheVehicle,
+    }),
+  });
 
-  const fallback = {
-    color: "BLANCO",
-    provincia: "PICHINCHA",
-    transmision: "AUTOMÁTICA",
-    tipo: "SUV",
-  };
-
-  try {
-    const res = await fetch("/api/pricing-metadata", {
-      method: "GET",
-    });
-    if (!res.ok) return fallback;
-
-    const metadata = await res.json();
-    const categorical = metadata?.categorical_values || {};
-    const pick = (arr, fb) =>
-      Array.isArray(arr) && arr.length > 0 ? String(arr[0]) : fb;
-
-    predictDefaultsCache = {
-      color: pick(categorical.color, fallback.color),
-      provincia: pick(categorical.provincia, fallback.provincia),
-      transmision: normalizeTransmisionForPredict(
-        pick(categorical.transmision, fallback.transmision),
-      ),
-      tipo: pick(categorical.tipo, fallback.tipo),
-    };
-
-    return predictDefaultsCache;
-  } catch {
-    return fallback;
-  }
+  const data = await res.json().catch(() => ({}));
+  return { res, data };
 }
 
 // ============================================================
