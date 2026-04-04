@@ -32,7 +32,7 @@ export default async function handler(req, res) {
           sb
             .from("events")
             .select("*", { count: "exact", head: true })
-            .eq("event_type", "whatsapp_click"),
+            .in("event_type", ["whatsapp_click", "whatsapp_agendar_reunion"]),
         ]);
 
         const today = startOfDay(0);
@@ -61,12 +61,12 @@ export default async function handler(req, res) {
             sb
               .from("events")
               .select("*", { count: "exact", head: true })
-              .eq("event_type", "whatsapp_click")
+              .in("event_type", ["whatsapp_click", "whatsapp_agendar_reunion"])
               .gte("created_at", today),
             sb
               .from("events")
               .select("*", { count: "exact", head: true })
-              .eq("event_type", "whatsapp_click")
+              .in("event_type", ["whatsapp_click", "whatsapp_agendar_reunion"])
               .gte("created_at", yesterday)
               .lt("created_at", today),
           ]);
@@ -118,6 +118,7 @@ export default async function handler(req, res) {
             "step_complete",
             "form_submit",
             "whatsapp_click",
+            "whatsapp_agendar_reunion",
           ]);
         return res.status(200).json({ data: data || [] });
       }

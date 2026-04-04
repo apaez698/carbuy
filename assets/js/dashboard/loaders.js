@@ -195,7 +195,11 @@ export function createDashboardLoaders({ fetchMetric, makeChart, colors }) {
       if (r.event_type === "step_start" && r.step === 2) counters.s2++;
       if (r.event_type === "step_start" && r.step === 3) counters.s3++;
       if (r.event_type === "form_submit") counters.sub++;
-      if (r.event_type === "whatsapp_click") counters.wha++;
+      if (
+        r.event_type === "whatsapp_click" ||
+        r.event_type === "whatsapp_agendar_reunion"
+      )
+        counters.wha++;
     });
 
     const base = counters.s1 || 1;

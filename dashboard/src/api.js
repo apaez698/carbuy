@@ -82,3 +82,54 @@ export async function updateFlag(dashPass, name, value) {
     return null;
   }
 }
+
+export async function fetchCacheState(dashPass) {
+  try {
+    const res = await fetch(
+      `/api/cache-admin?key=${encodeURIComponent(dashPass)}`,
+    );
+
+    if (res.status === 401) {
+      throw new AuthError();
+    }
+
+    if (!res.ok) return null;
+
+    const payload = await res.json();
+    return payload || null;
+  } catch (error) {
+    if (error instanceof AuthError) {
+      throw error;
+    }
+
+    return null;
+  }
+}
+
+export async function mutateCache(dashPass, action) {
+  try {
+    const res = await fetch(
+      `/api/cache-admin?key=${encodeURIComponent(dashPass)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action }),
+      },
+    );
+
+    if (res.status === 401) {
+      throw new AuthError();
+    }
+
+    if (!res.ok) return null;
+
+    const payload = await res.json();
+    return payload || null;
+  } catch (error) {
+    if (error instanceof AuthError) {
+      throw error;
+    }
+
+    return null;
+  }
+}

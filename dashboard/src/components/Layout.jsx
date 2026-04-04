@@ -54,11 +54,24 @@ function Layout({
 
   const isItemActive = (item) => {
     if (location.pathname === "/" && item.id === "section-resumen") return true;
-    if (location.pathname === "/leads" && item.id === "section-leads") return true;
-    if (location.pathname === "/conversion" && item.id === "section-conversion") return true;
-    if (location.pathname === "/funnel" && item.id === "section-funnel") return true;
-    if (location.pathname === "/formularios" && item.id === "section-formularios") return true;
-    if (location.pathname === "/whatsapp" && item.id === "section-whatsapp") return true;    if (location.pathname === "/flags" && item.id === "section-flags") return true;    return activeSection === item.id;
+    if (location.pathname === "/leads" && item.id === "section-leads")
+      return true;
+    if (location.pathname === "/conversion" && item.id === "section-conversion")
+      return true;
+    if (location.pathname === "/funnel" && item.id === "section-funnel")
+      return true;
+    if (
+      location.pathname === "/formularios" &&
+      item.id === "section-formularios"
+    )
+      return true;
+    if (location.pathname === "/whatsapp" && item.id === "section-whatsapp")
+      return true;
+    if (location.pathname === "/flags" && item.id === "section-flags")
+      return true;
+    if (location.pathname === "/cache" && item.id === "section-cache")
+      return true;
+    return activeSection === item.id;
   };
 
   const updateLabel = lastUpdate || "Cargando...";
@@ -82,7 +95,12 @@ function Layout({
               type="button"
               className={`nav-item ${isItemActive(item) ? "active" : ""}`.trim()}
               data-target={item.id}
-              style={{ background: "none", border: "none", textAlign: "left", width: "100%" }}
+              style={{
+                background: "none",
+                border: "none",
+                textAlign: "left",
+                width: "100%",
+              }}
               onClick={() => handleSectionClick(item)}
             >
               <span className="icon">{item.icon}</span>
@@ -104,7 +122,12 @@ function Layout({
               type="button"
               className={`nav-item ${isItemActive(item) ? "active" : ""}`.trim()}
               data-target={item.id}
-              style={{ background: "none", border: "none", textAlign: "left", width: "100%" }}
+              style={{
+                background: "none",
+                border: "none",
+                textAlign: "left",
+                width: "100%",
+              }}
               onClick={() => handleSectionClick(item)}
             >
               <span className="icon">{item.icon}</span>
@@ -124,11 +147,35 @@ function Layout({
             type="button"
             className={`nav-item ${location.pathname === "/flags" ? "active" : ""}`.trim()}
             data-target="section-flags"
-            style={{ background: "none", border: "none", textAlign: "left", width: "100%" }}
-            onClick={() => handleSectionClick({ id: "section-flags", path: "/flags" })}
+            style={{
+              background: "none",
+              border: "none",
+              textAlign: "left",
+              width: "100%",
+            }}
+            onClick={() =>
+              handleSectionClick({ id: "section-flags", path: "/flags" })
+            }
           >
             <span className="icon">🚩</span>
             Feature Flags
+          </button>
+          <button
+            type="button"
+            className={`nav-item ${location.pathname === "/cache" ? "active" : ""}`.trim()}
+            data-target="section-cache"
+            style={{
+              background: "none",
+              border: "none",
+              textAlign: "left",
+              width: "100%",
+            }}
+            onClick={() =>
+              handleSectionClick({ id: "section-cache", path: "/cache" })
+            }
+          >
+            <span className="icon">🧠</span>
+            Cache Admin
           </button>
         </div>
 
