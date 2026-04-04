@@ -6,9 +6,8 @@
  * 3. Resultado + envío WhatsApp
  */
 
-import { AUTOVALOR_API_BASE, WHA_NUMBER } from "./constants.js";
+import { WHA_NUMBER } from "./constants.js";
 import { clearFieldError, setFieldError } from "./validation.js";
-import { getModeloValueForSubmit } from "./catalog.js";
 import { track, api, SESSION_ID, utmParams } from "./tracking.js";
 
 // ============================================================
@@ -38,6 +37,22 @@ let formData = {
   estimadoMax: null,
   precision: null,
 };
+
+// ============================================================
+// SCROLL INTELIGENTE (solo si es necesario)
+// ============================================================
+function scrollToFormIfNeeded() {
+  const formSection = document.getElementById("formulario-nuevo");
+  if (!formSection) return;
+
+  const rect = formSection.getBoundingClientRect();
+  const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+  if (!isVisible) {
+    const top = Math.max(0, window.scrollY + rect.top - 12);
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+}
 
 // ============================================================
 // INICIALIZACIÓN
@@ -100,7 +115,6 @@ export function showPhase(n) {
   currentPhase = n;
 
   track("phase_start", { phase: n });
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function updatePhaseIndicators(n) {
@@ -329,23 +343,47 @@ function validatePhase2() {
   let valid = true;
 
   // Marca
-  const marca = (document.getElementById("marcaV2")?.value || "").trim();
-  if (!marca) {
+  const marcaSelect = (document.getElementById("marcaV2")?.value || "").trim();
+  if (!marcaSelect) {
     setFieldError("marcaV2", "Selecciona la marca de tu auto.");
     valid = false;
   } else {
-    formData.marca = marca;
+    const marcaManual = (
+      document.getElementById("marcaOtraV2")?.value || ""
+    ).trim();
+    if (marcaSelect === "OTRA") {
+      if (!marcaManual) {
+        setFieldError("marcaOtraV2", "Escribe la marca exacta de tu auto.");
+        valid = false;
+      } else {
+        formData.marca = marcaManual;
+      }
+    } else {
+      formData.marca = marcaSelect;
+    }
   }
 
   // Modelo
-  const modelo =
-    getModeloValueForSubmit() ||
-    (document.getElementById("modeloV2")?.value || "").trim();
-  if (!modelo) {
+  const modeloSelect = (
+    document.getElementById("modeloV2")?.value || ""
+  ).trim();
+  if (!modeloSelect) {
     setFieldError("modeloV2", "Selecciona el modelo de tu auto.");
     valid = false;
   } else {
-    formData.modelo = modelo;
+    const modeloManual = (
+      document.getElementById("modeloOtroV2")?.value || ""
+    ).trim();
+    if (modeloSelect === "OTRO") {
+      if (!modeloManual) {
+        setFieldError("modeloOtroV2", "Escribe el modelo exacto de tu auto.");
+        valid = false;
+      } else {
+        formData.modelo = modeloManual;
+      }
+    } else {
+      formData.modelo = modeloSelect;
+    }
   }
 
   // Año
@@ -515,14 +553,18 @@ async function consultarEstimado() {
 
     const predictDefaults = await getPredictDefaults();
 
-    // Preparar payload para API de AutoValor
+    // El upstream de pricing requiere modelo permitido; usar DESCONOCIDO evita 422.
+    const marcaSeleccionada =
+      (document.getElementById("marcaV2")?.value || "").trim() ||
+      formData.marca;
+
     const payload = {
       anio: formData.anio,
       kilometraje: formData.kilometraje,
       cilindrada: formData.cilindraje,
-      marca: formData.marca,
-      modelo: "DESCONOCIDO", // No es necesario para estimado
-      transmision: predictDefaults.transmision,
+      marca: marcaSeleccionada === "OTRA" ? "DESCONOCIDO" : formData.marca,
+      modelo: "DESCONOCIDO",
+      transmision: normalizeTransmisionForPredict(predictDefaults.transmision),
       tipo: predictDefaults.tipo,
       color: predictDefaults.color,
       provincia: predictDefaults.provincia,
@@ -533,10 +575,17 @@ async function consultarEstimado() {
 
     console.log("[FormV2] Consultando estimado:", payload);
 
-    const res = await fetch(AUTOVALOR_API_BASE + "/predict", {
+    const res = await fetch("/api/pricing-predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ vehicle: payload }),
+      body: JSON.stringify({
+        vehicle: payload,
+        cache_vehicle: {
+          ...payload,
+          marca: formData.marca,
+          modelo: formData.modelo,
+        },
+      }),
     });
 
     const data = await res.json();
@@ -607,18 +656,29 @@ function parsePredictNumeric(value, fallback = null) {
   return Number.isFinite(n) ? n : fallback;
 }
 
+function normalizeTransmisionForPredict(value) {
+  const raw = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase()
+    .trim();
+
+  if (raw === "MANUAL") return "MANUAL";
+  return "AUTOMÁTICA";
+}
+
 async function getPredictDefaults() {
   if (predictDefaultsCache) return predictDefaultsCache;
 
   const fallback = {
     color: "BLANCO",
     provincia: "PICHINCHA",
-    transmision: "AUTOMATICA",
+    transmision: "AUTOMÁTICA",
     tipo: "SUV",
   };
 
   try {
-    const res = await fetch(AUTOVALOR_API_BASE + "/metadata", {
+    const res = await fetch("/api/pricing-metadata", {
       method: "GET",
     });
     if (!res.ok) return fallback;
@@ -631,7 +691,9 @@ async function getPredictDefaults() {
     predictDefaultsCache = {
       color: pick(categorical.color, fallback.color),
       provincia: pick(categorical.provincia, fallback.provincia),
-      transmision: pick(categorical.transmision, fallback.transmision),
+      transmision: normalizeTransmisionForPredict(
+        pick(categorical.transmision, fallback.transmision),
+      ),
       tipo: pick(categorical.tipo, fallback.tipo),
     };
 
@@ -664,7 +726,7 @@ async function submitFormV2() {
   // Setup botón de WhatsApp
   setupWhatsappButton();
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  scrollToFormIfNeeded();
 }
 
 function buildWhatsappMessage() {

@@ -151,16 +151,84 @@ function setupFormV2BrandModels() {
   // Estado inicial del combo modelo
   setSelectOptions("modeloV2", [], "Selecciona primero una marca");
 
+  const marcaOtroField = document.getElementById("marcaOtraFieldV2");
+  const marcaOtroInput = document.getElementById("marcaOtraV2");
+  const modeloOtroField = document.getElementById("modeloOtroFieldV2");
+  const modeloOtroInput = document.getElementById("modeloOtroV2");
+
+  // Estado base seguro: ocultar campos manuales hasta que usuario seleccione Otro.
+  if (marcaOtroField) marcaOtroField.hidden = true;
+  if (modeloOtroField) modeloOtroField.hidden = true;
+
+  const toggleMarcaOtroV2 = () => {
+    const marca = (document.getElementById("marcaV2")?.value || "").trim();
+    const useOtro = marca === "OTRA";
+    if (marcaOtroField) marcaOtroField.hidden = !useOtro;
+    if (!useOtro && marcaOtroInput) marcaOtroInput.value = "";
+  };
+
+  const toggleModeloOtroV2 = () => {
+    const modelo = (document.getElementById("modeloV2")?.value || "").trim();
+    const useOtro = modelo === "OTRO";
+    if (modeloOtroField) modeloOtroField.hidden = !useOtro;
+    if (!useOtro && modeloOtroInput) modeloOtroInput.value = "";
+  };
+
+  const setModelosForMarca = (marca) => {
+    const normalized = (marca || "").trim();
+    const marcaSeleccionada = normalized && normalized !== "OTRA";
+
+    if (normalized === "OTRA") {
+      setSelectOptions(
+        "modeloV2",
+        [{ value: "OTRO", label: "Otro" }],
+        "Selecciona el modelo...",
+      );
+      toggleModeloOtroV2();
+      return;
+    }
+
+    const models = getModelosByMarca(normalized);
+    const modelOptions = [...models, { value: "OTRO", label: "Otro" }];
+    setSelectOptions(
+      "modeloV2",
+      modelOptions,
+      marcaSeleccionada
+        ? "Selecciona el modelo..."
+        : "Selecciona primero una marca",
+    );
+    toggleModeloOtroV2();
+  };
+
   // Cargar modelos cuando cambia marca
   document.getElementById("marcaV2")?.addEventListener("change", (e) => {
     const marca = (e.target.value || "").trim();
-    const models = getModelosByMarca(marca);
-    setSelectOptions(
-      "modeloV2",
-      models,
-      marca ? "Selecciona el modelo..." : "Selecciona primero una marca",
-    );
+    toggleMarcaOtroV2();
+    setModelosForMarca(marca);
+    clearFieldError("marcaV2");
+    clearFieldError("marcaOtraV2");
+    clearFieldError("modeloV2");
+    clearFieldError("modeloOtroV2");
   });
+
+  document.getElementById("modeloV2")?.addEventListener("change", () => {
+    toggleModeloOtroV2();
+    clearFieldError("modeloV2");
+    clearFieldError("modeloOtroV2");
+  });
+
+  marcaOtroInput?.addEventListener("input", () =>
+    clearFieldError("marcaOtraV2"),
+  );
+  modeloOtroInput?.addEventListener("input", () =>
+    clearFieldError("modeloOtroV2"),
+  );
+
+  // Sincronizar al iniciar por si el navegador restauró valores previos.
+  const marcaInicial = (document.getElementById("marcaV2")?.value || "").trim();
+  setModelosForMarca(marcaInicial);
+  toggleMarcaOtroV2();
+  toggleModeloOtroV2();
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•

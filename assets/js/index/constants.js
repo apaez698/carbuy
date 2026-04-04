@@ -1,5 +1,4 @@
 export const WHA_NUMBER = "593963225661";
-export const AUTOVALOR_API_BASE = "https://autovalor-ec.onrender.com";
 
 export const BRAND_MODEL_MAP = {
   AUDI: ["A1", "A5", "Q5"],

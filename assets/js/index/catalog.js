@@ -1,8 +1,4 @@
-import {
-  AUTOVALOR_API_BASE,
-  BRAND_ALIASES,
-  BRAND_MODEL_MAP,
-} from "./constants.js";
+import { BRAND_ALIASES, BRAND_MODEL_MAP } from "./constants.js";
 import { clearFieldError } from "./validation.js";
 
 let estimatorCatalog = {};
@@ -139,7 +135,7 @@ export async function loadEstimatorMetadata() {
   const apiError = document.getElementById("estimateApiError");
 
   try {
-    const res = await fetch(AUTOVALOR_API_BASE + "/metadata", {
+    const res = await fetch("/api/pricing-metadata", {
       method: "GET",
     });
     if (!res.ok) throw new Error("No se pudo cargar metadata");

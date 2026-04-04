@@ -5,6 +5,21 @@ const TOTAL_STEPS = 3;
 let _currentStep = 1;
 let _stepStart = Date.now();
 
+// ============================================================
+// SCROLL INTELIGENTE (solo si es necesario)
+// ============================================================
+function scrollToFormIfNeeded() {
+  const formSection = document.getElementById("formulario");
+  if (!formSection) return;
+
+  const rect = formSection.getBoundingClientRect();
+  const isVisible = rect.top >= 0 && rect.top < window.innerHeight;
+
+  if (!isVisible) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
 export function getStep() {
   return _currentStep;
 }
@@ -67,7 +82,7 @@ export function goNext() {
   track("step_complete", { step: _currentStep, time_on_step: timeOnStep });
   api("/api/session", { id: SESSION_ID, max_step: _currentStep }, "PATCH");
   showStep(_currentStep + 1);
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  scrollToFormIfNeeded();
 }
 
 export function goBack() {
@@ -77,6 +92,6 @@ export function goBack() {
       time_on_step: Math.round((Date.now() - _stepStart) / 1000),
     });
     showStep(_currentStep - 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToFormIfNeeded();
   }
 }

@@ -5,6 +5,21 @@ import { getModeloValueForSubmit } from "./catalog.js";
 import { updateEstimate } from "./estimator.js";
 import { getStepStart } from "./steps.js";
 
+// ============================================================
+// SCROLL INTELIGENTE (solo si es necesario)
+// ============================================================
+function scrollToFormIfNeeded() {
+  const formSection = document.getElementById("formulario");
+  if (!formSection) return;
+
+  const rect = formSection.getBoundingClientRect();
+  const isVisible = rect.top >= 0 && rect.top < window.innerHeight;
+
+  if (!isVisible) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
 export function toggleCheck(id) {
   document.getElementById(id).checked ^= true;
   updateEstimate();
@@ -199,5 +214,5 @@ export async function submitForm() {
     .forEach((s) => s.classList.remove("active"));
   document.getElementById("formNav").style.display = "none";
   document.getElementById("successScreen").classList.add("active");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  scrollToFormIfNeeded();
 }

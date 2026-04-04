@@ -18,6 +18,16 @@ const ALLOWED_EVENTS = new Set([
   "estimate_view",
   "form_submit",
   "whatsapp_click",
+  "form_v2_start",
+  "phase_start",
+  "phase_validation_error",
+  "estimate_error",
+  "phase_complete",
+  "phase_back",
+  "lead_created",
+  "vehicle_data_saved",
+  "estimate_calculated",
+  "whatsapp_agendar_reunion",
 ]);
 
 export default async function handler(req, res) {

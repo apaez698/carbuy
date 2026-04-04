@@ -1,4 +1,3 @@
-import { AUTOVALOR_API_BASE } from "./constants.js";
 import { clearFieldError, setFieldError } from "./validation.js";
 import { getModeloValueForSubmit } from "./catalog.js";
 import { track } from "./tracking.js";
@@ -179,7 +178,7 @@ export async function consultarValor() {
   btn.textContent = "Consultando...";
 
   try {
-    const res = await fetch(AUTOVALOR_API_BASE + "/predict", {
+    const res = await fetch("/api/pricing-predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ vehicle: vehicleForPredict }),
