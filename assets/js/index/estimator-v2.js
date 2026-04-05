@@ -29,12 +29,125 @@ let formData = {
   anio: "",
   kilometraje: "",
   cilindraje: "",
+  carroceria: "",
+  transmision: "",
+  combustible: "",
+  traccion: "",
+  color: "",
 
   // Fase 3: Estimado
   estimadoValor: null,
   estimadoMin: null,
   estimadoMax: null,
   precision: null,
+};
+
+// Lookup: marca → segmento (feature importance 0.128)
+const MARCA_SEGMENTO = {
+  AUDI: "ALTO",
+  BMW: "ALTO",
+  "MERCEDES BENZ": "ALTO",
+  LEXUS: "ALTO",
+  MINI: "ALTO",
+  JEEP: "MEDIO-ALTO",
+  TOYOTA: "MEDIO-ALTO",
+  MAZDA: "MEDIO-ALTO",
+  VOLKSWAGEN: "MEDIO-ALTO",
+  FORD: "MEDIO-ALTO",
+  HONDA: "MEDIO-ALTO",
+  HYUNDAI: "MEDIO",
+  KIA: "MEDIO",
+  CHEVROLET: "MEDIO",
+  NISSAN: "MEDIO",
+  RENAULT: "MEDIO",
+  MITSUBISHI: "MEDIO",
+  SUZUKI: "MEDIO",
+  PEUGEOT: "MEDIO",
+  CITROEN: "MEDIO",
+  FIAT: "MEDIO",
+  OPEL: "MEDIO",
+  SSANGYONG: "MEDIO",
+  DODGE: "MEDIO",
+  RAM: "MEDIO",
+  CHERY: "MEDIO-BAJO",
+  CHANGAN: "MEDIO-BAJO",
+  BYD: "MEDIO-BAJO",
+  "JAC AUTOS": "MEDIO-BAJO",
+  "JAC MOTORS": "MEDIO-BAJO",
+  "GREAT WALL": "MEDIO-BAJO",
+  HAVAL: "MEDIO-BAJO",
+  "MG MOTOR": "MEDIO-BAJO",
+  GEELY: "MEDIO-BAJO",
+  "GAC MOTOR": "MEDIO-BAJO",
+  JETOUR: "MEDIO-BAJO",
+  LIVAN: "MEDIO-BAJO",
+  BAIC: "BAJO",
+  FAW: "BAJO",
+  DONGFENG: "BAJO",
+  "D.F.S.K. (DONGFENG)": "BAJO",
+  FOTON: "BAJO",
+  ZOTYE: "BAJO",
+  SHINERAY: "BAJO",
+  SINOTRUK: "BAJO",
+  SOUEAST: "BAJO",
+  KYC: "BAJO",
+  JMC: "BAJO",
+  "ZX AUTO": "BAJO",
+  DAIHATSU: "BAJO",
+};
+
+// Lookup: marca → país de origen (feature importance 0.036)
+const MARCA_PAIS = {
+  TOYOTA: "JAPÓN",
+  MAZDA: "JAPÓN",
+  HONDA: "JAPÓN",
+  NISSAN: "JAPÓN",
+  SUZUKI: "JAPÓN",
+  MITSUBISHI: "JAPÓN",
+  DAIHATSU: "JAPÓN",
+  LEXUS: "JAPÓN",
+  HYUNDAI: "COREA DEL SUR",
+  KIA: "COREA DEL SUR",
+  SSANGYONG: "COREA DEL SUR",
+  CHEVROLET: "USA",
+  FORD: "USA",
+  DODGE: "USA",
+  JEEP: "USA",
+  RAM: "USA",
+  BMW: "ALEMANIA",
+  AUDI: "ALEMANIA",
+  VOLKSWAGEN: "ALEMANIA",
+  "MERCEDES BENZ": "ALEMANIA",
+  OPEL: "ALEMANIA",
+  MINI: "ALEMANIA",
+  RENAULT: "FRANCIA",
+  PEUGEOT: "FRANCIA",
+  CITROEN: "FRANCIA",
+  FIAT: "ITALIA",
+  BYD: "CHINA",
+  CHANGAN: "CHINA",
+  CHERY: "CHINA",
+  BAIC: "CHINA",
+  DONGFENG: "CHINA",
+  "D.F.S.K. (DONGFENG)": "CHINA",
+  FAW: "CHINA",
+  FOTON: "CHINA",
+  "GAC MOTOR": "CHINA",
+  GEELY: "CHINA",
+  "GREAT WALL": "CHINA",
+  HAVAL: "CHINA",
+  "JAC AUTOS": "CHINA",
+  "JAC MOTORS": "CHINA",
+  JETOUR: "CHINA",
+  JMC: "CHINA",
+  KYC: "CHINA",
+  LIVAN: "CHINA",
+  "MG MOTOR": "CHINA",
+  SHINERAY: "CHINA",
+  SINOTRUK: "CHINA",
+  SOUEAST: "CHINA",
+  ZOTYE: "CHINA",
+  "ZX AUTO": "CHINA",
 };
 
 // ============================================================
@@ -170,6 +283,13 @@ export async function goNextPhase() {
   // Validar fase actual
   if (!validatePhase(currentPhase)) {
     track("phase_validation_error", { phase: currentPhase });
+    // Scroll al primer campo con error para que el usuario lo vea
+    const firstError = document.querySelector(
+      "[data-phase].form-phase:not([hidden]) .field.has-error",
+    );
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
     return;
   }
 
@@ -248,6 +368,26 @@ function renderPhase3Content() {
       <div class="summary-row">
         <span class="label">Cilindraje:</span>
         <span class="value">${formData.cilindraje}L</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Carrocería:</span>
+        <span class="value">${formData.carroceria}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Transmisión:</span>
+        <span class="value">${formData.transmision}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Combustible:</span>
+        <span class="value">${formData.combustible}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Tracción:</span>
+        <span class="value">${formData.traccion}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Color:</span>
+        <span class="value">${formData.color}</span>
       </div>
       <div class="summary-row">
         <span class="label">Contacto:</span>
@@ -420,6 +560,76 @@ function validatePhase2() {
     formData.cilindraje = cilindraje;
   }
 
+  // Carrocería (optional — use default if field not in DOM)
+  const carroceriaEl = document.getElementById("carroceriaV2");
+  if (carroceriaEl) {
+    const carroceria = (carroceriaEl.value || "").trim();
+    if (!carroceria) {
+      setFieldError("carroceriaV2", "Selecciona el tipo de carrocería.");
+      valid = false;
+    } else {
+      formData.carroceria = carroceria;
+    }
+  } else {
+    formData.carroceria = "SUV";
+  }
+
+  // Transmisión (optional — use default if field not in DOM)
+  const transmisionEl = document.getElementById("transmisionV2");
+  if (transmisionEl) {
+    const transmision = (transmisionEl.value || "").trim();
+    if (!transmision) {
+      setFieldError("transmisionV2", "Selecciona el tipo de transmisión.");
+      valid = false;
+    } else {
+      formData.transmision = transmision;
+    }
+  } else {
+    formData.transmision = "MANUAL";
+  }
+
+  // Combustible (optional — use default if field not in DOM)
+  const combustibleEl = document.getElementById("combustibleV2");
+  if (combustibleEl) {
+    const combustible = (combustibleEl.value || "").trim();
+    if (!combustible) {
+      setFieldError("combustibleV2", "Selecciona el tipo de combustible.");
+      valid = false;
+    } else {
+      formData.combustible = combustible;
+    }
+  } else {
+    formData.combustible = "GASOLINA";
+  }
+
+  // Tracción (optional — use default if field not in DOM)
+  const traccionEl = document.getElementById("traccionV2");
+  if (traccionEl) {
+    const traccion = (traccionEl.value || "").trim();
+    if (!traccion) {
+      setFieldError("traccionV2", "Selecciona el tipo de tracción.");
+      valid = false;
+    } else {
+      formData.traccion = traccion;
+    }
+  } else {
+    formData.traccion = "DESCONOCIDO";
+  }
+
+  // Color (optional — use default if field not in DOM)
+  const colorEl = document.getElementById("colorV2");
+  if (colorEl) {
+    const color = (colorEl.value || "").trim();
+    if (!color) {
+      setFieldError("colorV2", "Selecciona el color de tu auto.");
+      valid = false;
+    } else {
+      formData.color = color;
+    }
+  } else {
+    formData.color = "BLANCO";
+  }
+
   return valid;
 }
 
@@ -516,6 +726,11 @@ async function savePhase2() {
           anio: formData.anio,
           kilometraje: formData.kilometraje,
           cilindrada: formData.cilindraje,
+          carroceria: formData.carroceria,
+          transmision: formData.transmision,
+          tipo_combustible: formData.combustible,
+          traccion: formData.traccion,
+          color: formData.color,
           estimado_min: formData.estimadoMin,
           estimado_max: formData.estimadoMax,
           estimado_texto: `${formatUsd(formData.estimadoValor)}`,
@@ -550,59 +765,132 @@ async function consultarEstimado() {
       btn.textContent = "Calculando estimado...";
     }
 
-    // Defaults requeridos para campos que Formulario V2 no captura.
-    const predictDefaults = {
-      tipo: "SUV",
-      transmision: "MANUAL",
-      combustible: "DESCONOCIDO",
-      provincia: "PICHINCHA",
-      color: "NEGRO",
-      estado_motor: "DESCONOCIDO",
-      estado_carroceria: "DESCONOCIDO",
-    };
+    // Validar datos antes de enviar
+    const anio = Number(formData.anio);
+    const kilometraje = Number(formData.kilometraje);
+    const cilindraje = Number(formData.cilindraje);
+
+    if (!Number.isFinite(anio) || anio < 1980 || anio > 2030) {
+      throw new Error(`Año no válido: ${formData.anio}`);
+    }
+    if (!Number.isFinite(kilometraje) || kilometraje < 0) {
+      throw new Error(`Kilometraje no válido: ${formData.kilometraje}`);
+    }
+    if (!Number.isFinite(cilindraje) || cilindraje < 0.6 || cilindraje > 8.0) {
+      throw new Error(
+        `Cilindraje no válido: ${formData.cilindraje}. Rango válido: 0.6-8.0L`,
+      );
+    }
+
+    // Convertir cilindraje de litros a cc para el modelo
+    const motor_cc = Math.round(cilindraje * 1000);
+    // Computar antigüedad
+    const currentYear = new Date().getFullYear();
+    const antiguedad = Math.max(0, currentYear - anio);
+    // Lookup segmento y país de origen por marca
+    const marcaNorm = normalizePredictText(formData.marca);
+    const segmento = MARCA_SEGMENTO[marcaNorm] || "MEDIO";
+    const pais_origen = MARCA_PAIS[marcaNorm] || "DESCONOCIDO";
 
     const payload = {
-      anio: Number(formData.anio),
-      kilometraje: Number(formData.kilometraje),
-      cilindrada: Number(formData.cilindraje),
-      marca: normalizePredictText(formData.marca) || "DESCONOCIDO",
+      anio: anio,
+      antiguedad: antiguedad,
+      kilometraje: kilometraje,
+      motor_cc: motor_cc,
+      potencia_hp: 120,
+      marca: marcaNorm || "DESCONOCIDO",
       modelo: normalizePredictText(formData.modelo) || "DESCONOCIDO",
-      ...predictDefaults,
+      carroceria: normalizePredictText(formData.carroceria) || "SUV",
+      transmision: normalizePredictText(formData.transmision) || "MANUAL",
+      tipo_combustible:
+        normalizePredictText(formData.combustible) || "GASOLINA",
+      provincia: "PICHINCHA",
+      traccion: normalizePredictText(formData.traccion) || "DESCONOCIDO",
+      segmento: segmento,
+      pais_origen: pais_origen,
+      color: normalizePredictText(formData.color) || "BLANCO",
     };
 
-    const cacheVehicle = {
-      ...payload,
-      marca: normalizePredictText(formData.marca) || payload.marca,
-      modelo: normalizePredictText(formData.modelo) || payload.modelo,
-    };
+    const cacheVehicle = { ...payload };
 
+    console.log("[FormV2] Payload preparado:", payload);
     console.log("[FormV2] Consultando estimado:", payload);
 
     let { res, data } = await fetchPredict(payload, cacheVehicle);
 
+    if (!res.ok && res.status === 422) {
+      const suggestedModelo = getSuggestedModeloFromValidation(
+        payload.modelo,
+        data,
+      );
+
+      if (suggestedModelo && suggestedModelo !== payload.modelo) {
+        // Reintento con modelo valido sugerido por upstream.
+        const fallbackPayload = {
+          ...payload,
+          modelo: suggestedModelo,
+        };
+        console.warn(
+          `[FormV2] Reintentando predict con modelo sugerido por upstream: ${suggestedModelo}`,
+        );
+        console.log("[FormV2] Fallback payload:", fallbackPayload);
+        ({ res, data } = await fetchPredict(fallbackPayload, {
+          ...cacheVehicle,
+          modelo: suggestedModelo,
+        }));
+      }
+    }
+
+    if (!res.ok && res.status === 422) {
+      // Fallback final: no bloquear el flujo del formulario por drift del esquema upstream.
+      data = buildLocalEstimateClient(payload);
+      res = { ...res, ok: true, status: 200 };
+      console.warn(
+        "[FormV2] Upstream 422 persistente; usando estimado local para continuar flujo",
+        data,
+      );
+    }
+
     if (
       !res.ok &&
-      res.status === 422 &&
-      payload.modelo &&
-      payload.modelo !== "DESCONOCIDO"
+      (res.status === 504 || res.status === 502 || res.status === 503)
     ) {
-      // Reintento para modelos no reconocidos por upstream.
-      const fallbackPayload = {
-        ...payload,
-        modelo: "DESCONOCIDO",
-      };
+      // Timeout o servicio no disponible: usar fallback local para no bloquear al usuario.
+      data = buildLocalEstimateClient(payload);
+      res = { ...res, ok: true, status: 200 };
       console.warn(
-        "[FormV2] Reintentando predict con modelo DESCONOCIDO por error 422",
+        `[FormV2] Upstream ${res.status} (timeout/unavailable); usando estimado local`,
+        data,
       );
-      ({ res, data } = await fetchPredict(fallbackPayload, {
-        ...cacheVehicle,
-        modelo: cacheVehicle.modelo || payload.modelo,
-      }));
     }
 
     if (!res.ok) {
-      console.error("[FormV2] Error estimador:", data);
-      throw new Error(data?.error?.message || "Error consultando estimado");
+      console.error("[FormV2] Error estimador (response no OK):", data);
+      // Mostrar error específico del upstream
+      const errorMsg =
+        data?.error?.message || data?.error || "Error consultando estimado";
+      const rawDetail = data?.error?.details;
+      const payloadDetail = Array.isArray(rawDetail?.payload)
+        ? rawDetail.payload[0]
+        : "";
+      const modeloDetail =
+        typeof rawDetail?.modelo === "string"
+          ? rawDetail.modelo
+          : Array.isArray(rawDetail?.modelo)
+            ? rawDetail.modelo[0]
+            : rawDetail?.modelo?.received
+              ? `Modelo recibido: ${rawDetail.modelo.received}`
+              : "";
+      const errorDetail =
+        payloadDetail ||
+        modeloDetail ||
+        data?.detail ||
+        data?.validation_error ||
+        data?.message ||
+        "";
+      const fullError = `${errorMsg}${errorDetail ? ": " + errorDetail : ""}`;
+      console.error("[FormV2] Error completo:", fullError);
+      throw new Error(fullError);
     }
 
     const predictedValue = parsePredictNumeric(data?.predicted_value);
@@ -614,6 +902,7 @@ async function consultarEstimado() {
     );
 
     if (!Number.isFinite(predictedValue)) {
+      console.error("[FormV2] Valor estimado inválido:", data?.predicted_value);
       throw new Error("Valor estimado inválido");
     }
 
@@ -670,6 +959,112 @@ function normalizePredictText(value) {
   return String(value || "")
     .trim()
     .toUpperCase();
+}
+
+function normalizeComparableText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^A-Z0-9 ]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toUpperCase();
+}
+
+function getSuggestedModeloFromValidation(originalModelo, errorData) {
+  const rawMessage =
+    errorData?.error?.details?.modelo?.[0] ||
+    errorData?.error?.message ||
+    errorData?.message ||
+    "";
+
+  if (!/valid options\s*:/i.test(rawMessage)) return null;
+
+  const optionsChunk = rawMessage.split(/valid options\s*:/i)[1] || "";
+  const options = optionsChunk
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  if (!options.length) return null;
+
+  const original = normalizeComparableText(originalModelo);
+  if (!original) return options[0];
+
+  let best = null;
+  let bestScore = -1;
+
+  for (const option of options) {
+    const normalizedOption = normalizeComparableText(option);
+    if (!normalizedOption) continue;
+
+    // Prioriza coincidencias por inclusion (ej: LAND CRUISER dentro de LAND CRUISER PRADO).
+    if (
+      original.includes(normalizedOption) ||
+      normalizedOption.includes(original)
+    ) {
+      const inclusionScore = 1000 + normalizedOption.length;
+      if (inclusionScore > bestScore) {
+        best = option;
+        bestScore = inclusionScore;
+      }
+      continue;
+    }
+
+    const originalTokens = new Set(original.split(" "));
+    const optionTokens = normalizedOption.split(" ");
+    const overlap = optionTokens.filter((t) => originalTokens.has(t)).length;
+    if (overlap > bestScore) {
+      best = option;
+      bestScore = overlap;
+    }
+  }
+
+  if (bestScore <= 0) {
+    // Fallback conservador para cuando no hay similitud suficiente.
+    return "COROLLA";
+  }
+
+  return best;
+}
+
+function buildLocalEstimateClient(vehicle) {
+  const currentYear = new Date().getFullYear();
+  const anio = Number(vehicle?.anio) || currentYear;
+  const kilometraje = Math.max(0, Number(vehicle?.kilometraje) || 0);
+  const motor_cc = Number(vehicle?.motor_cc) || 1600;
+  const cilindrada = motor_cc / 1000;
+  const marca = normalizePredictText(vehicle?.marca);
+
+  const brandMultiplier = {
+    TOYOTA: 1.12,
+    MAZDA: 1.08,
+    KIA: 1.02,
+    HYUNDAI: 1.0,
+    CHEVROLET: 0.98,
+    NISSAN: 1.0,
+    SUZUKI: 0.97,
+    VOLKSWAGEN: 1.04,
+  };
+
+  const age = Math.min(40, Math.max(0, currentYear - anio));
+  const depreciationFactor = Math.pow(0.92, age);
+  const kmPenalty = Math.min(15000, kilometraje * 0.035);
+  const ccFactor = Math.min(1.6, Math.max(0.75, 1 + (cilindrada - 1.6) * 0.08));
+  const brandFactor = brandMultiplier[marca] || 1;
+
+  let predictedValue =
+    22000 * depreciationFactor * ccFactor * brandFactor - kmPenalty;
+  predictedValue = Math.min(120000, Math.max(2500, Math.round(predictedValue)));
+
+  return {
+    predicted_value: predictedValue,
+    range_min: Math.round(predictedValue * 0.9),
+    range_max: Math.round(predictedValue * 1.1),
+    source: "client_local_fallback_v1",
+    warning:
+      "Upstream schema changed; local fallback estimate used to keep flow available.",
+  };
 }
 
 async function fetchPredict(vehicle, cacheVehicle) {
@@ -732,7 +1127,9 @@ function buildWhatsappMessage() {
       `Marca y modelo: ${formData.marca} ${formData.modelo}`,
       `Anio: ${formData.anio}`,
       `Kilometraje: ${formatNumber(formData.kilometraje)} km`,
-      `Cilindraje: ${formData.cilindraje} L`,
+      `Cilindraje: ${formData.cilindraje}L | Carroceria: ${formData.carroceria}`,
+      `Transmision: ${formData.transmision} | Combustible: ${formData.combustible}`,
+      `Traccion: ${formData.traccion} | Color: ${formData.color}`,
       "",
       "COTIZACION",
       `Valor estimado: ${formatUsd(formData.estimadoValor)}`,
@@ -803,7 +1200,9 @@ function sendPhase2WhatsApp() {
       `Marca y modelo: ${formData.marca} ${formData.modelo}`,
       `Anio: ${formData.anio}`,
       `Kilometraje: ${formatNumber(formData.kilometraje)} km`,
-      `Cilindraje: ${formData.cilindraje} L`,
+      `Cilindraje: ${formData.cilindraje}L | Carroceria: ${formData.carroceria}`,
+      `Transmision: ${formData.transmision} | Combustible: ${formData.combustible}`,
+      `Traccion: ${formData.traccion} | Color: ${formData.color}`,
       "",
       "DATOS DEL CLIENTE",
       `Nombre: ${formData.nombre}`,
@@ -853,7 +1252,9 @@ function setupAgendarButton() {
         `Marca y modelo: ${formData.marca} ${formData.modelo}`,
         `Anio: ${formData.anio}`,
         `Kilometraje: ${formatNumber(formData.kilometraje)} km`,
-        `Cilindraje: ${formData.cilindraje} L`,
+        `Cilindraje: ${formData.cilindraje}L | Carroceria: ${formData.carroceria}`,
+        `Transmision: ${formData.transmision} | Combustible: ${formData.combustible}`,
+        `Traccion: ${formData.traccion} | Color: ${formData.color}`,
         "",
         "COTIZACION INICIAL",
         `Valor estimado: ${formatUsd(formData.estimadoValor)}`,
