@@ -160,7 +160,51 @@ function cleanupExpiredEntries(cache, now) {
   }
 }
 
+function buildCacheState() {
+  const store = getPredictCacheStore();
+  const now = Date.now();
+  cleanupExpiredEntries(store, now);
+
+  const entries = [];
+  for (const [k, entry] of store.entries()) {
+    const expiresAt = Number(entry?.expiresAt) || 0;
+    entries.push({
+      key: k,
+      expiresAtIso: new Date(expiresAt).toISOString(),
+      ttlRemainingSec: Math.max(0, Math.floor((expiresAt - now) / 1000)),
+    });
+  }
+
+  return {
+    size: store.size,
+    ttlMs: PREDICT_CACHE_TTL_MS,
+    entries,
+  };
+}
+
+function handleAdmin(req, res) {
+  const rawKey = req.query?.key;
+  const key = Array.isArray(rawKey) ? rawKey[0] : rawKey;
+  const validPass = process.env.DASHBOARD_PASSWORD;
+  if (!validPass || key !== validPass) {
+    return res.status(401).json({ error: "No autorizado" });
+  }
+
+  const action = req.query._admin;
+
+  if (action === "clear") {
+    const store = getPredictCacheStore();
+    store.clear();
+  }
+
+  return res.status(200).json(buildCacheState());
+}
+
 export default async function handler(req, res) {
+  if (req.query?._admin) {
+    return handleAdmin(req, res);
+  }
+
   if (req.method === "OPTIONS") {
     res.setHeader(
       "Access-Control-Allow-Origin",

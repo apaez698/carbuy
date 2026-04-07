@@ -84,19 +84,22 @@ export async function updateFlag(dashPass, name, value) {
 }
 
 export async function fetchCacheState(dashPass) {
-  try {
-    const res = await fetch(
-      `/api/cache-admin?key=${encodeURIComponent(dashPass)}`,
-    );
+  const key = encodeURIComponent(dashPass);
 
-    if (res.status === 401) {
+  try {
+    const [predictRes, metadataRes] = await Promise.all([
+      fetch(`/api/pricing-predict?_admin=state&key=${key}`),
+      fetch(`/api/pricing-metadata?_admin=state&key=${key}`),
+    ]);
+
+    if (predictRes.status === 401 || metadataRes.status === 401) {
       throw new AuthError();
     }
 
-    if (!res.ok) return null;
+    const predict = predictRes.ok ? await predictRes.json() : {};
+    const metadata = metadataRes.ok ? await metadataRes.json() : {};
 
-    const payload = await res.json();
-    return payload || null;
+    return { predict, metadata };
   } catch (error) {
     if (error instanceof AuthError) {
       throw error;
@@ -107,24 +110,25 @@ export async function fetchCacheState(dashPass) {
 }
 
 export async function mutateCache(dashPass, action) {
-  try {
-    const res = await fetch(
-      `/api/cache-admin?key=${encodeURIComponent(dashPass)}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action }),
-      },
-    );
+  const key = encodeURIComponent(dashPass);
 
-    if (res.status === 401) {
+  try {
+    const calls = [];
+
+    if (action === "clear_predict" || action === "clear_all") {
+      calls.push(fetch(`/api/pricing-predict?_admin=clear&key=${key}`));
+    }
+    if (action === "clear_metadata" || action === "clear_all") {
+      calls.push(fetch(`/api/pricing-metadata?_admin=clear&key=${key}`));
+    }
+
+    const results = await Promise.all(calls);
+
+    if (results.some((r) => r.status === 401)) {
       throw new AuthError();
     }
 
-    if (!res.ok) return null;
-
-    const payload = await res.json();
-    return payload || null;
+    return fetchCacheState(dashPass);
   } catch (error) {
     if (error instanceof AuthError) {
       throw error;

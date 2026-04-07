@@ -1,3 +1,9 @@
+// DEPRECATED: On Vercel, each API file runs in a separate serverless function.
+// This endpoint cannot see the globalThis caches from pricing-predict or
+// pricing-metadata. Use the _admin query parameter on those endpoints instead.
+// Kept for backward compatibility; the dashboard now calls the pricing
+// endpoints directly via ?_admin=state|clear&key=<pass>.
+
 const PREDICT_CACHE_TTL_MS = 5 * 60 * 1000;
 const METADATA_CACHE_TTL_MS = 30 * 60 * 1000;
 

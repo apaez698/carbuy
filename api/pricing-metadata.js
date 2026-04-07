@@ -14,7 +14,43 @@ function getMetadataCacheStore() {
   return globalThis.__pricingMetadataCache;
 }
 
+function buildCacheState() {
+  const cache = getMetadataCacheStore();
+  const now = Date.now();
+  const expiresAt = Number(cache.expiresAt) || 0;
+
+  return {
+    hasValue: Boolean(cache.value),
+    ttlMs: METADATA_CACHE_TTL_MS,
+    expiresAtIso: expiresAt > 0 ? new Date(expiresAt).toISOString() : null,
+    ttlRemainingSec: Math.max(0, Math.floor((expiresAt - now) / 1000)),
+  };
+}
+
+function handleAdmin(req, res) {
+  const rawKey = req.query?.key;
+  const key = Array.isArray(rawKey) ? rawKey[0] : rawKey;
+  const validPass = process.env.DASHBOARD_PASSWORD;
+  if (!validPass || key !== validPass) {
+    return res.status(401).json({ error: "No autorizado" });
+  }
+
+  const action = req.query._admin;
+
+  if (action === "clear") {
+    const cache = getMetadataCacheStore();
+    cache.value = null;
+    cache.expiresAt = 0;
+  }
+
+  return res.status(200).json(buildCacheState());
+}
+
 export default async function handler(req, res) {
+  if (req.query?._admin) {
+    return handleAdmin(req, res);
+  }
+
   if (req.method === "OPTIONS") {
     res.setHeader(
       "Access-Control-Allow-Origin",
