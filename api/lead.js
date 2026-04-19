@@ -29,8 +29,8 @@ export default async function handler(req, res) {
   try {
     const body = req.body;
 
-    // Validaciones mínimas
-    if (!body.nombre || !body.celular || !body.email || !body.marca) {
+    // Validaciones mínimas (email es opcional para flujo V3)
+    if (!body.nombre || !body.celular || !body.marca) {
       return res.status(400).json({ error: "Faltan campos obligatorios" });
     }
 
@@ -41,9 +41,10 @@ export default async function handler(req, res) {
       });
     }
 
-    // Sanitizar email básico
-    const emailClean = String(body.email).toLowerCase().trim().slice(0, 100);
-    if (!isValidEmail(emailClean)) {
+    // Email opcional — validar solo si se proporcionó
+    const rawEmail = String(body.email || "").toLowerCase().trim();
+    const emailClean = rawEmail.slice(0, 100);
+    if (emailClean && !isValidEmail(emailClean)) {
       return res.status(400).json({ error: "Email inválido" });
     }
 

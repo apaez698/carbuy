@@ -1,0 +1,118 @@
+import ScreenHeader from "./ScreenHeader.jsx";
+import Chip from "../components/Chip.jsx";
+import CondCard from "../components/CondCard.jsx";
+import Slider from "../components/Slider.jsx";
+import FieldLabel from "../components/FieldLabel.jsx";
+import TextInput from "../components/TextInput.jsx";
+import { PrimaryBtn } from "../components/Buttons.jsx";
+import { CAR_DB } from "../data/carDb.js";
+
+const F = "DM Sans, system-ui, sans-serif";
+const YEARS = Array.from({ length: 9 }, (_, i) => 2017 + i);
+
+function fmtKm(n) { return n.toLocaleString("en-US") + " km"; }
+
+export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext, step, totalSteps }) {
+  const brandObj = CAR_DB.find(b => b.brand === value.brand);
+  const valid    = value.brand && value.model && value.year && value.km > 0 && value.estado;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
+      <ScreenHeader t={t} onBack={onBack} step={step} total={totalSteps} title={copy.vehTitle} sub={copy.vehSub} />
+
+      <div style={{ padding: "22px 24px 22px", display: "flex", flexDirection: "column", gap: 22, flex: 1 }}>
+
+        {/* Marca */}
+        <div>
+          <FieldLabel t={t}>Marca</FieldLabel>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            {CAR_DB.map(b => (
+              <Chip key={b.brand} t={t} active={value.brand === b.brand}
+                onClick={() => onChange({ ...value, brand: b.brand, model: "" })}>
+                {b.brand}
+              </Chip>
+            ))}
+            <Chip t={t} active={value.brand === "Otra"}
+              onClick={() => onChange({ ...value, brand: "Otra", model: "" })}>
+              + Otra
+            </Chip>
+          </div>
+        </div>
+
+        {/* Modelo — chips para marcas conocidas */}
+        {brandObj && (
+          <div>
+            <FieldLabel t={t}>Modelo</FieldLabel>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {brandObj.models.map(m => (
+                <Chip key={m} size="sm" t={t} active={value.model === m}
+                  onClick={() => onChange({ ...value, model: m })}>
+                  {m}
+                </Chip>
+              ))}
+            </div>
+            <div style={{ fontFamily: F, fontSize: 11, color: t.dim, marginTop: 8 }}>
+              La base de datos inferirá el más parecido si no está listado.
+            </div>
+          </div>
+        )}
+
+        {/* Modelo — campo libre para "Otra" */}
+        {value.brand === "Otra" && (
+          <div>
+            <FieldLabel t={t}>Marca / modelo</FieldLabel>
+            <TextInput t={t} value={value.model}
+              onChange={v => onChange({ ...value, model: v })}
+              placeholder="Ej. Peugeot 208" />
+          </div>
+        )}
+
+        {/* Año */}
+        <div>
+          <FieldLabel t={t}>Año</FieldLabel>
+          <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4, scrollbarWidth: "none" }}>
+            {YEARS.map(y => (
+              <Chip key={y} size="sm" t={t} active={value.year === y}
+                onClick={() => onChange({ ...value, year: y })}>
+                {y}
+              </Chip>
+            ))}
+          </div>
+        </div>
+
+        {/* Kilometraje */}
+        <div>
+          <FieldLabel t={t}>Kilometraje</FieldLabel>
+          <div style={{ fontFamily: F, fontWeight: 700, fontSize: 24, color: t.text }}>
+            {fmtKm(value.km)}
+          </div>
+          <div style={{ fontFamily: F, fontSize: 11, color: t.dim, marginTop: 2, marginBottom: 14 }}>
+            Arrastra para ajustar
+          </div>
+          <Slider t={t} value={value.km} min={0} max={200000} step={1000}
+            onChange={v => onChange({ ...value, km: v })} />
+          <div style={{ display: "flex", justifyContent: "space-between", fontFamily: F, fontSize: 10, color: t.dim, marginTop: 10 }}>
+            <span>0 km</span><span>200,000 km</span>
+          </div>
+        </div>
+
+        {/* Estado */}
+        <div>
+          <FieldLabel t={t}>Estado del auto</FieldLabel>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+            <CondCard t={t} icon="✨" title="Excelente" sub="Sin golpes ni fallas"
+              active={value.estado === "Excelente"} onClick={() => onChange({ ...value, estado: "Excelente" })} />
+            <CondCard t={t} icon="👍" title="Bueno" sub="Detalles menores"
+              active={value.estado === "Bueno"} onClick={() => onChange({ ...value, estado: "Bueno" })} />
+            <CondCard t={t} icon="🔧" title="Regular" sub="Necesita trabajo"
+              active={value.estado === "Regular"} onClick={() => onChange({ ...value, estado: "Regular" })} />
+          </div>
+        </div>
+
+        <div style={{ marginTop: "auto", paddingTop: 6 }}>
+          <PrimaryBtn t={t} disabled={!valid} onClick={onNext}>Ver estimación →</PrimaryBtn>
+        </div>
+      </div>
+    </div>
+  );
+}
