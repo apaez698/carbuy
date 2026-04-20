@@ -6,7 +6,7 @@ import { useRef, useEffect, useCallback } from "react";
  * - Click-and-drag on desktop
  * - Touch swipe on mobile
  */
-export default function ScrollRow({ children, gap = 8, resetKey, reverse = false, rows = 1 }) {
+export default function ScrollRow({ children, gap = 8, rowGap, resetKey, reverse = false, rows = 1 }) {
   const outerRef = useRef(null);
   const innerRef = useRef(null);
   const rafRef = useRef(null);
@@ -119,8 +119,8 @@ export default function ScrollRow({ children, gap = 8, resetKey, reverse = false
       <div
         ref={innerRef}
         style={{
-          display: "flex", gap, width: "max-content",
-          ...(rows > 1 ? { flexWrap: "wrap", flexDirection: "column", maxHeight: rows * 42 + (rows - 1) * gap } : {}),
+          display: "flex", gap, rowGap: rowGap ?? gap, width: "max-content",
+          ...(rows > 1 ? { flexWrap: "wrap", flexDirection: "column", maxHeight: rows * 42 + (rows - 1) * (rowGap ?? gap) } : {}),
         }}
       >
         {children}

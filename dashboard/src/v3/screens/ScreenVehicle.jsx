@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import ScreenHeader from "./ScreenHeader.jsx";
 import Chip from "../components/Chip.jsx";
 import CondCard from "../components/CondCard.jsx";
@@ -6,7 +7,7 @@ import FieldLabel from "../components/FieldLabel.jsx";
 import TextInput from "../components/TextInput.jsx";
 import ScrollRow from "../components/ScrollRow.jsx";
 import { PrimaryBtn } from "../components/Buttons.jsx";
-import { CAR_DB } from "../data/carDb.js";
+import useCatalog from "../hooks/useCatalog.js";
 
 const F = "DM Sans, system-ui, sans-serif";
 const CUR_YEAR = new Date().getFullYear();
@@ -15,8 +16,16 @@ const YEARS = Array.from({ length: CUR_YEAR - 1980 + 1 }, (_, i) => CUR_YEAR - i
 function fmtKm(n) { return n.toLocaleString("en-US") + " km"; }
 
 export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext, step, totalSteps }) {
-  const brandObj = CAR_DB.find(b => b.brand === value.brand);
-  const valid    = value.brand && value.model && value.year && value.km > 0 && value.estado;
+  const { brands, models, loadingBrands, loadingModels } = useCatalog(value.brand);
+  const [modelFilter, setModelFilter] = useState("");
+
+  const filteredModels = useMemo(() => {
+    if (!modelFilter) return models;
+    const q = modelFilter.toLowerCase();
+    return models.filter((m) => m.toLowerCase().includes(q));
+  }, [models, modelFilter]);
+
+  const valid = value.brand && value.model && value.year && value.km > 0 && value.estado;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
@@ -26,36 +35,45 @@ export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext
 
         {/* Marca */}
         <div>
-          <FieldLabel t={t}>Marca</FieldLabel>
+          <FieldLabel t={t}>Marca{loadingBrands && <span style={{ fontFamily: F, fontSize: 11, color: t.dim, marginLeft: 6 }}>cargando…</span>}</FieldLabel>
           <ScrollRow gap={8} resetKey="brands" rows={2}>
-            {CAR_DB.map(b => (
-              <Chip key={b.brand} t={t} active={value.brand === b.brand}
-                onClick={() => onChange({ ...value, brand: b.brand, model: "" })}>
-                {b.brand}
+            {brands.map(b => (
+              <Chip key={b} t={t} active={value.brand === b}
+                onClick={() => { setModelFilter(""); onChange({ ...value, brand: b, model: "" }); }}>
+                {b}
               </Chip>
             ))}
             <Chip t={t} active={value.brand === "Otra"}
-              onClick={() => onChange({ ...value, brand: "Otra", model: "" })}>
+              onClick={() => { setModelFilter(""); onChange({ ...value, brand: "Otra", model: "" }); }}>
               + Otra
             </Chip>
           </ScrollRow>
         </div>
 
-        {/* Modelo — chips para marcas conocidas */}
-        {brandObj && (
+        {/* Modelo — chips cargados desde API */}
+        {value.brand && value.brand !== "Otra" && (
           <div>
-            <FieldLabel t={t}>Modelo</FieldLabel>
-            <ScrollRow gap={8} resetKey={value.brand} reverse rows={2}>
-              {brandObj.models.map(m => (
+            <FieldLabel t={t}>Modelo{loadingModels && <span style={{ fontFamily: F, fontSize: 11, color: t.dim, marginLeft: 6 }}>cargando…</span>}</FieldLabel>
+            {models.length > 12 && (
+              <div style={{ marginBottom: 8 }}>
+                <TextInput t={t} value={modelFilter}
+                  onChange={setModelFilter}
+                  placeholder="Buscar modelo…" />
+              </div>
+            )}
+            <ScrollRow gap={12} resetKey={value.brand + modelFilter} reverse rows={2} rowGap={10}>
+              {filteredModels.map(m => (
                 <Chip key={m} size="sm" t={t} active={value.model === m}
                   onClick={() => onChange({ ...value, model: m })}>
                   {m}
                 </Chip>
               ))}
             </ScrollRow>
-            <div style={{ fontFamily: F, fontSize: 11, color: t.dim, marginTop: 8 }}>
-              La base de datos inferirá el más parecido si no está listado.
-            </div>
+            {!loadingModels && filteredModels.length === 0 && modelFilter && (
+              <div style={{ fontFamily: F, fontSize: 12, color: t.dim, marginTop: 6 }}>
+                Sin resultados para "{modelFilter}"
+              </div>
+            )}
           </div>
         )}
 
