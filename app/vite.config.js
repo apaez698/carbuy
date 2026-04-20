@@ -4,19 +4,19 @@ import { resolve } from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/dashboard/",
+  base: "/",
   plugins: [react()],
   build: {
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
-        v3: resolve(__dirname, "v3.html"),
       },
     },
   },
   test: {
     environment: "jsdom",
     setupFiles: "./src/test/setup.js",
+    exclude: ["node_modules/**", "_deprecated_v1_v2/**"],
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],

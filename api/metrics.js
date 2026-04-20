@@ -29,28 +29,31 @@ export default async function handler(req, res) {
   try {
     // Según qué datos pide el dashboard
     switch (q) {
-      // ── KPIs generales ──
+      // ── KPIs generales (new schema) ──
       case "kpis": {
-        const [sessions, leads, whaClicks] = await Promise.all([
-          sb.from("sessions").select("*", { count: "exact", head: true }),
-          sb.from("leads").select("*", { count: "exact", head: true }),
-          sb
-            .from("events")
-            .select("*", { count: "exact", head: true })
-            .in("event_type", ["whatsapp_click", "whatsapp_agendar_reunion"]),
-        ]);
+        const [sessions, clients, vehicles, valuations, whaClicks] =
+          await Promise.all([
+            sb.from("sessions").select("*", { count: "exact", head: true }),
+            sb.from("clients").select("*", { count: "exact", head: true }),
+            sb.from("vehicles").select("*", { count: "exact", head: true }),
+            sb.from("valuations").select("*", { count: "exact", head: true }),
+            sb
+              .from("events")
+              .select("*", { count: "exact", head: true })
+              .in("event_type", ["whatsapp_click", "whatsapp_agendar_reunion"]),
+          ]);
 
         const today = startOfDay(0);
         const yesterday = startOfDay(1);
 
-        const [leadsHoy, leadsAyer, sesHoy, sesAyer, whaHoy, whaAyer] =
+        const [clientsHoy, clientsAyer, sesHoy, sesAyer, whaHoy, whaAyer] =
           await Promise.all([
             sb
-              .from("leads")
+              .from("clients")
               .select("*", { count: "exact", head: true })
               .gte("created_at", today),
             sb
-              .from("leads")
+              .from("clients")
               .select("*", { count: "exact", head: true })
               .gte("created_at", yesterday)
               .lt("created_at", today),
@@ -78,10 +81,16 @@ export default async function handler(req, res) {
 
         return res.status(200).json({
           totalSessions: sessions.count || 0,
-          totalLeads: leads.count || 0,
+          totalClients: clients.count || 0,
+          totalVehicles: vehicles.count || 0,
+          totalValuations: valuations.count || 0,
+          // Legacy compat
+          totalLeads: clients.count || 0,
           whaClicks: whaClicks.count || 0,
-          leadsHoy: leadsHoy.count || 0,
-          leadsAyer: leadsAyer.count || 0,
+          clientsHoy: clientsHoy.count || 0,
+          clientsAyer: clientsAyer.count || 0,
+          leadsHoy: clientsHoy.count || 0,
+          leadsAyer: clientsAyer.count || 0,
           sesHoy: sesHoy.count || 0,
           sesAyer: sesAyer.count || 0,
           whaHoy: whaHoy.count || 0,
@@ -170,7 +179,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ data: data || [] });
       }
 
-      // ── Feedback beta de testers ──
+      // ── Feedback beta de testers (legacy — deprecated) ──
       case "beta_feedback": {
         const { data, count } = await fromPublic(sb, "beta_feedback")
           .select(
@@ -180,6 +189,72 @@ export default async function handler(req, res) {
           .order("created_at", { ascending: false })
           .limit(200);
 
+        return res.status(200).json({ data: data || [], count: count || 0 });
+      }
+
+      // ── NEW: Clients list ──
+      case "clients_list": {
+        const { data, count } = await sb
+          .from("clients")
+          .select(
+            "id, created_at, nombre, celular, email, ciudad, acepta_whatsapp, session_id, source",
+            { count: "exact" },
+          )
+          .order("created_at", { ascending: false })
+          .limit(50);
+        return res.status(200).json({ data: data || [], count: count || 0 });
+      }
+
+      // ── NEW: Vehicles list ──
+      case "vehicles_list": {
+        const { data, count } = await sb
+          .from("vehicles")
+          .select(
+            "id, created_at, client_id, marca, modelo, anio, kilometraje, estado_general, source",
+            { count: "exact" },
+          )
+          .order("created_at", { ascending: false })
+          .limit(50);
+        return res.status(200).json({ data: data || [], count: count || 0 });
+      }
+
+      // ── NEW: Valuations list ──
+      case "valuations_list": {
+        const { data, count } = await sb
+          .from("valuations")
+          .select(
+            "id, created_at, client_id, vehicle_id, estimated_min, estimated_max, estimated_value, estimated_text, confidence, source, whatsapp_clicked, feedback_provided, feedback_rating",
+            { count: "exact" },
+          )
+          .order("created_at", { ascending: false })
+          .limit(50);
+        return res.status(200).json({ data: data || [], count: count || 0 });
+      }
+
+      // ── NEW: Interactions (client + vehicle + valuation joined) ──
+      case "interactions": {
+        const { data, count } = await sb
+          .from("clients")
+          .select(
+            `id, created_at, nombre, celular, email, ciudad,
+             vehicles (id, marca, modelo, anio, kilometraje, estado_general),
+             valuations:valuations!valuations_client_id_fkey (id, estimated_value, estimated_text, whatsapp_clicked, feedback_provided, feedback_rating)`,
+            { count: "exact" },
+          )
+          .order("created_at", { ascending: false })
+          .limit(30);
+        return res.status(200).json({ data: data || [], count: count || 0 });
+      }
+
+      // ── NEW: Feedback list (new table) ──
+      case "feedback_list": {
+        const { data, count } = await sb
+          .from("feedback")
+          .select("id, created_at, valuation_id, rating, comment", {
+            count: "exact",
+          })
+          .order("created_at", { ascending: false })
+          .limit(50);
         return res.status(200).json({ data: data || [], count: count || 0 });
       }
 

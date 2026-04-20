@@ -108,8 +108,8 @@ function TweaksPanel({ tweaks, setTweak, onClose }) {
         ))}
       </TweakGroup>
 
-      <a href="/dashboard" target="_blank" style={{ display: "block", marginTop: 10, fontSize: 11, color: "rgb(129,140,248)", textAlign: "center", textDecoration: "none" }}>
-        Ver leads en dashboard ↗
+      <a href="/admin" target="_blank" style={{ display: "block", marginTop: 10, fontSize: 11, color: "rgb(129,140,248)", textAlign: "center", textDecoration: "none" }}>
+        Ver leads en admin ↗
       </a>
     </div>
   );
@@ -137,7 +137,7 @@ export default function App() {
   const [loading,   setLoading]   = useState(false);
 
   // Lead IDs after remote save
-  const [localIds,     setLocalIds]     = useState(null); // { clientId, autoId }
+  const [localIds,     setLocalIds]     = useState(null); // { clientId, autoId, valuationId }
 
   // Feedback flow state
   const [feedbackOpen,      setFeedbackOpen]      = useState(false);
@@ -165,15 +165,16 @@ export default function App() {
   const persistLead = useCallback(async (clientData, vehicleData, estimateData) => {
     const cId = lsSaveClient(clientData);
     const aId = lsSaveAuto(cId, vehicleData, estimateData);
-    setLocalIds({ clientId: cId, autoId: aId });
 
-    const remoteId = await saveLead({
+    const remote = await saveLead({
       client:    clientData,
       vehicle:   vehicleData,
       estimate:  estimateData,
       sessionId: null,
     });
-    return { clientId: cId, autoId: aId, remoteId };
+    const ids = { clientId: cId, autoId: aId, valuationId: remote?.valuationId ?? null };
+    setLocalIds(ids);
+    return ids;
   }, []);
 
   // ── Estimate flow ────────────────────────────────────────────────────────
@@ -239,7 +240,7 @@ export default function App() {
   // ── Feedback submission ──────────────────────────────────────────────────
   async function submitFeedback({ rating, comment }) {
     lsSaveFeedback({ rating, comment, clientId: localIds?.clientId, autoId: localIds?.autoId, estimate: estimate?.estimate });
-    await saveFeedback({ rating, comment, clientId: localIds?.clientId, vehicleId: localIds?.autoId, estimate: estimate?.estimate });
+    await saveFeedback({ rating, comment, valuationId: localIds?.valuationId });
 
     setFeedbackSubmitted(true);
     setTimeout(() => setFeedbackSubmitted(false), 3000);

@@ -4,152 +4,124 @@ import { createMockRes } from "./test-utils.js";
 const mockInsert = vi.fn();
 const mockSelect = vi.fn();
 const mockSingle = vi.fn();
+const mockUpdate = vi.fn();
+const mockEq = vi.fn();
 
 vi.mock("../api/_supabase.js", () => ({
   getSupabase: () => ({
-    from: () => ({
-      insert: mockInsert,
-    }),
+    from: (table) => {
+      if (table === "valuations") {
+        return { update: mockUpdate };
+      }
+      return { insert: mockInsert };
+    },
   }),
 }));
 
 import handler from "../api/feedback.js";
-
-function validBody() {
-  return {
-    section1_data_entry: 5,
-    section1_understanding: 4,
-    section1_missing_data: "Historial de mantenimiento",
-
-    section2_price_justice: "fair",
-    section2_price_details: "Alineado con lo que esperaba",
-    section2_recommend: 5,
-
-    section3_contact_visibility: 5,
-    section3_next_steps: 4,
-
-    section4_navigation: 4,
-    section4_issues: ["none"],
-    section4_improvements: "Mejorar microcopys",
-
-    name: "Luis",
-    contact: "luis@test.com",
-  };
-}
 
 describe("POST /api/feedback", () => {
   beforeEach(() => {
     mockInsert.mockReset();
     mockSelect.mockReset();
     mockSingle.mockReset();
+    mockUpdate.mockReset();
+    mockEq.mockReset();
 
-    mockInsert.mockReturnValue({
-      select: mockSelect,
-    });
-    mockSelect.mockReturnValue({
-      single: mockSingle,
-    });
+    mockInsert.mockReturnValue({ select: mockSelect });
+    mockSelect.mockReturnValue({ single: mockSingle });
     mockSingle.mockResolvedValue({
       data: { id: "feedback-id-1" },
       error: null,
     });
+    mockUpdate.mockReturnValue({ eq: mockEq });
+    mockEq.mockResolvedValue({ error: null });
   });
 
-  it("rechaza escala invalida", async () => {
+  it("rechaza rating invalido", async () => {
     const req = {
       method: "POST",
       headers: {},
-      body: {
-        ...validBody(),
-        section1_data_entry: 9,
-      },
+      body: { rating: 9, comment: "test" },
     };
     const res = createMockRes();
-
     await handler(req, res);
-
     expect(res.statusCode).toBe(400);
-    expect(res.body.error).toContain("Escalas invalidas");
+    expect(res.body.error).toContain("rating");
   });
 
-  it("rechaza cuando no se seleccionan issues", async () => {
+  it("rechaza sin rating", async () => {
     const req = {
       method: "POST",
       headers: {},
-      body: {
-        ...validBody(),
-        section4_issues: [],
-      },
+      body: { comment: "test" },
     };
     const res = createMockRes();
-
     await handler(req, res);
-
     expect(res.statusCode).toBe(400);
-    expect(res.body.error).toContain("Debes seleccionar");
   });
 
-  it("guarda feedback valido", async () => {
+  it("guarda feedback valido sin valuation_id", async () => {
     const req = {
       method: "POST",
-      headers: {
-        "user-agent": "Vitest",
-        "x-forwarded-for": "10.20.30.40",
-      },
-      body: validBody(),
+      headers: {},
+      body: { rating: 4, comment: "Buen servicio" },
     };
     const res = createMockRes();
-
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
     expect(res.body.ok).toBe(true);
     expect(mockInsert).toHaveBeenCalledTimes(1);
-    expect(mockInsert.mock.calls[0][0].ip_address).toBe("10.20.30.40");
-    expect(mockInsert.mock.calls[0][0].section4_issues).toBe("none");
+    expect(mockInsert.mock.calls[0][0].rating).toBe(4);
+    expect(mockInsert.mock.calls[0][0].comment).toBe("Buen servicio");
+    // No debe intentar actualizar valuations sin valuation_id
+    expect(mockUpdate).not.toHaveBeenCalled();
   });
 
-  it("ignora ip invalida en headers y guarda igual", async () => {
+  it("guarda feedback y actualiza valuation si tiene valuation_id", async () => {
     const req = {
       method: "POST",
-      headers: {
-        "user-agent": "Vitest",
-        "x-forwarded-for": "unknown",
-      },
-      body: validBody(),
+      headers: {},
+      body: { rating: 5, comment: "Excelente", valuation_id: "val-123" },
     };
     const res = createMockRes();
-
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
     expect(mockInsert).toHaveBeenCalledTimes(1);
-    expect(mockInsert.mock.calls[0][0].ip_address).toBeNull();
+    expect(mockInsert.mock.calls[0][0].valuation_id).toBe("val-123");
+    // Debe actualizar valuations con snapshot de feedback
+    expect(mockUpdate).toHaveBeenCalledTimes(1);
+    expect(mockUpdate.mock.calls[0][0]).toEqual({
+      feedback_provided: true,
+      feedback_rating: 5,
+      feedback_comment: "Excelente",
+    });
   });
 
-  it("expone detalle de error cuando Supabase falla", async () => {
+  it("expone error cuando Supabase falla en insert", async () => {
     mockSingle.mockResolvedValueOnce({
       data: null,
-      error: {
-        code: "PGRST204",
-        message: "Could not find the column",
-        details: "column section2_price_details does not exist",
-        hint: null,
-      },
+      error: { code: "PGRST204", message: "Table not found" },
     });
 
     const req = {
       method: "POST",
-      headers: { "user-agent": "Vitest" },
-      body: validBody(),
+      headers: {},
+      body: { rating: 3, comment: "Regular" },
     };
     const res = createMockRes();
-
     await handler(req, res);
 
     expect(res.statusCode).toBe(500);
     expect(res.body.error).toBe("Error guardando feedback");
-    expect(res.body.requestId).toBeTruthy();
-    expect(res.body.debug.code).toBe("PGRST204");
+  });
+
+  it("rechaza metodo GET", async () => {
+    const req = { method: "GET", headers: {} };
+    const res = createMockRes();
+    await handler(req, res);
+    expect(res.statusCode).toBe(405);
   });
 });
