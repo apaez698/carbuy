@@ -137,7 +137,6 @@ export default function App() {
   const [loading,   setLoading]   = useState(false);
 
   // Lead IDs after remote save
-  const [remoteLeadId, setRemoteLeadId] = useState(null);
   const [localIds,     setLocalIds]     = useState(null); // { clientId, autoId }
 
   // Feedback flow state
@@ -174,15 +173,13 @@ export default function App() {
       estimate:  estimateData,
       sessionId: null,
     });
-    setRemoteLeadId(remoteId);
     return { clientId: cId, autoId: aId, remoteId };
   }, []);
 
   // ── Estimate flow ────────────────────────────────────────────────────────
   async function goEstimate() {
-    const resultStep = tweaks.leadTiming === "antes" ? STEPS.RESULT : STEPS.RESULT;
     setLoading(true);
-    setStep(resultStep);
+    setStep(STEPS.RESULT);
 
     const est = await fetchEstimate(vehicle);
     setEstimate(est);
@@ -233,7 +230,6 @@ export default function App() {
     setVehicle(BLANK_VEHICLE);
     setEstimate(null);
     setLocalIds(null);
-    setRemoteLeadId(null);
     setFeedbackShown(false);
     setFeedbackSubmitted(false);
     setFeedbackRequired(false);
@@ -369,9 +365,6 @@ export default function App() {
         @keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
         @keyframes slideUp { from { transform: translateY(100%) } to { transform: translateY(0) } }
         div::-webkit-scrollbar { display: none; }
-        @media (max-width: 430px) {
-          .phone-shell { border-radius: 0 !important; border: none !important; min-height: 100vh !important; }
-        }
       `}</style>
     </div>
   );

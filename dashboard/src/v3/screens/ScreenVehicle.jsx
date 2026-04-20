@@ -4,11 +4,13 @@ import CondCard from "../components/CondCard.jsx";
 import Slider from "../components/Slider.jsx";
 import FieldLabel from "../components/FieldLabel.jsx";
 import TextInput from "../components/TextInput.jsx";
+import ScrollRow from "../components/ScrollRow.jsx";
 import { PrimaryBtn } from "../components/Buttons.jsx";
 import { CAR_DB } from "../data/carDb.js";
 
 const F = "DM Sans, system-ui, sans-serif";
-const YEARS = Array.from({ length: 9 }, (_, i) => 2017 + i);
+const CUR_YEAR = new Date().getFullYear();
+const YEARS = Array.from({ length: CUR_YEAR - 1980 + 1 }, (_, i) => CUR_YEAR - i);
 
 function fmtKm(n) { return n.toLocaleString("en-US") + " km"; }
 
@@ -25,7 +27,7 @@ export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext
         {/* Marca */}
         <div>
           <FieldLabel t={t}>Marca</FieldLabel>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          <ScrollRow gap={8} resetKey="brands" rows={2}>
             {CAR_DB.map(b => (
               <Chip key={b.brand} t={t} active={value.brand === b.brand}
                 onClick={() => onChange({ ...value, brand: b.brand, model: "" })}>
@@ -36,21 +38,21 @@ export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext
               onClick={() => onChange({ ...value, brand: "Otra", model: "" })}>
               + Otra
             </Chip>
-          </div>
+          </ScrollRow>
         </div>
 
         {/* Modelo — chips para marcas conocidas */}
         {brandObj && (
           <div>
             <FieldLabel t={t}>Modelo</FieldLabel>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            <ScrollRow gap={8} resetKey={value.brand} reverse rows={2}>
               {brandObj.models.map(m => (
                 <Chip key={m} size="sm" t={t} active={value.model === m}
                   onClick={() => onChange({ ...value, model: m })}>
                   {m}
                 </Chip>
               ))}
-            </div>
+            </ScrollRow>
             <div style={{ fontFamily: F, fontSize: 11, color: t.dim, marginTop: 8 }}>
               La base de datos inferirá el más parecido si no está listado.
             </div>
@@ -70,14 +72,14 @@ export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext
         {/* Año */}
         <div>
           <FieldLabel t={t}>Año</FieldLabel>
-          <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4, scrollbarWidth: "none" }}>
+          <ScrollRow gap={8} resetKey="years">
             {YEARS.map(y => (
               <Chip key={y} size="sm" t={t} active={value.year === y}
                 onClick={() => onChange({ ...value, year: y })}>
                 {y}
               </Chip>
             ))}
-          </div>
+          </ScrollRow>
         </div>
 
         {/* Kilometraje */}

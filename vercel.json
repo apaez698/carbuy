@@ -9,11 +9,9 @@
     { "src": "/feedback-beta-autocash-2026", "dest": "/feedback.html" },
     { "src": "/terminos", "dest": "/terminos.html" },
     { "src": "/privacidad", "dest": "/privacidad.html" },
-    { "src": "/v3", "dest": "/dashboard/dist/v3.html" },
     { "src": "/dashboard/assets/(.*)", "dest": "/dashboard/dist/assets/$1" },
     { "src": "/dashboard/(.*)", "dest": "/dashboard/dist/index.html" },
     { "src": "/dashboard", "dest": "/dashboard/dist/index.html" },
-    { "src": "/dashboard-legacy", "dest": "/dashboard-legacy.html" },
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/(.*)", "dest": "/dashboard/dist/v3.html" }
   ]
 }

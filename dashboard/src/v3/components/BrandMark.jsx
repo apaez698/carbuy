@@ -1,7 +1,7 @@
 import CarGlyph from "./CarGlyph.jsx";
 
 export default function BrandMark({ t }) {
-  const isLight = ["light", "cream"].includes(t._name);
+  const isLight = parseInt(t.bg.match(/\d+/)?.[0] ?? "0", 10) > 200;
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
       <div style={{

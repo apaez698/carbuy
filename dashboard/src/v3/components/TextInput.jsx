@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export default function TextInput({ t, value, onChange, placeholder, type = "text", autoFocus, prefix, onBlur, error }) {
+export default function TextInput({ t, value, onChange, placeholder, type = "text", autoFocus, prefix }) {
   const [focus, setFocus] = useState(false);
   return (
     <div style={{
       display: "flex", alignItems: "center", gap: 8,
       height: 52, padding: "0 16px", borderRadius: 12,
       background: t.card,
-      border: `1px solid ${error ? "rgb(248,113,113)" : focus ? t.accent : t.border}`,
+      border: `1px solid ${focus ? t.accent : t.border}`,
       transition: "border-color 120ms",
     }}>
       {prefix && (
@@ -20,7 +20,7 @@ export default function TextInput({ t, value, onChange, placeholder, type = "tex
         value={value}
         onChange={e => onChange(e.target.value)}
         onFocus={() => setFocus(true)}
-        onBlur={e => { setFocus(false); onBlur?.(e); }}
+        onBlur={() => setFocus(false)}
         placeholder={placeholder}
         autoFocus={autoFocus}
         style={{
