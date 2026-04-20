@@ -109,11 +109,12 @@ export default function ScrollRow({ children, gap = 8, rowGap, resetKey, reverse
       onWheel={stopHint}
       style={{
         overflowX: "auto",
+        overflowY: "hidden",
         paddingBottom: 4,
         cursor: "grab",
         scrollbarWidth: "none",
         WebkitOverflowScrolling: "touch",
-        overflow: "hidden",
+        touchAction: "pan-x pan-y",
       }}
     >
       <div

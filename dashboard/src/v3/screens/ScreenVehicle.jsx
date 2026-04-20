@@ -31,7 +31,7 @@ export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
       <ScreenHeader t={t} onBack={onBack} step={step} total={totalSteps} title={copy.vehTitle} sub={copy.vehSub} />
 
-      <div style={{ padding: "22px 24px 22px", display: "flex", flexDirection: "column", gap: 22, flex: 1 }}>
+      <div style={{ padding: "16px 14px 16px", display: "flex", flexDirection: "column", gap: 18, flex: 1 }}>
 
         {/* Marca */}
         <div>
@@ -61,14 +61,16 @@ export default function ScreenVehicle({ t, copy, value, onChange, onBack, onNext
                   placeholder="Buscar modelo…" />
               </div>
             )}
-            <ScrollRow gap={12} resetKey={value.brand + modelFilter} reverse rows={2} rowGap={10}>
-              {filteredModels.map(m => (
-                <Chip key={m} size="sm" t={t} active={value.model === m}
-                  onClick={() => onChange({ ...value, model: m })}>
-                  {m}
-                </Chip>
-              ))}
-            </ScrollRow>
+            {filteredModels.length > 0 && (
+              <ScrollRow gap={12} resetKey={value.brand + modelFilter + filteredModels.length} reverse rows={filteredModels.length > 6 ? 2 : 1} rowGap={10}>
+                {filteredModels.map(m => (
+                  <Chip key={m} size="sm" t={t} active={value.model === m}
+                    onClick={() => onChange({ ...value, model: m })}>
+                    {m}
+                  </Chip>
+                ))}
+              </ScrollRow>
+            )}
             {!loadingModels && filteredModels.length === 0 && modelFilter && (
               <div style={{ fontFamily: F, fontSize: 12, color: t.dim, marginTop: 6 }}>
                 Sin resultados para "{modelFilter}"

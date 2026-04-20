@@ -242,6 +242,7 @@ export default function App() {
     await saveFeedback({ rating, comment, clientId: localIds?.clientId, vehicleId: localIds?.autoId, estimate: estimate?.estimate });
 
     setFeedbackSubmitted(true);
+    setTimeout(() => setFeedbackSubmitted(false), 3000);
     const wasRequired = feedbackRequired;
     setFeedbackRequired(false);
     setFeedbackOpen(false);
@@ -308,17 +309,19 @@ export default function App() {
     }
   }
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 480;
+
   // ─────────────────────────────────────────────────────────────────────────
   return (
-    <div style={{ minHeight: "100vh", background: pageBg, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 12px" }}>
+    <div style={{ minHeight: "100vh", background: isMobile ? t.bg : pageBg, display: "flex", alignItems: isMobile ? "stretch" : "center", justifyContent: "center", padding: isMobile ? 0 : "20px 12px" }}>
       {/* Phone shell */}
       <div style={{
-        width: 390, minHeight: 820, maxWidth: "100%",
-        borderRadius: 36, overflow: "hidden",
-        background: t.bg, border: `1px solid ${t.border}`,
+        width: isMobile ? "100%" : 390, minHeight: isMobile ? "100vh" : 820, maxWidth: "100%",
+        borderRadius: isMobile ? 0 : 36, overflow: isMobile ? "auto" : "hidden",
+        background: t.bg, border: isMobile ? "none" : `1px solid ${t.border}`,
         color: t.text, fontSize: `${dens * 100}%`,
         position: "relative",
-        boxShadow: "0 40px 80px -20px rgba(0,0,0,0.6)",
+        boxShadow: isMobile ? "none" : "0 40px 80px -20px rgba(0,0,0,0.6)",
       }}>
         {renderScreen()}
 
@@ -335,10 +338,10 @@ export default function App() {
 
         {/* Thank-you overlay after feedback sent */}
         {feedbackSubmitted && !feedbackOpen && (
-          <div style={{
+          <div onClick={() => setFeedbackSubmitted(false)} style={{
             position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)",
             display: "grid", placeItems: "center", padding: 24, zIndex: 50,
-            animation: "fadeIn 180ms ease",
+            animation: "fadeIn 180ms ease", cursor: "pointer",
           }}>
             <div style={{ background: t.card, border: `1px solid ${t.border}`, borderRadius: 16, padding: "28px 24px", textAlign: "center", maxWidth: 300 }}>
               <div style={{ width: 48, height: 48, borderRadius: 24, background: t.accentDim, display: "grid", placeItems: "center", margin: "0 auto 12px", fontSize: 22 }}>
@@ -346,6 +349,7 @@ export default function App() {
               </div>
               <div style={{ fontFamily: "DM Sans, system-ui, sans-serif", fontWeight: 700, fontSize: 16, color: t.text }}>¡Gracias por tu feedback!</div>
               <div style={{ fontFamily: "DM Sans, system-ui, sans-serif", fontSize: 12, color: t.muted, marginTop: 6, lineHeight: 1.5 }}>Tu opinión nos ayuda a afinar el modelo.</div>
+              <div style={{ fontFamily: "DM Sans, system-ui, sans-serif", fontSize: 11, color: t.dim, marginTop: 14 }}>Toca para cerrar</div>
             </div>
           </div>
         )}

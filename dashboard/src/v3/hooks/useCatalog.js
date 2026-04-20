@@ -34,8 +34,6 @@ export default function useCatalog(selectedBrand) {
       return;
     }
 
-    // Avoid duplicate fetches for the same brand
-    if (lastBrand.current === selectedBrand) return;
     lastBrand.current = selectedBrand;
 
     let cancelled = false;
@@ -51,6 +49,7 @@ export default function useCatalog(selectedBrand) {
 
     return () => {
       cancelled = true;
+      lastBrand.current = null;
     };
   }, [selectedBrand]);
 
